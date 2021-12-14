@@ -8,7 +8,7 @@
     <title>MyComox | Home Page</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
-    <link href="http://fonts.cdnfonts.com/css/resotelavender" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/resotelavender" rel="stylesheet">
     <link href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
@@ -924,7 +924,7 @@ window.onload = function() {
            //$('#form_login').submit();
 
            $.ajax({
-	             url: 'http://localhost/perform_login',
+	             url: '/perform_login',
 	             method: 'post',
 	             dataType: 'json',
 	 	         data: {username: userLogin, password: userPass},
@@ -965,7 +965,7 @@ window.onload = function() {
 	    var selectedVal;
 
         $.ajax({
-	           url: 'http://localhost/tools',
+	           url: '/tools',
 	           method: 'get',
 	           dataType: 'json',
 	           success: function(result){
@@ -1006,7 +1006,7 @@ window.onload = function() {
 
 	     if ($.isNumeric(value) && value > 0) {
                $.ajax({
-	                 url: 'http://localhost/change_tool',
+	                 url: '/change_tool',
 	                 method: 'post',
 	                 dataType: 'text',
 	                 data: {name: tool, value: value},
@@ -1061,7 +1061,7 @@ window.onload = function() {
 	       var motor_number = $('#number').val();
 
 	       $.ajax({
-	           url: 'http://localhost/add_motor',
+	           url: '/add_motor',
 	           method: 'post',
 	           dataType: 'text',
 	           data: {name: $('#number').val()},
@@ -1103,7 +1103,7 @@ window.onload = function() {
 
     $("#button_confirm").click(function(){                                         // обработчик CONFIRM DELETE_MOTOR
           $.ajax({
-	          url: 'http://localhost/delete_motor',
+	          url: '/delete_motor',
 	          method: 'post',
 	          dataType: 'text',
 	          data: {name: active_motor},

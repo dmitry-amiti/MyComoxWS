@@ -761,7 +761,7 @@ window.onload = function() {
 
 
      $.ajax({
-	     url: 'http://localhost/motors',
+	     url: '/motors',
 	     method: 'get',
 	     dataType: 'json',
 	     success: function(result){
@@ -1316,7 +1316,7 @@ window.onload = function() {
         event.preventDefault();
 
         $.ajax({
-	           url: 'http://localhost/users',
+	           url: '/users',
 	           method: 'get',
 	           dataType: 'json',
 	           success: function(result){
@@ -1344,7 +1344,7 @@ window.onload = function() {
 
           if (userLogin != null){
                 $.ajax({
-	                url: 'http://localhost/delete_user',
+	                url: '/delete_user',
 	                method: 'post',
 	                dataType: 'text',
 	                data: {login: userLogin},
@@ -1376,7 +1376,7 @@ window.onload = function() {
            var userRole      = $('#selectRole option:selected').val();
 
 	       $.ajax({
-	           url: 'http://localhost/add_user',
+	           url: '/add_user',
 	           method: 'post',
 	           dataType: 'text',
 	           data: {name: userName, lastname: userLastName, login: userLogin, password: userPass, role: userRole},
@@ -1410,7 +1410,7 @@ window.onload = function() {
 	    var selectedVal;
 
         $.ajax({
-	           url: 'http://localhost/tools',
+	           url: '/tools',
 	           method: 'get',
 	           dataType: 'json',
 	           success: function(result){
@@ -1451,7 +1451,7 @@ window.onload = function() {
 
 	     if ($.isNumeric(value) && value > 0) {
                $.ajax({
-	                 url: 'http://localhost/change_tool',
+	                 url: '/change_tool',
 	                 method: 'post',
 	                 dataType: 'text',
 	                 data: {name: tool, value: value},
@@ -1561,7 +1561,7 @@ window.onload = function() {
 
     $("#button_confirm").click(function(){                                        // обработчик CONFIRM DELETE_MOTOR
           $.ajax({
-	          url: 'http://localhost/delete_motor',
+	          url: '/delete_motor',
 	          method: 'post',
 	          dataType: 'text',
 	          data: {name: active_motor},
@@ -1591,7 +1591,7 @@ window.onload = function() {
 	       var motor_number = $('#number').val();
 
 	       $.ajax({
-	           url: 'http://localhost/add_motor',
+	           url: '/add_motor',
 	           method: 'post',
 	           dataType: 'text',
 	           data: {name: $('#number').val()},
@@ -1829,7 +1829,7 @@ window.onload = function() {
           for (let tool of charts.keys()) {                // перебираем tools из charts
 
                $.ajax({
-	              url: 'http://localhost/last_values',
+	              url: '/last_values',
 	              method: 'post',
 	              dataType: 'json',
 	              data: {time_now : timeNow, time_then : timeThen, engine : active_motor, tool : tool},
