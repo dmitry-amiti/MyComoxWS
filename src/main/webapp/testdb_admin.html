@@ -1887,7 +1887,7 @@ window.onload = function() {
     function onMessageReceived(payload) {
         var result = JSON.parse(payload.body);
         processingWSData(result);                                         // call processing data function
-        //console.log(result);
+        console.log(result);
     }
 
 
@@ -1896,6 +1896,14 @@ window.onload = function() {
         stompClient = null;
         socket = null;
         showAlert('Could not connect to WebSocket server.');
+    }
+
+
+    function disconnect() {
+        stompClient.disconnect();
+        stompClient = null;
+        socket = null;
+        showAlert("Client disconnected");
     }
 
 </script>
