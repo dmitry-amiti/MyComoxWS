@@ -761,7 +761,7 @@ window.onload = function() {
 
 
      $.ajax({
-	     url: 'http://localhost/motors',
+	     url: '/motors',
 	     method: 'get',
 	     dataType: 'json',
 	     success: function(result){
@@ -801,27 +801,27 @@ window.onload = function() {
 
     <div class="item"><a href="#" id="getAbout">About</a></div>
 
-    <div class="item" id="item_motors"><a href="#">Motors &nbsp;<i class='fa fa-angle-down anim'></i></a>
-        <div class="submenu engines">
-            <a href="#" id="addMotor">Add Motor</a>
-            <a href="#" id="deleteMotor">Delete Motor</a>
-        </div>
-    </div>
+    <!--<div class="item" id="item_motors"><a href="#">Motors &nbsp;<i class='fa fa-angle-down anim'></i></a>-->
+        <!--<div class="submenu engines">-->
+            <!--<a href="#" id="addMotor">Add Motor</a>-->
+            <!--<a href="#" id="deleteMotor">Delete Motor</a>-->
+        <!--</div>-->
+    <!--</div>-->
 
-    <div class="item" id="item_tools"><a href="#">Tools &nbsp;<i class='fa fa-angle-down anim'></i></a>
-        <div class="submenu">
-            <!--<a href="#" id="addTool">Add Tool</a>-->
-            <!--<a href="#">Delete Tool</a>-->
-            <a href="#" id="setCritical">Set Critical Values</a>
-        </div>
-    </div>
+    <!--<div class="item" id="item_tools"><a href="#">Tools &nbsp;<i class='fa fa-angle-down anim'></i></a>-->
+        <!--<div class="submenu">-->
+            <!--&lt;!&ndash;<a href="#" id="addTool">Add Tool</a>&ndash;&gt;-->
+            <!--&lt;!&ndash;<a href="#">Delete Tool</a>&ndash;&gt;-->
+            <!--<a href="#" id="setCritical">Set Critical Values</a>-->
+        <!--</div>-->
+    <!--</div>-->
 
-    <div class="item" id="item_users"><a href="#">Users &nbsp;<i class='fa fa-angle-down anim'></i></a>
-        <div class="submenu users">
-            <a href="#" id="addUser">Add User</a>
-            <a href="#" id="deleteUser">Delete User</a>
-        </div>
-    </div>
+    <!--<div class="item" id="item_users"><a href="#">Users &nbsp;<i class='fa fa-angle-down anim'></i></a>-->
+        <!--<div class="submenu users">-->
+            <!--<a href="#" id="addUser">Add User</a>-->
+            <!--<a href="#" id="deleteUser">Delete User</a>-->
+        <!--</div>-->
+    <!--</div>-->
     <div class="item logout"><a href="/go_away"><i class="fa fa-user-circle-o"></i>&nbsp; Log Out</a></div>
 </div>
 
@@ -1178,7 +1178,7 @@ window.onload = function() {
         event.preventDefault();
 
         $.ajax({
-	           url: 'http://localhost/users',
+	           url: '/users',
 	           method: 'get',
 	           dataType: 'json',
 	           success: function(result){
@@ -1206,7 +1206,7 @@ window.onload = function() {
 
           if (userLogin != null){
                 $.ajax({
-	                url: 'http://localhost/delete_user',
+	                url: '/delete_user',
 	                method: 'post',
 	                dataType: 'text',
 	                data: {login: userLogin},
@@ -1238,7 +1238,7 @@ window.onload = function() {
            var userRole      = $('#selectRole option:selected').val();
 
 	       $.ajax({
-	           url: 'http://localhost/add_user',
+	           url: '/add_user',
 	           method: 'post',
 	           dataType: 'text',
 	           data: {name: userName, lastname: userLastName, login: userLogin, password: userPass, role: userRole},
@@ -1272,7 +1272,7 @@ window.onload = function() {
 	    var selectedVal;
 
         $.ajax({
-	           url: 'http://localhost/tools',
+	           url: '/tools',
 	           method: 'get',
 	           dataType: 'json',
 	           success: function(result){
@@ -1313,7 +1313,7 @@ window.onload = function() {
 
 	     if ($.isNumeric(value) && value > 0) {
                $.ajax({
-	                 url: 'http://localhost/change_tool',
+	                 url: '/change_tool',
 	                 method: 'post',
 	                 dataType: 'text',
 	                 data: {name: tool, value: value},
@@ -1332,7 +1332,7 @@ window.onload = function() {
 
 
 
-     function refreshSelectTool(result) {                                                     // REFRESH SELECT_TOOL
+     function refreshSelectTool(result) {                                                      // REFRESH SELECT_TOOL
           if(!$('#selectTool').is(":hidden")) {
 
               var tools    = Object.keys(result);     // достаем tools
@@ -1423,7 +1423,7 @@ window.onload = function() {
 
     $("#button_confirm").click(function(){                                        // обработчик CONFIRM DELETE_MOTOR
           $.ajax({
-	          url: 'http://localhost/delete_motor',
+	          url: '/delete_motor',
 	          method: 'post',
 	          dataType: 'text',
 	          data: {name: active_motor},
@@ -1454,7 +1454,7 @@ window.onload = function() {
 	       var motor_number = $('#number').val();
 
 	       $.ajax({
-	           url: 'http://localhost/add_motor',
+	           url: '/add_motor',
 	           method: 'post',
 	           dataType: 'text',
 	           data: {name: $('#number').val()},
@@ -1542,7 +1542,7 @@ window.onload = function() {
 
 
 
-	function processingWSData(result){                                               //  ОБРАБОТКА ДАННЫХ С WEBSOCKET
+	function processWSData(result){                                                   //  ОБРАБОТКА ДАННЫХ С WEBSOCKET
 
          if (result.engines.length > current_engines.length){
 	         result.engines.forEach(function(e_number){
@@ -1701,7 +1701,7 @@ window.onload = function() {
           var timeThen = timeNow - delta;                  // get timestamp [delta] seconds ago
 
           $.ajax({
-	         url: 'http://localhost/last_values',
+	         url: '/last_values',
 	         method: 'post',
 	         dataType: 'json',
 	         data: {time_now: timeNow, time_then: timeThen, engine: active_motor, tool: 'Temperature'},
@@ -1755,7 +1755,7 @@ window.onload = function() {
 
     function onMessageReceived(payload) {
         var result = JSON.parse(payload.body);
-        processingWSData(result);                                         // call processing data function
+        processWSData(result);                                            // call process data function
         //var result = payload.body;
         //showAlert(result.critical_values.Temperature.value);
     }
@@ -1773,7 +1773,7 @@ window.onload = function() {
         //stompClient.disconnect();
         stompClient = null;
         socket = null;
-        //showAlert('Could not connect to WebSocket server.');
+        showAlert('Could not connect to WebSocket server.');
     }
 
 

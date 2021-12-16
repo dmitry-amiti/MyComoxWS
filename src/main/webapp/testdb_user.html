@@ -2,7 +2,7 @@
 
 
 <!-- MAIN DATABASE PAGE -->
-<!--6.11 - REFRESH SELECT_TOOL-->
+
 
 <head>
     <title>MyComox | Main Page</title>
@@ -798,7 +798,9 @@ window.onload = function() {
 
 <div class="menu">
     <div class="item home"><a href="javascript:void(0)"><i class='fa fa-home'></i>&nbsp; Home</a></div>
+
     <div class="item"><a href="#" id="getAbout">About</a></div>
+
     <!--<div class="item" id="item_motors"><a href="#">Motors &nbsp;<i class='fa fa-angle-down anim'></i></a>-->
         <!--<div class="submenu engines">-->
             <!--<a href="#" id="addMotor">Add Motor</a>-->
@@ -820,6 +822,7 @@ window.onload = function() {
             <!--<a href="#" id="deleteUser">Delete User</a>-->
         <!--</div>-->
     <!--</div>-->
+
     <div class="item logout"><a href="/go_away"><i class="fa fa-user-circle-o"></i>&nbsp; Log Out</a></div>
 </div>
 
@@ -1046,8 +1049,12 @@ window.onload = function() {
         <div class="small_live_chart">
             <div class="chart_container" id="tempLiveContainer"></div>
         </div>
-        <div class="small_live_chart"></div>
-        <div class="small_live_chart"></div>
+        <div class="small_live_chart">
+            <div class="chart_container" id="accLiveContainer"></div>
+        </div>
+        <div class="small_live_chart">
+            <div class="chart_container" id="magnLiveContainer"></div>
+        </div>
     </div>
 
 
@@ -1068,8 +1075,12 @@ window.onload = function() {
         <div class="small_live_chart">
             <div class="chart_container" id="tempLVContainer"></div>
         </div>
-        <div class="small_live_chart"></div>
-        <div class="small_live_chart"></div>
+        <div class="small_live_chart">
+            <div class="chart_container" id="accLVContainer"></div>
+        </div>
+        <div class="small_live_chart">
+            <div class="chart_container" id="magnLVContainer"></div>
+        </div>
     </div>
 
 
@@ -1085,14 +1096,25 @@ window.onload = function() {
 
      var active_motor = null;
      var current_engines = [];
-     var units = new Map();
+     var units = new Map();            // map хранит пары {"tool":"unit"}
      var updateInterval = 1000;
      var timer;
 
      var dataLength = 20;
-     var tempLiveDataPoints = [];
-     var tempLVDataPoints = [];
 
+     var charts = new Map();           // map, которая хранит данные о графиках (имена и названия dp)
+
+     var tempLiveDataPoints = [];
+     var accLiveDataPoints  = [];
+     var magnLiveDataPoints = [];
+
+     var tempLVDataPoints = [];
+     var accLVDataPoints  = [];
+     var magnLVDataPoints = [];
+
+
+
+////////////  live charts  //////////////
 
      var tempLiveChart = new CanvasJS.Chart("tempLiveContainer", {
  	   theme: "light2",
@@ -1107,7 +1129,7 @@ window.onload = function() {
                label: ""
            },
        	   title: "Timestamp (in seconds)",
-       	   labelAngle: -40,
+       	   labelAngle: -40
        	   //interval: 1,
        	   //suffix: " s"
        },
@@ -1117,8 +1139,53 @@ window.onload = function() {
  	   }]
      });
 
-     tempLiveChart.render();
 
+     var accLiveChart = new CanvasJS.Chart("accLiveContainer", {
+ 	   theme: "light2",
+ 	   title: {
+ 	       text: "Accelerometer (g)"
+ 	   },
+ 	   axisX: {
+           crosshair:{
+               enabled: true,
+               snapToDataPoint: true,
+               lineDashType: "dash",
+               label: ""
+           },
+       	   title: "Timestamp (in seconds)",
+       	   labelAngle: -40
+       },
+ 	   data: [{
+ 	   	   type: "spline",
+ 	   	   dataPoints: accLiveDataPoints
+ 	   }]
+     });
+
+
+     var magnLiveChart = new CanvasJS.Chart("magnLiveContainer", {
+ 	   theme: "light2",
+ 	   title: {
+ 	       text: "Magnetometer (uT)"
+ 	   },
+ 	   axisX: {
+           crosshair:{
+               enabled: true,
+               snapToDataPoint: true,
+               lineDashType: "dash",
+               label: ""
+           },
+       	   title: "Timestamp (in seconds)",
+       	   labelAngle: -40
+       },
+ 	   data: [{
+ 	   	   type: "spline",
+ 	   	   dataPoints: magnLiveDataPoints
+ 	   }]
+     });
+
+
+
+////////////  last_values charts  ////////////
 
      var tempLVChart = new CanvasJS.Chart("tempLVContainer", {
  	   theme: "light2",
@@ -1143,7 +1210,83 @@ window.onload = function() {
  	   }]
      });
 
-     tempLVChart.render();
+
+     var accLVChart = new CanvasJS.Chart("accLVContainer", {
+ 	   theme: "light2",
+ 	   title: {
+ 	       text: "Accelerometer (g)"
+ 	   },
+ 	   zoomEnabled:true,
+ 	   axisX: {
+           crosshair:{
+               enabled: true,
+               snapToDataPoint: true,
+               lineDashType: "dash",
+               label: ""
+           },
+       	   title: "Timestamp (in seconds)",
+       	   labelAngle: -40
+       },
+ 	   data: [{
+ 	   	   type: "spline",
+ 	   	   color: "#01A794",
+ 	   	   dataPoints: accLVDataPoints
+ 	   }]
+     });
+
+
+     var magnLVChart = new CanvasJS.Chart("magnLVContainer", {
+ 	   theme: "light2",
+ 	   title: {
+ 	       text: "Magnetometer (uT)"
+ 	   },
+ 	   zoomEnabled:true,
+ 	   axisX: {
+           crosshair:{
+               enabled: true,
+               snapToDataPoint: true,
+               lineDashType: "dash",
+               label: ""
+           },
+       	   title: "Timestamp (in seconds)",
+       	   labelAngle: -40
+       },
+ 	   data: [{
+ 	   	   type: "spline",
+ 	   	   color: "#01A794",
+ 	   	   dataPoints: magnLVDataPoints
+ 	   }]
+     });
+
+
+///////////////////////////////////////////////////
+
+
+     var temp_chart = {
+        chart: tempLiveChart,
+        dp: tempLiveDataPoints,
+        last_chart: tempLVChart,
+        last_dp: tempLVDataPoints
+     }
+
+     var acc_chart = {
+        chart: accLiveChart,
+        dp: accLiveDataPoints,
+        last_chart: accLVChart,
+        last_dp: accLVDataPoints
+     }
+
+     var magn_chart = {
+        chart: magnLiveChart,
+        dp: magnLiveDataPoints,
+        last_chart: magnLVChart,
+        last_dp: magnLVDataPoints
+     }
+
+     charts.set("Temperature", temp_chart)    // заполняем map [charts] переменными графиков и datapoints
+        .set("Accelerometer", acc_chart)
+        .set("Magnetometer", magn_chart);
+
 
 
 
@@ -1330,7 +1473,7 @@ window.onload = function() {
 
 
 
-     function refreshSelectTool(result) {                                                      // REFRESH SELECT_TOOL
+     function refreshSelectTool(result) {                                                     // REFRESH SELECT_TOOL
           if(!$('#selectTool').is(":hidden")) {
 
               var tools    = Object.keys(result);     // достаем tools
@@ -1427,7 +1570,6 @@ window.onload = function() {
 	          data: {name: active_motor},
 	          success: function(e){
                   $("#"+active_motor).remove();                       // удаляем мотор с экрана
-                  clearLiveChart(tempLiveChart, tempLiveDataPoints);  // очищаем график
                   $('.small_live_chart').hide();                      // скрываем все графики
 
                   position = current_engines.indexOf(active_motor);   // удаляем мотор из локального массива
@@ -1482,9 +1624,17 @@ window.onload = function() {
 
 
     $('#big_motors').on('click','.small_motor', function(e) {                  // функция нажатия на конкретный мотор
+
+            for (let tool of charts.keys()) {          // перебираем ключи charts и очищаем все графики
+                clearLiveChart(charts.get(tool).chart,   charts.get(tool).dp);
+                clearLVChart(charts.get(tool).last_chart, charts.get(tool).last_dp);
+            }
+
+
             if (active_motor == null){                  // если не нажат ни один элемент
                  $(this).addClass('small_motor_active');
                  $('.small_live_chart').show();
+                 $('.chart_container').show();
                  active_motor = $(this).attr('id');
             } else if (this.id != active_motor) {       // если нажат другой элемент
                  $("#"+active_motor).removeClass('small_motor_active');
@@ -1495,14 +1645,15 @@ window.onload = function() {
                  $('.small_live_chart').hide();
                  active_motor = null;
             }
-            clearLiveChart(tempLiveChart, tempLiveDataPoints);   // рендерим в любом случае
-            clearLVChart(tempLVChart, tempLVDataPoints);
+
+
+            for (let tool of charts.keys()) {          // рендерим все графики (после появления блоков на странице)
+                charts.get(tool).chart.render();
+                charts.get(tool).last_chart.render();
+            }
 
             e.stopPropagation();
             console.log(active_motor);
-
-           //$(this).css({"background-color":"#E0E0E0"});
-           //$(this).css({"border-color":"#E0E0E0"});
     });
 
 
@@ -1511,19 +1662,19 @@ window.onload = function() {
 
     function addNewEngine(motor_number){               // функция добавления мотора (принимает на вход номер мотора)
            var new_small_title    = $("<div class='small_title'>" + motor_number + "</div>");
-           var new_image_grey     = $("<img class='image_led_grey'  src='https://i.ibb.co/2jHWKDj/grey.png'>");
-           var new_image_green    = $("<img class='image_led_green' src='https://i.ibb.co/nPJHRbf/green.png'>");
-           var new_image_red      = $("<img class='image_led_red'   src='https://i.ibb.co/HpqzmVm/red.png'>");
+           var new_image_grey     = $("<img class='image_led image_led_grey'  src='https://i.ibb.co/2jHWKDj/grey.png'>");
+           var new_image_green    = $("<img class='image_led image_led_green' src='https://i.ibb.co/nPJHRbf/green.png'>");
+           var new_image_red      = $("<img class='image_led image_led_red'   src='https://i.ibb.co/HpqzmVm/red.png'>");
            var new_small_led      = $("<div class='small_led'/>")
                                                 .append(new_image_grey)
                                                 .append(new_image_green)
                                                 .append(new_image_red);
            var new_small_play     = $("<div class='small_play'><i class='fa fa-play-circle'></i></div>");
-           var new_tool_info_temp = $("<div class='tool_info temperature'><div class='tool_title'>Temperature:</div>"+
+           var new_tool_info_temp = $("<div class='tool_info Temperature'><div class='tool_title'>Temperature:</div>"+
                                       "<div class='tool_value'>--℃</div></div>");
-           var new_tool_info_acc  = $("<div class='tool_info acc'><div class='tool_title'>Accelerometer:</div>" +
+           var new_tool_info_acc  = $("<div class='tool_info Accelerometer'><div class='tool_title'>Accelerometer:</div>" +
                                       "<div class='tool_value'>--g</div></div>");
-           var new_tool_info_magn = $("<div class='tool_info magn'><div class='tool_title'>Magnetometer:</div>" +
+           var new_tool_info_magn = $("<div class='tool_info Magnetometer'><div class='tool_title'>Magnetometer:</div>" +
                                       "<div class='tool_value'>--uT</div></div>");
 
            var new_motor = $("<div class='small_motor' id='" + motor_number + "' />")
@@ -1540,107 +1691,87 @@ window.onload = function() {
 
 
 
-	function processWSData(result){                                                   //  ОБРАБОТКА ДАННЫХ С WEBSOCKET
+	function processingWSData(result){                                              //  ОБРАБОТКА ДАННЫХ С WEBSOCKET
 
-         if (result.engines.length > current_engines.length){
-	         result.engines.forEach(function(e_number){
-	             if(current_engines.indexOf(e_number) < 0) {   // если элемента 'e_number' нет в [current_engines]
-	                 addNewEngine(e_number);
-	             }
-	         });
-	     } else if (result.engines.length < current_engines.length){
-	         current_engines.forEach(function(e_number){
-	             if(result.engines.indexOf(e_number) < 0) {    // если элемента 'e_number' нет в [result.engines]
-	                  $("#"+e_number).remove();
-	                  if (active_motor == e_number) {
-	                      clearLiveChart(tempLiveChart, tempLiveDataPoints);  // очищаем график
-	                      $('.small_live_chart').hide();                      // скрываем все графики
-	                      active_motor = null;
-	                  }
-	             }
-	         });
-	     } else if (result.engines.length == current_engines.length){
-	         result.engines.forEach(function(e_number){
-	             if(current_engines.indexOf(e_number) < 0) {
-	                 addNewEngine(e_number);
-	             }
-	         });
-	         current_engines.forEach(function(e_number){
-	             if (result.engines.indexOf(e_number) < 0) {
-	                  $("#"+e_number).remove();
-	                  if (active_motor == e_number) {
-	                      clearLiveChart(tempLiveChart, tempLiveDataPoints);  // очищаем график
-	                      $('.small_live_chart').hide();                      // скрываем все графики
-	                      active_motor = null;
-	                  }
-	             }
-	         });
-	     }
+         result.engines.forEach(function(e_number){
+	         if(current_engines.indexOf(e_number) < 0) {    // если элемента 'e_number' нет в [current_engines]
+	             addNewEngine(e_number);
+	         }
+	     });
+	     current_engines.forEach(function(e_number){
+	         if (result.engines.indexOf(e_number) < 0) {    // если элемента 'e_number' нет в [result.engines]
+	              $("#"+e_number).remove();
+	              if (active_motor == e_number) {
+	                  $('.small_live_chart').hide();        // скрываем все графики
+	                  active_motor = null;
+	              }
+	         }
+	     });
 
          current_engines = result.engines;
+         refreshSelectTool(result.critical_values);                      // обновляем значения в [selectTool]
 
-
-         var critical_temp = result.critical_values.Temperature.value;   // забираем !критическую! температуру
          var timeNowGMT = Math.floor(Date.now()/1000);                   // get the timestamp now in SECONDS
-         var timeNowLocale = new Date().toLocaleTimeString();            // localized ts now as string [00:00:00]
+         var timeNowLocale = new Date().toLocaleTimeString();            // ts now as [00:00:00]
+         var tools    = Object.keys(result.critical_values);             // достаем tools
+
+         for (var i in result.engines){           // перебираем engines
+
+                     var e_number = result.engines[i];
+                     var color    = 'grey';
+                     var led      = $("#"+e_number).children('.small_led');
+                     var play     = $("#"+e_number).children('.small_play');
 
 
-         for (var i in result.engines){                                  // перебираем моторы
-             var e_number    = result.engines[i];
-             var temp        = 0;
-             var temp_ts     = 0;
-             if (e_number in result.values && 'Temperature' in result.values[e_number]) {
-                   temp_ts   =  Math.floor(result.values[e_number].Temperature.timestamp/1000);
-             }
-             if (temp_ts == timeNowGMT || temp_ts == timeNowGMT - 1){
-                   temp      = result.values[e_number].Temperature.value;
-             }
+                     tools.forEach (function(tool){       // перебираем tools
+                          var temp_value     = 0;
+                          var temp_timestamp = 0;
 
-             var text_temp   = $("#"+e_number).children('.temperature').children('.tool_value');
-             var led         = $("#"+e_number).children('.small_led');
-             var play        = $("#"+e_number).children('.small_play');
+                          if (e_number in result.values && tool in result.values[e_number]) {
+                             temp_timestamp   =  Math.floor((result.values[e_number])[tool].timestamp/1000);
+
+                          }
+
+                          if (temp_timestamp == timeNowGMT || temp_timestamp == timeNowGMT - 1){
+                             temp_value       =  (result.values[e_number])[tool].value;
+                          }
 
 
+                          var y     = temp_value;
+                          var chart = charts.get(tool).chart;
+                          var dp    = charts.get(tool).dp;
+                          var text_value = $("#"+e_number).children("."+tool).children('.tool_value');
+                          var crit_value = result.critical_values[tool].value;
+                          var crit_unit  = result.critical_values[tool].unit;
 
-             //if (play.is(":hidden")){    // если нет элемента play
-                   if (temp > critical_temp) {
-                          text_temp.css('color', 'red');
-                          text_temp.html(temp + "℃");
-                          play.show();
-                          led.children('.image_led_red').show();
-                          led.children('.image_led_grey').hide();
-                          led.children('.image_led_green').hide();
-                   } else if (temp <= critical_temp && temp > 0) {
-                          text_temp.css('color', 'black');
-                          text_temp.html(temp + "℃");
-                          led.children('.image_led_red').hide();
-                          led.children('.image_led_grey').hide();
-                          led.children('.image_led_green').show();
-                   } else if (temp == 0) {
-                          text_temp.css('color', 'black');
-                          text_temp.html("--℃");
-                          led.children('.image_led_red').hide();
-                          led.children('.image_led_grey').show();
-                          led.children('.image_led_green').hide();
-                   }
-             //}
+                          if (y > crit_value) {
+                                text_value.html(y + crit_unit);
+                                text_value.css('color', 'red');
+                                color = 'red';
+                                if (active_motor == e_number) {                              // отрисовываем график
+                                    renderLiveChart(chart, dp, 'red',   y, timeNowGMT, timeNowLocale);
+                                }
+                          } else if (y <= crit_value && y > 0){
+                                text_value.html(y + crit_unit);
+                                text_value.css('color', 'black');
+                                if (color != 'red') color = 'green';
+                                if (active_motor == e_number) {                              // отрисовываем график
+                                    renderLiveChart(chart, dp, 'green', y, timeNowGMT, timeNowLocale);
+                                }
+                          } else if (y == 0) {
+                                text_value.html("--" + crit_unit);
+                                text_value.css('color', 'black');
+                                if (color != 'red' && color != 'green') color = 'grey';
+                                if (active_motor == e_number) {                              // отрисовываем график
+                                    renderLiveChart(chart, dp, 'grey',  y, timeNowGMT, timeNowLocale);
+                                }
+                          }
+                     });
 
+                     led.children('.image_led').hide();   // скрываем все led и показываем только нужный
+                     led.children(".image_led_" + color).show();
+          }
 
-             if (active_motor == e_number) {
-                  y = temp;
-
-                  if (temp > critical_temp) {
-                        renderLiveChart(tempLiveChart, tempLiveDataPoints, 'red',   y, timeNowGMT, timeNowLocale);
-                  } else if (temp <= critical_temp && temp > 0) {
-                        renderLiveChart(tempLiveChart, tempLiveDataPoints, 'green', y, timeNowGMT, timeNowLocale);
-                  } else if (temp == 0) {
-                        renderLiveChart(tempLiveChart, tempLiveDataPoints, 'grey',  y, timeNowGMT, timeNowLocale);
-                  }
-             }
-         }
-
-
-         refreshSelectTool(result.critical_values);        // обновляем значения в [selectTool]
 	}
 
 
@@ -1685,7 +1816,7 @@ window.onload = function() {
 
     $("#btn_select_time").click(function(){                                    // нажатие на кнопку SHOW LAST VALUES
         if (active_motor != null) {
-            getLastTemperValues();
+            getLastValues();
         } else {
             showAlert('Please, select engine')
         }
@@ -1693,40 +1824,46 @@ window.onload = function() {
 
 
 
-    function getLastTemperValues () {                                                             // GET LAST VALUES
+    function getLastValues () {                                                             // GET LAST VALUES
           var delta = $('#period').val();
           var timeNow = Math.floor(Date.now()/1000);       // get current second
           var timeThen = timeNow - delta;                  // get timestamp [delta] seconds ago
 
-          $.ajax({
-	         url: '/last_values',
-	         method: 'post',
-	         dataType: 'json',
-	         data: {time_now: timeNow, time_then: timeThen, engine: active_motor, tool: 'Temperature'},
-	         success: function(result){
-	                clearLVChart(tempLVChart, tempLVDataPoints);                    // очищаем график и шкалу
-	                var critical_temp = result.critical_values.Temperature.value;   // забираем критическую температуру
+          for (let tool of charts.keys()) {                // перебираем tools из charts
 
-	                for (i = timeThen; i < timeNow; i++){
-	                    var time = new Date (i*1000).toLocaleTimeString();
+               $.ajax({
+	              url: '/last_values',
+	              method: 'post',
+	              dataType: 'json',
+	              data: {time_now : timeNow, time_then : timeThen, engine : active_motor, tool : tool},
+	              success: function(result){
+	                   var critical_value = result.critical_values[tool].value;   // забираем критическое значение
+                       var last_chart = charts.get(tool).last_chart;
+                       var last_dp    = charts.get(tool).last_dp;
+                       clearLVChart(last_chart, last_dp);                         // очищаем график и шкалу
 
-                        if (i in result.last_values){
-                              if (result.last_values[i] > critical_temp) {
-                                    tempLVDataPoints.push({x: i, y: result.last_values[i], label: time, color: "Red", markerSize: 15});
-                              } else {
-                                    tempLVDataPoints.push({x: i, y: result.last_values[i], label: time});
-                              }
-                        } else {
-                              tempLVDataPoints.push({x: i, y: 0, label: time, color: "Grey"});
-                        }
-	                }
+	                   for (i = timeThen; i < timeNow; i++){
+	                       var time = new Date(i*1000).toLocaleTimeString();
 
-	                tempLVChart.render();
-	         },
-	         error:  function(){
-                showAlert('Something went wrong... Check the connection.');
-             }
-          });
+                           if (i in result.last_values){
+                                 if (result.last_values[i] > critical_value) {
+                                    last_dp.push({x: i, y: result.last_values[i], label: time, color: "Red", markerSize: 15});
+                                 } else {
+                                    last_dp.push({x: i, y: result.last_values[i], label: time});
+                                 }
+                           } else {
+                                 last_dp.push({x: i, y: 0, label: time, color: "Grey"});
+                           }
+	                   }
+
+	                   last_chart.render();         // отрисовываем график
+	              },
+	              error:  function(){
+                     showAlert('Something went wrong... Check the connection.');
+                  }
+               });
+          };
+
     }
 
 
@@ -1744,7 +1881,6 @@ window.onload = function() {
     }
 
 
-
     function onConnected() {
         stompClient.subscribe('/topic/public', onMessageReceived);        // Subscribe to the Public Topic
         stompClient.debug = null;                                         // Disable console messages
@@ -1753,27 +1889,25 @@ window.onload = function() {
 
     function onMessageReceived(payload) {
         var result = JSON.parse(payload.body);
-        processWSData(result);                                            // call process data function
-        //var result = payload.body;
-        //showAlert(result.critical_values.Temperature.value);
-    }
-
-
-     function disconnect() {
-        stompClient.disconnect();
-        stompClient = null;
-        socket = null;
-        showAlert("Client disconnected");
+        processingWSData(result);                                         // call processing data function
+        //console.log(result);
     }
 
 
     function onError(error) {
-        //stompClient.disconnect();
+        stompClient.disconnect();
         stompClient = null;
         socket = null;
         showAlert('Could not connect to WebSocket server.');
     }
 
+
+    function disconnect() {
+        stompClient.disconnect();
+        stompClient = null;
+        socket = null;
+        showAlert("Client disconnected");
+    }
 
 </script>
 
