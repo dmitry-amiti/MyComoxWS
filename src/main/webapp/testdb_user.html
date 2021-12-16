@@ -823,7 +823,7 @@ window.onload = function() {
         <!--</div>-->
     <!--</div>-->
 
-    <div class="item logout"><a href="/go_away"><i class="fa fa-user-circle-o"></i>&nbsp; Log Out</a></div>
+    <div class="item logout" id="away"><a href="#"><i class="fa fa-user-circle-o"></i>&nbsp; Log Out</a></div>
 </div>
 
 
@@ -1299,6 +1299,13 @@ window.onload = function() {
 
     $("#addTool").click(function(){
         $("#modal_add_tool").fadeIn(300);
+        event.preventDefault();
+    });
+
+
+    $("#away").click(function(){
+        disconnect();
+        window.location.href = '/go_away';
         event.preventDefault();
     });
 

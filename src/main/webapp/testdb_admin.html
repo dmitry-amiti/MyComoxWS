@@ -798,7 +798,7 @@ window.onload = function() {
 
 <div class="menu">
     <div class="item home"><a href="javascript:void(0)"><i class='fa fa-home'></i>&nbsp; Home</a></div>
-    <div class="item"><a href="#" id="getAbout">About</a></div>
+    <div class="item"><a href="javascript:void(0)" id="getAbout">About</a></div>
     <div class="item" id="item_motors"><a href="#">Motors &nbsp;<i class='fa fa-angle-down anim'></i></a>
         <div class="submenu engines">
             <a href="#" id="addMotor">Add Motor</a>
@@ -820,7 +820,7 @@ window.onload = function() {
             <a href="#" id="deleteUser">Delete User</a>
         </div>
     </div>
-    <div class="item logout"><a href="/go_away"><i class="fa fa-user-circle-o"></i>&nbsp; Log Out</a></div>
+    <div class="item logout" id="away"><a href="#"><i class="fa fa-user-circle-o"></i>&nbsp; Log Out</a></div>
 </div>
 
 
@@ -1298,6 +1298,15 @@ window.onload = function() {
         $("#modal_add_tool").fadeIn(300);
         event.preventDefault();
     });
+
+
+
+    $("#away").click(function(){
+        disconnect();
+        window.location.href = '/go_away';
+        event.preventDefault();
+    });
+
 
 
     $("#addUser").click(function(){
@@ -1903,7 +1912,7 @@ window.onload = function() {
         stompClient.disconnect();
         stompClient = null;
         socket = null;
-        showAlert("Client disconnected");
+        //showAlert("Client disconnected");
     }
 
 </script>
