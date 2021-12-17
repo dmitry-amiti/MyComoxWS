@@ -1905,7 +1905,8 @@ window.onload = function() {
         stompClient.disconnect();
         stompClient = null;
         socket = null;
-        showAlert('Could not connect to WebSocket server.');
+        location.reload();
+        //showAlert('Could not connect to WebSocket server.');
     }
 
 
@@ -1913,7 +1914,6 @@ window.onload = function() {
         stompClient.disconnect();
         stompClient = null;
         socket = null;
-        showAlert("Client disconnected");
     }
 
 </script>
