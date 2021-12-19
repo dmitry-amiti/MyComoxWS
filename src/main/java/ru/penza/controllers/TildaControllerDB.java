@@ -47,7 +47,7 @@ public class TildaControllerDB {
     private WebSocketMessageBrokerStats webSocketMessageBrokerStats;
 
 
-    @GetMapping("/")                                                      // EMPTY PATH //
+    @GetMapping("/")                                                     // EMPTY PATH //
     public String getFirst() {
         return "redirect:/home";
     }
@@ -64,7 +64,7 @@ public class TildaControllerDB {
 
     @GetMapping("/main")                                                // MAIN PAGE //
     public String getDB(Authentication auth) {
-        if (hasRole("ADMIN", auth)) {
+        if (authHasRole("ADMIN", auth)) {
             return "testdb_admin";
         }
         return "testdb_user";
@@ -72,7 +72,7 @@ public class TildaControllerDB {
 
 
 
-    private boolean hasRole(String role, Authentication auth) {          // CHECK AUTHORITY //
+    private boolean authHasRole(String role, Authentication auth) {          // CHECK AUTHORITY //
         for (GrantedAuthority authority : auth.getAuthorities()) {
             if (role.equals(authority.getAuthority())) {
                 return true;

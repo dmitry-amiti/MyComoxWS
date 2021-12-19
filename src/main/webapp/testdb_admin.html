@@ -714,6 +714,7 @@ button {
 
 button:focus {
     outline: none;
+    background-color: #333333;
 }
 
 /**************** END BODY ******************/
@@ -935,7 +936,7 @@ window.onload = function() {
                     <input type="text" id="user_password" autocomplete="off" placeholder="minimum 4 symbols">
                 </label>
                 <label class="label_add_user">Select role
-                    <select class="select_modal  select_border_none"  id="selectRole">
+                    <select class="select_modal  select_border_none"  id="selectRole" tabindex="-1">
                         <option value="USER" selected>User</option>
                         <option value="ADMIN">Admin</option>
                     </select>
@@ -970,7 +971,7 @@ window.onload = function() {
 </div>
 
 
-<div class="modal-alert" id="alert_window">
+<div class="modal-alert" id="alert_window" tabindex="1">
     <div class="modal-content-alert">
         <div class="text-alert" id="textAlert"></div>
         <div class="close-alert"><i class="far fa-times"></i></div>
@@ -1111,7 +1112,7 @@ window.onload = function() {
 
 
 
-////////////  live charts  //////////////
+////////////  live charts  /////////////
 
      var tempLiveChart = new CanvasJS.Chart("tempLiveContainer", {
  	   theme: "light2",
@@ -1301,6 +1302,23 @@ window.onload = function() {
 
 
 
+    $('.modal-content').keypress(function(e){                          // обработчик нажатия ENTER на модальном окне
+        var key = e.which;
+        if (key == 13) {
+            $(this).find('.button_form').mouseup();
+        }
+    });
+
+
+    $('#alert_window').keypress(function(e){                               // обработчик нажатия ENTER alert_window
+        var key = e.which;
+        if (key == 13) {
+            $(this).find('.close-alert').mouseup();
+        }
+    });
+
+
+
     $("#away").click(function(){
         disconnect();
         window.location.href = '/go_away';
@@ -1362,6 +1380,7 @@ window.onload = function() {
                         if ($('#selectUser option').size() == 0) {      // если select пустой
                               $('#selectUser').prop('disabled', true);  // блокируем
                         }
+                        showAlert('User was removed from DB');
 	                },
 	                error:  function(){
                         showAlert('Something went wrong... Check the connection.');
@@ -1395,6 +1414,7 @@ window.onload = function() {
 	                } else {
 	                    showAlert('This login already exists');
 	                }
+	                showAlert(e);
                     console.log(e);
 	           },
 	           error:  function(){
@@ -1555,6 +1575,7 @@ window.onload = function() {
     function showAlert (text) {                                                                  // вызов окна ALERT
         $('#textAlert').html(text);
         $('#alert_window').fadeIn(300);
+        $('#alert_window').focus();
     }
 
 
@@ -1612,7 +1633,7 @@ window.onload = function() {
 	                         $('form').each(function() { this.reset() });
 	                         console.log(e);
 	                    } else {
-	                        showAlert('This number already exists in the DB');
+	                         showAlert('This number already exists in the DB');
 	                    }
 	           },
 	           error:  function(){
@@ -1830,7 +1851,7 @@ window.onload = function() {
 
 
 
-    function getLastValues () {                                                             // GET LAST VALUES
+    function getLastValues () {                                                                   // GET LAST VALUES
           var delta = $('#period').val();
           var timeNow = Math.floor(Date.now()/1000);       // get current second
           var timeThen = timeNow - delta;                  // get timestamp [delta] seconds ago
@@ -1896,7 +1917,6 @@ window.onload = function() {
     function onMessageReceived(payload) {
         var result = JSON.parse(payload.body);
         processingWSData(result);                                         // call processing data function
-        //console.log(result);
     }
 
 

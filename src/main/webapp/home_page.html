@@ -118,6 +118,7 @@
     box-shadow: 5px 10px 5px #666666;
     font-family: Poppins;
     font-size: 16px;
+    outline: none;
 }
 
 
@@ -445,7 +446,6 @@ input:focus {
 /************** END MENU ****************/
 
 
-
 /************** PRELOADER ****************/
 
 
@@ -597,25 +597,25 @@ button:focus {
 //}
 
 
-#bs1:hover #img1{
+#bs1:hover #img1 {
     transform: skewX(20deg) translate(-15%, 0) scale(1.2);
     opacity: 1;
     filter: grayscale(0%);
 }
 
-#bs2:hover #img2{
+#bs2:hover #img2 {
     transform: skewX(20deg) translate(-13%, 0) scale(1.2);
     opacity: 1;
     filter: grayscale(0%);
 }
 
-#bs3:hover #img3{
+#bs3:hover #img3 {
     transform: skewX(20deg) translate(-15%, 0) scale(1.2);
     opacity: 1;
     filter: grayscale(0%);
 }
 
-#bs4:hover #img4{
+#bs4:hover #img4 {
     transform: skewX(20deg) translate(-14%, 0) scale(1.2);
     opacity: 1;
     filter: grayscale(0%);
@@ -810,7 +810,7 @@ window.onload = function() {
 
 
 
-<div class="modal-alert" id="alert_window">
+<div class="modal-alert" id="alert_window" tabindex="1">
     <div class="modal-content-alert">
         <div class="text-alert" id="textAlert"></div>
         <div class="close-alert"><i class="far fa-times"></i></div>
@@ -863,12 +863,22 @@ window.onload = function() {
     });
 
 
-    $('#button_login').keypress(function(e){                                   // обработчик нажатия ENTER на кнопке
+
+    $('.modal-content').keypress(function(e){                          // обработчик нажатия ENTER на модальном окне
         var key = e.which;
-        if(key == 13) {
-            $(this).mouseup();
+        if (key == 13) {
+            $(this).find('.button_form').mouseup();
         }
     });
+
+
+    $('#alert_window').keypress(function(e){                               // обработчик нажатия ENTER alert_window
+        var key = e.which;
+        if (key == 13) {
+            $(this).find('.close-alert').mouseup();
+        }
+    });
+
 
 
     $('.modal').mouseup(function(e){                   // событие клика по веб-документу
@@ -908,6 +918,7 @@ window.onload = function() {
 
     $("#call_login_form").click(function(){                                                     // вызов формы LOGIN
         $("#modal_login").fadeIn(300);
+        $('#log_in').focus();
         event.preventDefault();
     });
 
@@ -952,6 +963,7 @@ window.onload = function() {
     function showAlert (text) {                                                                  // вызов окна ALERT
         $('#textAlert').html(text);
         $('#alert_window').fadeIn(300);
+        $('#alert_window').focus();
     }
 
 
