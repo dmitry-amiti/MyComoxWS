@@ -1380,7 +1380,7 @@ window.onload = function() {
                         if ($('#selectUser option').size() == 0) {      // если select пустой
                               $('#selectUser').prop('disabled', true);  // блокируем
                         }
-                        showAlert('User was removed from DB');
+                        showAlert('User was removed from DB');          // даже если пользователя уже нет в БД
 	                },
 	                error:  function(){
                         showAlert('Something went wrong... Check the connection.');

@@ -14,7 +14,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Transactional
     @Modifying
-    @Query(value = "delete from mycomox_user where login = ?1", nativeQuery = true)
+    @Query(value = "delete from mycomox_user where login = ?1 and role != 'SUPERADMIN'", nativeQuery = true)
     Integer deleteUser(String login);
 
     @Query(value = "select login from mycomox_user where role != 'SUPERADMIN'", nativeQuery = true)
