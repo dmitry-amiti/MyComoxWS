@@ -1410,11 +1410,11 @@ window.onload = function() {
 	           data: {name: userName, lastname: userLastName, login: userLogin, password: userPass, role: userRole},
 	           success: function(e){
 	                if (e != '0'){
+	                    showAlert(e);
 	                    $('form').each(function() { this.reset() });
 	                } else {
 	                    showAlert('This login already exists');
 	                }
-	                showAlert(e);
                     console.log(e);
 	           },
 	           error:  function(){
