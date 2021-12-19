@@ -64,12 +64,11 @@ public class TildaControllerDB {
 
     @GetMapping("/main")                                                // MAIN PAGE //
     public String getDB(Authentication auth) {
-        if (authHasRole("ADMIN", auth)) {
+        if ((authHasRole("ADMIN", auth)) || (authHasRole("SUPERADMIN", auth))) {
             return "testdb_admin";
         }
         return "testdb_user";
     }
-
 
 
     private boolean authHasRole(String role, Authentication auth) {          // CHECK AUTHORITY //
@@ -80,9 +79,6 @@ public class TildaControllerDB {
         }
         return false;
     }
-
-
-
 
 
     @PostMapping("/add_user")                            /// ADD USER TO DB ///
