@@ -3,11 +3,10 @@ package ru.penza.controllers;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -22,6 +21,7 @@ import ru.penza.services.ToolService;
 import ru.penza.services.UserService;
 import ru.penza.services.ValueService;
 
+import java.security.Principal;
 import java.util.Optional;
 
 //@CrossOrigin
@@ -81,6 +81,15 @@ public class TildaControllerDB {
     }
 
 
+    @GetMapping("/me")                                    /// GET MY LOGIN ///
+    @ResponseBody
+    public String getMyLogin(Principal principal) {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("me", principal.getName());
+        return jsonObject.toString();
+    }
+
+
     @PostMapping("/add_user")                            /// ADD USER TO DB ///
     @ResponseBody
     public String addUser(UserForm userForm) {
@@ -93,6 +102,7 @@ public class TildaControllerDB {
     public String deleteUser(UserForm userForm) {
         Integer result = userService.deleteUserByLogin(userForm.getLogin());
         if (result > 0) {
+            messagingTemplate.convertAndSend("/topic/logout/" + userForm.getLogin(), "out");
             return userForm.getLogin() + " successfully removed from DB";
         } else {
             return "There is no such user in the DB";

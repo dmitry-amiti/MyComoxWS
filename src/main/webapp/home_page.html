@@ -940,11 +940,11 @@ window.onload = function() {
 	             dataType: 'json',
 	 	         data: {username: userLogin, password: userPass},
 	             success: function(e){
-                      console.log(e.status);
+                      //console.log(e.status);
                       if (e.status == 200){
                            window.location.href = e.redirect;
                       } else if (e.status == 401){
-                           showAlert('Check login and password.');
+                           showAlert('Wrong login or password');
                       }
 	             },
 	             error:  function(){

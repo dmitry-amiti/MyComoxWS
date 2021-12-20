@@ -756,8 +756,15 @@ window.onload = function() {
     });
 
 
-    connect();                                                                            // WEBSOCKET CONNECT
-
+     $.ajax({
+	     url: '/me',
+	     method: 'get',
+	     dataType: 'json',
+	     success: function(result){
+             login = result.me;
+	     },
+	     error: function(){}
+     });
 
 
      $.ajax({
@@ -775,6 +782,10 @@ window.onload = function() {
 	            showAlert('Please check the connection. Unable to get data from server.');
 	     }
      });
+
+
+     connect();                                                                            // WEBSOCKET CONNECT
+
 
      //var timer = setInterval(function(){getTimerData()}, updateInterval);
 
@@ -1889,15 +1900,24 @@ window.onload = function() {
 
 
     function onConnected() {
-        stompClient.subscribe('/topic/public', onMessageReceived);        // Subscribe to the Public Topic
-        stompClient.debug = null;                                         // Disable console messages
+        stompClient.subscribe('/topic/public', onMessageReceived);          // Subscribe to the Public Topic
+        stompClient.subscribe('/topic/logout/'+login, onGetLogoutMessage);
+        stompClient.debug = null;                                           // Disable console messages
     }
 
 
     function onMessageReceived(payload) {
         var result = JSON.parse(payload.body);
-        processingWSData(result);                                         // call processing data function
+        processingWSData(result);                                           // call processing data function
         //console.log(result);
+    }
+
+
+    function onGetLogoutMessage(payload) {
+        if (payload.body == 'out') {
+            disconnect();
+            window.location.href = '/go_away';
+        }
     }
 
 
