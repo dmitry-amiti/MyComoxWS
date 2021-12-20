@@ -1766,12 +1766,12 @@ window.onload = function() {
 
                           if (e_number in result.values && tool in result.values[e_number]) {
                              temp_timestamp   =  Math.floor((result.values[e_number])[tool].timestamp/1000);
-
-                          }
-
-                          if (temp_timestamp == timeNowGMT || temp_timestamp == timeNowGMT - 1){
                              temp_value       =  (result.values[e_number])[tool].value;
                           }
+
+                          //if (temp_timestamp == timeNowGMT || temp_timestamp == timeNowGMT - 1){
+
+                          //}
 
 
                           var y     = temp_value;
