@@ -1109,6 +1109,7 @@ window.onload = function() {
      var timer;
 
      var dataLength = 20;
+     var x = 0;
 
      var charts = new Map();           // map, которая хранит данные о графиках (имена и названия dp)
 
@@ -1665,6 +1666,7 @@ window.onload = function() {
             for (let tool of charts.keys()) {          // перебираем ключи charts и очищаем все графики
                 clearLiveChart(charts.get(tool).chart,   charts.get(tool).dp);
                 clearLVChart(charts.get(tool).last_chart, charts.get(tool).last_dp);
+                x = 0;
             }
 
 
@@ -1747,6 +1749,8 @@ window.onload = function() {
 
          current_engines = result.engines;
          refreshSelectTool(result.critical_values);                      // обновляем значения в [selectTool]
+         x++;
+         //console.log(x);
 
          var timeNowGMT = Math.floor(Date.now()/1000);                   // get the timestamp now in SECONDS
          //console.log('time now: '+timeNowGMT);
@@ -1766,9 +1770,9 @@ window.onload = function() {
                           var temp_timestamp = 0;
 
                           if (e_number in result.values && tool in result.values[e_number]) {
-                             //temp_timestamp   =  Math.floor((result.values[e_number])[tool].timestamp/1000);
-                             //console.log(temp_timestamp);
                              temp_value       =  (result.values[e_number])[tool].value;
+                             temp_timestamp   =  Math.floor((result.values[e_number])[tool].timestamp);
+                             //console.log(temp_timestamp);
                           }
 
                           //if (temp_timestamp == timeNowGMT || temp_timestamp == timeNowGMT - 1){
@@ -1788,21 +1792,21 @@ window.onload = function() {
                                 text_value.css('color', 'red');
                                 color = 'red';
                                 if (active_motor == e_number) {                              // отрисовываем график
-                                    renderLiveChart(chart, dp, 'red',   y, timeNowGMT, timeNowLocale);
+                                    renderLiveChart(chart, dp, 'red',   y, x, timeNowLocale);
                                 }
                           } else if (y <= crit_value && y > 0){
                                 text_value.html(y + crit_unit);
                                 text_value.css('color', 'black');
                                 if (color != 'red') color = 'green';
                                 if (active_motor == e_number) {                              // отрисовываем график
-                                    renderLiveChart(chart, dp, 'green', y, timeNowGMT, timeNowLocale);
+                                    renderLiveChart(chart, dp, 'green', y, x, timeNowLocale);
                                 }
                           } else if (y == 0) {
                                 text_value.html("--" + crit_unit);
                                 text_value.css('color', 'black');
                                 if (color != 'red' && color != 'green') color = 'grey';
                                 if (active_motor == e_number) {                              // отрисовываем график
-                                    renderLiveChart(chart, dp, 'grey',  y, timeNowGMT, timeNowLocale);
+                                    renderLiveChart(chart, dp, 'grey',  y, x, timeNowLocale);
                                 }
                           }
                      });

@@ -25,13 +25,15 @@ public class ValueService {
         Map<Object, Object> values;
 
         Long hereTimeStamp = System.currentTimeMillis() / 1000;
+        System.out.println("herTS: " + hereTimeStamp);
 
         for (Object[] obj : vals) {
             String motor = (String) obj[0];
             String tool = (String) obj[1];
             Double val;
             Long ts = Long.parseLong(obj[3].toString()) / 1000;
-            Long timestamp = Long.parseLong(obj[3].toString());
+
+            System.out.println("getTS: " + ts);
 
             if (ts.equals(hereTimeStamp) || (ts == hereTimeStamp - 1)) {
                 val = (Double) obj[2];
@@ -40,7 +42,7 @@ public class ValueService {
                 values = new HashMap<>();
 
                 values.put("value", val);
-                values.put("timestamp", timestamp);
+                values.put("timestamp", ts);
 
                 if (motors.get(motor) != null) {
                     motors.get(motor).put(tool, values);
@@ -49,9 +51,8 @@ public class ValueService {
                     motors.put(motor, tools);
                 }
             }
-
-
         }
+        System.out.println();
         return motors;
     }
 
