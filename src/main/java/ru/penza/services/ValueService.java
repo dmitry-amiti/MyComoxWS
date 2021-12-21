@@ -31,6 +31,7 @@ public class ValueService {
             String tool = (String) obj[1];
             Double val;
             Long ts = Long.parseLong(obj[3].toString()) / 1000;
+            Long timestamp = Long.parseLong(obj[3].toString());
 
             if (ts.equals(hereTimeStamp) || (ts == hereTimeStamp - 1)) {
                 val = (Double) obj[2];
@@ -39,7 +40,7 @@ public class ValueService {
                 values = new HashMap<>();
 
                 values.put("value", val);
-                values.put("timestamp", ts);
+                values.put("timestamp", timestamp);
 
                 if (motors.get(motor) != null) {
                     motors.get(motor).put(tool, values);
