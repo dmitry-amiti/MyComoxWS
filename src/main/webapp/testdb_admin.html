@@ -1749,11 +1749,11 @@ window.onload = function() {
          refreshSelectTool(result.critical_values);                      // обновляем значения в [selectTool]
 
          var timeNowGMT = Math.floor(Date.now()/1000);                   // get the timestamp now in SECONDS
-         console.log('time now: '+timeNowGMT);
+         //console.log('time now: '+timeNowGMT);
          var timeNowLocale = new Date().toLocaleTimeString();            // ts now as [00:00:00]
          var tools    = Object.keys(result.critical_values);             // достаем tools
 
-         for (var i in result.engines){           // перебираем engines
+         for (var i in result.engines){           // перебираем все engines
 
                      var e_number = result.engines[i];
                      var color    = 'grey';
@@ -1761,18 +1761,19 @@ window.onload = function() {
                      var play     = $("#"+e_number).children('.small_play');
 
 
-                     tools.forEach (function(tool){       // перебираем tools
+                     tools.forEach (function(tool){       // перебираем все tools
                           var temp_value     = 0;
                           var temp_timestamp = 0;
 
                           if (e_number in result.values && tool in result.values[e_number]) {
-                             temp_timestamp   =  Math.floor((result.values[e_number])[tool].timestamp/1000);
-                             console.log(temp_timestamp);
-                          }
-
-                          if (temp_timestamp == timeNowGMT || temp_timestamp == timeNowGMT - 1){
+                             //temp_timestamp   =  Math.floor((result.values[e_number])[tool].timestamp/1000);
+                             //console.log(temp_timestamp);
                              temp_value       =  (result.values[e_number])[tool].value;
                           }
+
+                          //if (temp_timestamp == timeNowGMT || temp_timestamp == timeNowGMT - 1){
+
+                          //}
 
 
                           var y     = temp_value;

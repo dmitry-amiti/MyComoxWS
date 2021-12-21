@@ -24,26 +24,32 @@ public class ValueService {
         Map<Object, Object> tools;
         Map<Object, Object> values;
 
-        Long hereTimeStamp = System.currentTimeMillis();
+        Long hereTimeStamp = System.currentTimeMillis() / 1000;
 
         for (Object[] obj : vals) {
             String motor = (String) obj[0];
             String tool = (String) obj[1];
-            Double val = (Double) obj[2];
-            Long ts = Long.parseLong(obj[3].toString());
+            Double val;
+            Long ts = Long.parseLong(obj[3].toString()) / 1000;
 
-            tools = new HashMap<>();
-            values = new HashMap<>();
+            if (ts.equals(hereTimeStamp) || (ts == hereTimeStamp - 1)) {
+                val = (Double) obj[2];
 
-            values.put("value", val);
-            values.put("timestamp", ts);
+                tools = new HashMap<>();
+                values = new HashMap<>();
 
-            if (motors.get(motor) != null) {
-                motors.get(motor).put(tool, values);
-            } else {
-                tools.put(tool, values);
-                motors.put(motor, tools);
+                values.put("value", val);
+                values.put("timestamp", ts);
+
+                if (motors.get(motor) != null) {
+                    motors.get(motor).put(tool, values);
+                } else {
+                    tools.put(tool, values);
+                    motors.put(motor, tools);
+                }
             }
+
+
         }
         return motors;
     }
@@ -66,7 +72,6 @@ public class ValueService {
     }
 
 }
-
 
 
 //        List<Map<Object, Object>> values = new ArrayList<>();
