@@ -19,9 +19,12 @@ public class ValueService {
 
     public Map<Object, Map<Object, Object>> getAllValuesMap() {
         List<Object[]> vals = valueRepository.getAllValues();
+
         Map<Object, Map<Object, Object>> motors = new HashMap<>();
         Map<Object, Object> tools;
         Map<Object, Object> values;
+
+        Long hereTimeStamp = System.currentTimeMillis();
 
         for (Object[] obj : vals) {
             String motor = (String) obj[0];
