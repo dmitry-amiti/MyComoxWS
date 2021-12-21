@@ -1749,7 +1749,7 @@ window.onload = function() {
          refreshSelectTool(result.critical_values);                      // обновляем значения в [selectTool]
 
          var timeNowGMT = Math.floor(Date.now()/1000);                   // get the timestamp now in SECONDS
-         //console.log('time now: '+timeNowGMT);
+         console.log('time now: '+timeNowGMT);
          var timeNowLocale = new Date().toLocaleTimeString();            // ts now as [00:00:00]
          var tools    = Object.keys(result.critical_values);             // достаем tools
 
@@ -1767,7 +1767,7 @@ window.onload = function() {
 
                           if (e_number in result.values && tool in result.values[e_number]) {
                              //temp_timestamp   =  Math.floor((result.values[e_number])[tool].timestamp/1000);
-                             //console.log(temp_timestamp);
+                             console.log(temp_timestamp);
                              temp_value       =  (result.values[e_number])[tool].value;
                           }
 
