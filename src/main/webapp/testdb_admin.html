@@ -1766,7 +1766,7 @@ window.onload = function() {
                           var temp_timestamp = 0;
 
                           if (e_number in result.values && tool in result.values[e_number]) {
-                             //temp_timestamp   =  Math.floor((result.values[e_number])[tool].timestamp/1000);
+                             temp_timestamp   =  Math.floor((result.values[e_number])[tool].timestamp/1000);
                              console.log(temp_timestamp);
                              temp_value       =  (result.values[e_number])[tool].value;
                           }
