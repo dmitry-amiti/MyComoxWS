@@ -1109,7 +1109,7 @@ window.onload = function() {
      var timer;
 
      var dataLength = 20;
-     var x = 0;
+     var counter = 0;                  // счетчик для [datapoints] графиков
 
      var charts = new Map();           // map, которая хранит данные о графиках (имена и названия dp)
 
@@ -1666,7 +1666,7 @@ window.onload = function() {
             for (let tool of charts.keys()) {          // перебираем ключи charts и очищаем все графики
                 clearLiveChart(charts.get(tool).chart,   charts.get(tool).dp);
                 clearLVChart(charts.get(tool).last_chart, charts.get(tool).last_dp);
-                x = 0;
+                counter = 0;
             }
 
 
@@ -1749,12 +1749,16 @@ window.onload = function() {
 
          current_engines = result.engines;
          refreshSelectTool(result.critical_values);                      // обновляем значения в [selectTool]
-         x++;
-         //console.log(x);
+         //counter++;                                                      // увеличиваем счетчик для [datapoints]
 
-         var timeNowGMT = Math.floor(Date.now()/1000);                   // get the timestamp now in SECONDS
+         //var timeNowGMT = Math.floor(Date.now()/1000);                   // get the timestamp now in SECONDS
          //console.log('time now: '+timeNowGMT);
-         var timeNowLocale = new Date().toLocaleTimeString();            // ts now as [00:00:00]
+         //var timeNowLocale = new Date().toLocaleTimeString();            // ts now as [00:00:00]
+
+         var server_ts = Math.floor(result.server_time / 1000);
+         var server_time = getTimeFromTS(result.server_time);            // server_time as [00:00:00]
+         //console.log(server_ts);
+
          var tools    = Object.keys(result.critical_values);             // достаем tools
 
          for (var i in result.engines){           // перебираем все engines
@@ -1771,7 +1775,7 @@ window.onload = function() {
 
                           if (e_number in result.values && tool in result.values[e_number]) {
                              temp_value       =  (result.values[e_number])[tool].value;
-                             temp_timestamp   =  Math.floor((result.values[e_number])[tool].timestamp);
+                             //temp_timestamp   =  Math.floor((result.values[e_number])[tool].timestamp);
                              //console.log(temp_timestamp);
                           }
 
@@ -1792,21 +1796,21 @@ window.onload = function() {
                                 text_value.css('color', 'red');
                                 color = 'red';
                                 if (active_motor == e_number) {                              // отрисовываем график
-                                    renderLiveChart(chart, dp, 'red',   y, x, timeNowLocale);
+                                    renderLiveChart(chart, dp, 'red',   y, server_ts, server_time);
                                 }
                           } else if (y <= crit_value && y > 0){
                                 text_value.html(y + crit_unit);
                                 text_value.css('color', 'black');
                                 if (color != 'red') color = 'green';
                                 if (active_motor == e_number) {                              // отрисовываем график
-                                    renderLiveChart(chart, dp, 'green', y, x, timeNowLocale);
+                                    renderLiveChart(chart, dp, 'green', y, server_ts, server_time);
                                 }
                           } else if (y == 0) {
                                 text_value.html("--" + crit_unit);
                                 text_value.css('color', 'black');
                                 if (color != 'red' && color != 'green') color = 'grey';
                                 if (active_motor == e_number) {                              // отрисовываем график
-                                    renderLiveChart(chart, dp, 'grey',  y, x, timeNowLocale);
+                                    renderLiveChart(chart, dp, 'grey',  y, server_ts, server_time);
                                 }
                           }
                      });
@@ -1819,13 +1823,13 @@ window.onload = function() {
 
 
 
-   function renderLiveChart(chart, dataPoints, color, yValue, tsNowGMT, tsNowLocale) {   // пушит в массив и отрисовывает
+   function renderLiveChart(chart, dataPoints, color, yValue, ts, tsNowLocale) {   // пушит в массив и отрисовывает
         if (color=="red"){
-            dataPoints.push({x: tsNowGMT, y: yValue, label: tsNowLocale, color: "Red", markerSize: 15});
+            dataPoints.push({x: ts, y: yValue, label: tsNowLocale, color: "Red", markerSize: 15});
         } else if (color=="grey"){
-            dataPoints.push({x: tsNowGMT, y: 0,      label: tsNowLocale, color: "Grey"});
+            dataPoints.push({x: ts, y: 0,      label: tsNowLocale, color: "Grey"});
         } else {
-            dataPoints.push({x: tsNowGMT, y: yValue, label: tsNowLocale});
+            dataPoints.push({x: ts, y: yValue, label: tsNowLocale});
         }
 
         // шаг у 'X' должен быть равен 1, иначе будут сбои с разлиновкой
@@ -1842,16 +1846,27 @@ window.onload = function() {
 
 
    function clearLiveChart (chart, dataPoints){                               // очищаем переданный в функцию график
-          dataPoints.length = 0;
-          chart.render();
+        dataPoints.length = 0;
+        chart.render();
    }
 
 
     function clearLVChart (chart, dataPoints){                                // очищаем переданный в функцию график
-          chart.options.axisX.viewportMinimum = null;
-          chart.options.axisX.viewportMaximum = null;
-          dataPoints.length = 0;
-          chart.render();
+        chart.options.axisX.viewportMinimum = null;
+        chart.options.axisX.viewportMaximum = null;
+        dataPoints.length = 0;
+        chart.render();
+   }
+
+
+   function getTimeFromTS (ts){
+        var date = new Date(ts);
+        var hours = date.getHours();
+        var minutes = "0" + date.getMinutes();
+        var seconds = "0" + date.getSeconds();
+        // Will display time in 10:30:23 format
+        var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+        return formattedTime;
    }
 
 

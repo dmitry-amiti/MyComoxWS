@@ -25,7 +25,8 @@ public class ValueService {
         Map<Object, Object> values;
 
         Long hereTimeStamp = System.currentTimeMillis() / 1000;
-        System.out.println("herTS: " + hereTimeStamp);
+        long hereTS = System.currentTimeMillis();
+        System.out.println("herTS: " + hereTS);
 
         for (Object[] obj : vals) {
             String motor = (String) obj[0];
@@ -33,7 +34,7 @@ public class ValueService {
             Double val;
             Long ts = Long.parseLong(obj[3].toString()) / 1000;
 
-            System.out.println("getTS: " + ts);
+            System.out.println("getTS: " + Long.parseLong(obj[3].toString()));
 
             if (ts.equals(hereTimeStamp) || (ts == hereTimeStamp - 1)) {
                 val = (Double) obj[2];
