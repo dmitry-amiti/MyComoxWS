@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import ru.penza.models.Value;
 import ru.penza.repositories.ValueRepository;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -63,16 +64,48 @@ public class ValueService {
     }
 
 
-    public Map<Long, Double> getLastVals(Long then, Long now, String motor, String tool) {
-        List<Value> valsFromDB = valueRepository.getLastValues(then * 1000, now * 1000, motor, tool);
-        Map<Long, Double> map = new HashMap<>();
+    public List<Map> getLastVals(Long delta, String motor, String tool) {
+        long now = System.currentTimeMillis() / 1000;     // сначала делим, чтобы округлить
+        long then = now - delta;
+//        System.out.println("then: " + then + "    now: " + now);
 
-        for (Value value : valsFromDB) {
+        List<Value> valuesFromDB = valueRepository.getLastValues(then * 1000, now * 1000, motor, tool);
+        Map<Long, Double> map = new HashMap<>();
+        Map<Object, Object> temp_map;
+        List<Map> list = new ArrayList<>();
+
+        for (Value value : valuesFromDB) {
             map.put(value.getTimestamp() / 1000, value.getValue());
         }
+//        System.out.println(map.toString());
 
-        return map;
+        for (Long i = then; i < now; i++) {
+            temp_map = new HashMap<>();
+            if (map.containsKey(i)) {
+                temp_map.put("ts", i);
+                temp_map.put("value", map.get(i));
+            } else {
+                temp_map.put("ts", i);
+                temp_map.put("value", 0);
+            }
+            list.add(temp_map);
+        }
+
+        return list;
     }
+
+
+//    public Map<Long, Double> getLastVals(Long then, Long now, String motor, String tool) {
+//        List<Value> valsFromDB = valueRepository.getLastValues(then * 1000, now * 1000, motor, tool);
+//        Map<Long, Double> map = new HashMap<>();
+//
+//        for (Value value : valsFromDB) {
+//            map.put(value.getTimestamp() / 1000, value.getValue());
+//        }
+//
+//        return map;
+//    }
+
 
 }
 

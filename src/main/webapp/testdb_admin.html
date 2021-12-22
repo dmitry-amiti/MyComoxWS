@@ -1109,7 +1109,7 @@ window.onload = function() {
      var timer;
 
      var dataLength = 20;
-     var counter = 0;                  // счетчик для [datapoints] графиков
+     //var counter = 0;                  // счетчик для [datapoints] графиков
 
      var charts = new Map();           // map, которая хранит данные о графиках (имена и названия dp)
 
@@ -1666,7 +1666,7 @@ window.onload = function() {
             for (let tool of charts.keys()) {          // перебираем ключи charts и очищаем все графики
                 clearLiveChart(charts.get(tool).chart,   charts.get(tool).dp);
                 clearLVChart(charts.get(tool).last_chart, charts.get(tool).last_dp);
-                counter = 0;
+                //counter = 0;
             }
 
 
@@ -1751,14 +1751,8 @@ window.onload = function() {
          refreshSelectTool(result.critical_values);                      // обновляем значения в [selectTool]
          //counter++;                                                      // увеличиваем счетчик для [datapoints]
 
-         //var timeNowGMT = Math.floor(Date.now()/1000);                   // get the timestamp now in SECONDS
-         //console.log('time now: '+timeNowGMT);
-         //var timeNowLocale = new Date().toLocaleTimeString();            // ts now as [00:00:00]
-
          var server_ts = Math.floor(result.server_time / 1000);
          var server_time = getTimeFromTS(result.server_time);            // server_time as [00:00:00]
-         //console.log(server_ts);
-
          var tools    = Object.keys(result.critical_values);             // достаем tools
 
          for (var i in result.engines){           // перебираем все engines
@@ -1770,19 +1764,11 @@ window.onload = function() {
 
 
                      tools.forEach (function(tool){       // перебираем все tools
-                          var temp_value     = 0;
-                          var temp_timestamp = 0;
+                          var temp_value = 0;
 
                           if (e_number in result.values && tool in result.values[e_number]) {
-                             temp_value       =  (result.values[e_number])[tool].value;
-                             //temp_timestamp   =  Math.floor((result.values[e_number])[tool].timestamp);
-                             //console.log(temp_timestamp);
+                             temp_value = (result.values[e_number])[tool].value;
                           }
-
-                          //if (temp_timestamp == timeNowGMT || temp_timestamp == timeNowGMT - 1){
-
-                          //}
-
 
                           var y     = temp_value;
                           var chart = charts.get(tool).chart;
@@ -1833,9 +1819,6 @@ window.onload = function() {
         }
 
         // шаг у 'X' должен быть равен 1, иначе будут сбои с разлиновкой
-        //console.log(tsNowGMT + "  " + yValue);
-        //console.log(dataPoints);
-
 
         if (dataPoints.length > dataLength) {
          	dataPoints.shift();
@@ -1859,12 +1842,12 @@ window.onload = function() {
    }
 
 
-   function getTimeFromTS (ts){
+   function getTimeFromTS (ts){                                       // converts server timestamp to time [00:00:00]
         var date = new Date(ts);
         var hours = date.getHours();
         var minutes = "0" + date.getMinutes();
         var seconds = "0" + date.getSeconds();
-        // Will display time in 10:30:23 format
+        // will display time in [00:00:00] format
         var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
         return formattedTime;
    }
@@ -1884,33 +1867,31 @@ window.onload = function() {
 
     function getLastValues () {                                                                   // GET LAST VALUES
           var delta = $('#period').val();
-          var timeNow = Math.floor(Date.now()/1000);       // get current second
-          var timeThen = timeNow - delta;                  // get timestamp [delta] seconds ago
 
           for (let tool of charts.keys()) {                // перебираем tools из charts
-
                $.ajax({
 	              url: '/last_values',
 	              method: 'post',
 	              dataType: 'json',
-	              data: {time_now : timeNow, time_then : timeThen, engine : active_motor, tool : tool},
+	              data: {delta : delta, engine : active_motor, tool : tool},
 	              success: function(result){
 	                   var critical_value = result.critical_values[tool].value;   // забираем критическое значение
                        var last_chart = charts.get(tool).last_chart;
                        var last_dp    = charts.get(tool).last_dp;
                        clearLVChart(last_chart, last_dp);                         // очищаем график и шкалу
 
-	                   for (i = timeThen; i < timeNow; i++){
-	                       var time = new Date(i*1000).toLocaleTimeString();
 
-                           if (i in result.last_values){
-                                 if (result.last_values[i] > critical_value) {
-                                    last_dp.push({x: i, y: result.last_values[i], label: time, color: "Red", markerSize: 15});
-                                 } else {
-                                    last_dp.push({x: i, y: result.last_values[i], label: time});
-                                 }
-                           } else {
-                                 last_dp.push({x: i, y: 0, label: time, color: "Grey"});
+	                   for (var i in result.last_values){
+	                        var ts = result.last_values[i].ts;
+	                        var time = getTimeFromTS(ts*1000);
+	                        var value = result.last_values[i].value;
+
+                           if (value > critical_value) {
+                                last_dp.push({x: ts, y: value, label: time, color: "Red", markerSize: 15});
+                           } else if (value <= critical_value && value > 0) {
+                                last_dp.push({x: ts, y: value, label: time});
+                           } else if (value == 0) {
+                                last_dp.push({x: ts, y: 0, label: time, color: "Grey"});
                            }
 	                   }
 

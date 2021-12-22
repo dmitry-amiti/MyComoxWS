@@ -193,8 +193,20 @@ public class TildaControllerDB {
     public String getLV(PeriodForm periodForm) {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("critical_values", toolService.getAllCriticalsMap());
-        jsonObject.put("last_values", valueService.getLastVals(periodForm.getTime_then(),
-                periodForm.getTime_now(), periodForm.getEngine(), periodForm.getTool()));
+        jsonObject.put("last_values", valueService.getLastVals(
+                periodForm.getDelta(),
+                periodForm.getEngine(),
+                periodForm.getTool()));
+        System.out.println(jsonObject);
+        return jsonObject.toString();
+    }
+
+    @GetMapping("/last_values")
+    @ResponseBody
+    public String getLVals() {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("critical_values", toolService.getAllCriticalsMap());
+        jsonObject.put("last_values", valueService.getLastVals(20L, "333", "Temperature"));
         System.out.println(jsonObject);
         return jsonObject.toString();
     }

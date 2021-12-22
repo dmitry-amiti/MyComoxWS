@@ -4,8 +4,7 @@ import lombok.Data;
 
 @Data
 public class PeriodForm {
-    private Long time_now;
-    private Long time_then;
+    private Long delta;
     private String engine;
     private String tool;
 }
