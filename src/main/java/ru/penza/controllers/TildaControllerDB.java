@@ -65,10 +65,13 @@ public class TildaControllerDB {
 
     @GetMapping("/main")                                                // MAIN PAGE //
     public String getDB(Authentication auth) {
-        if ((authHasRole("ADMIN", auth)) || (authHasRole("SUPERADMIN", auth))) {
+        if (authHasRole("SUPERADMIN", auth)) {
+            return "testdb_superadmin";
+        } else if (authHasRole("ADMIN", auth)) {
             return "testdb_admin";
+        } else {
+            return "testdb_user";
         }
-        return "testdb_user";
     }
 
 
