@@ -9,6 +9,7 @@ import ru.penza.models.User;
 import ru.penza.repositories.UserRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -19,6 +20,10 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+
+    public Optional<User> getUser(String login){
+        return userRepository.findOneByLogin(login);
+    }
 
     public String addUser(UserForm userForm) {
         User user = User.builder()

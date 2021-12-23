@@ -762,7 +762,11 @@ window.onload = function() {
 	    method: 'get',
 	    dataType: 'json',
 	    success: function(result){
-            login = result.me;
+	         if (result.logout == 0){
+	            login = result.me;
+	         } else {
+	            window.location.href = '/go_away';
+	         }
 	    },
 	    error: function(){}
     });

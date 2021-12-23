@@ -16,6 +16,7 @@ import ru.penza.forms.PeriodForm;
 import ru.penza.forms.ToolForm;
 import ru.penza.forms.UserForm;
 import ru.penza.models.Engine;
+import ru.penza.models.User;
 import ru.penza.services.EngineService;
 import ru.penza.services.ToolService;
 import ru.penza.services.UserService;
@@ -81,11 +82,17 @@ public class TildaControllerDB {
     }
 
 
-    @GetMapping("/me")                                    /// GET MY LOGIN ///
+    @GetMapping("/me")                                    ///  CHECK USERNAME AND GET USER LOGIN ///
     @ResponseBody
     public String getMyLogin(Principal principal) {
+        Optional<User> user = userService.getUser(principal.getName());
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("me", principal.getName());
+        if (user.isPresent()) {        // если такой есть, то отдаем username
+            jsonObject.put("logout", 0);
+            jsonObject.put("me", principal.getName());
+        } else {                       // если нет, то отправляем указание на logout
+            jsonObject.put("logout", 1);
+        }
         return jsonObject.toString();
     }
 
