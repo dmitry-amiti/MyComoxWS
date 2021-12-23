@@ -201,15 +201,5 @@ public class TildaControllerDB {
         return jsonObject.toString();
     }
 
-    @GetMapping("/last_values")
-    @ResponseBody
-    public String getLVals() {
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("critical_values", toolService.getAllCriticalsMap());
-        jsonObject.put("last_values", valueService.getLastVals(20L, "333", "Temperature"));
-        System.out.println(jsonObject);
-        return jsonObject.toString();
-    }
-
 
 }

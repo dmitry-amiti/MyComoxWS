@@ -757,6 +757,8 @@ window.onload = function() {
     });
 
 
+    connect();                                                                        // WEBSOCKET CONNECT
+
 
     $.ajax({
 	    url: '/me',
@@ -778,16 +780,13 @@ window.onload = function() {
 	     	        addNewEngine(result.engines[i]);
 	     	    }
 	     	    current_engines = result.engines;
-	     	    //timer = window.setInterval(getTimerData, updateInterval);
 	     },
 	     error: function(){
 	            showAlert('Please check the connection. Unable to get data from server.');
 	     }
      });
 
-     connect();                                                                            // WEBSOCKET CONNECT
 
-     //var timer = setInterval(function(){getTimerData()}, updateInterval);
 
 }
 

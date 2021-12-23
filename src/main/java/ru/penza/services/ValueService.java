@@ -95,24 +95,4 @@ public class ValueService {
     }
 
 
-//    public Map<Long, Double> getLastVals(Long then, Long now, String motor, String tool) {
-//        List<Value> valsFromDB = valueRepository.getLastValues(then * 1000, now * 1000, motor, tool);
-//        Map<Long, Double> map = new HashMap<>();
-//
-//        for (Value value : valsFromDB) {
-//            map.put(value.getTimestamp() / 1000, value.getValue());
-//        }
-//
-//        return map;
-//    }
-
-
 }
-
-
-//        List<Map<Object, Object>> values = new ArrayList<>();
-//        List<Value> valsFromDB = valueRepository.getLastValues(2000L, 1633132314L, motor, tool);
-//            map = new HashMap<>();
-//            map.put("timestamp", value.getTimestamp() / 1000);
-//            map.put("value", value.getValue());
-//            values.add(map);
