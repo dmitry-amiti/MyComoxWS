@@ -58,7 +58,7 @@ p {
     background: #01A794;
 }
 
-/*****************  END SELECT TIME PERIOD *****************/
+/***************** END SELECT TIME PERIOD *****************/
 
 
 
@@ -159,7 +159,7 @@ p {
 }
 
 
-/***************  END LIVE CHART ***************/
+/***************  END LIVE CHART  ***************/
 
 
 
@@ -785,8 +785,6 @@ window.onload = function() {
 	            showAlert('Please check the connection. Unable to get data from server.');
 	     }
      });
-
-
 
 }
 
@@ -1589,13 +1587,14 @@ window.onload = function() {
     }
 
 
-    $("#deleteMotor").mouseup(function(){                                              // вызов CONFIRM DELETE_MOTOR
+    $("#deleteMotor").click(function(){                                                // вызов CONFIRM DELETE_MOTOR
          if (active_motor != null){
               $('#textConfirm').html('Are you sure you want to delete this engine?');
               $("#confirm_window").fadeIn(300);
          } else {
               showAlert('Please, select engine');
          }
+         event.preventDefault();
     });
 
 
@@ -1642,6 +1641,7 @@ window.onload = function() {
 	                         $(".modal").hide();
 	                         $('form').each(function() { this.reset() });
 	                         console.log(e);
+	                         console.log("added engine" + current_engines);
 	                    } else {
 	                         showAlert('This number already exists in the DB');
 	                    }
@@ -1660,7 +1660,7 @@ window.onload = function() {
 
 
 
-    $('#big_motors').on('click','.small_motor', function(e) {                  // функция нажатия на конкретный мотор
+    $('#big_motors').on('click','.small_motor', function(e) {                 // функция нажатия на конкретный мотор
 
             for (let tool of charts.keys()) {          // перебираем ключи charts и очищаем все графики
                 clearLiveChart(charts.get(tool).chart,   charts.get(tool).dp);
@@ -1730,7 +1730,7 @@ window.onload = function() {
 
 
 	function processingWSData(result){                                              //  ОБРАБОТКА ДАННЫХ С WEBSOCKET
-
+         console.log("web socket: " + result.engines);
          result.engines.forEach(function(e_number){
 	         if(current_engines.indexOf(e_number) < 0) {    // если элемента 'e_number' нет в [current_engines]
 	             addNewEngine(e_number);
