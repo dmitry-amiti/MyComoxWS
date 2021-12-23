@@ -757,9 +757,6 @@ window.onload = function() {
     });
 
 
-    connect();                                                                        // WEBSOCKET CONNECT
-
-
     $.ajax({
 	    url: '/me',
 	    method: 'get',
@@ -771,20 +768,21 @@ window.onload = function() {
     });
 
 
-     $.ajax({
-	     url: '/motors',
-	     method: 'get',
-	     dataType: 'json',
-	     success: function(result){
-	     	    for (i = 0; i < result.engines.length; i++){
-	     	        addNewEngine(result.engines[i]);
-	     	    }
-	     	    current_engines = result.engines;
-	     },
-	     error: function(){
-	            showAlert('Please check the connection. Unable to get data from server.');
-	     }
-     });
+    $.ajax({
+	    url: '/motors',
+	    method: 'get',
+	    dataType: 'json',
+	    success: function(result){
+	            current_engines = result.engines;
+	    	    for (i = 0; i < result.engines.length; i++){
+	    	        addNewEngine(result.engines[i]);
+	    	    }
+	    	    connect();                                                                      // WEBSOCKET CONNECT
+	    },
+	    error: function(){
+	           showAlert('Please check the connection. Unable to get data from server.');
+	    }
+    });
 
 }
 
@@ -1641,7 +1639,6 @@ window.onload = function() {
 	                         $(".modal").hide();
 	                         $('form').each(function() { this.reset() });
 	                         console.log(e);
-	                         console.log("added engine" + current_engines);
 	                    } else {
 	                         showAlert('This number already exists in the DB');
 	                    }
@@ -1730,7 +1727,7 @@ window.onload = function() {
 
 
 	function processingWSData(result){                                              //  ОБРАБОТКА ДАННЫХ С WEBSOCKET
-         console.log("web socket: " + result.engines);
+
          result.engines.forEach(function(e_number){
 	         if(current_engines.indexOf(e_number) < 0) {    // если элемента 'e_number' нет в [current_engines]
 	             addNewEngine(e_number);
@@ -1922,7 +1919,7 @@ window.onload = function() {
 
     function onConnected() {
         stompClient.subscribe('/topic/public', onMessageReceived);           // Subscribe to the Public Topic
-        stompClient.subscribe('/topic/logout/'+login, onGetLogoutMessage);
+        stompClient.subscribe('/topic/logout/'+login, onGetLogoutMessage);   // Subscribe to the Login Topic
         stompClient.debug = null;                                            // Disable console messages
     }
 
