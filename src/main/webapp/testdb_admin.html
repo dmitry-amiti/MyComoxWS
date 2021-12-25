@@ -835,6 +835,8 @@ window.onload = function() {
         <!--</div>-->
     <!--</div>-->
 
+    <div class="item" id="sound"><a href="#">&nbsp;<i class="fas fa-volume-slash"></i>&nbsp;</a></div>
+
     <div class="item logout" id="away"><a href="#"><i class="fa fa-user-circle-o"></i>&nbsp; Log Out</a></div>
 </div>
 
@@ -1111,6 +1113,8 @@ window.onload = function() {
      var units = new Map();            // map хранит пары {"tool":"unit"}
      var updateInterval = 1000;
      var timer;
+     var snd = new Audio('/sounds/alert.wav');
+     var volume = null;
 
      var dataLength = 20;
      //var counter = 0;                  // счетчик для [datapoints] графиков
@@ -1310,10 +1314,23 @@ window.onload = function() {
     });
 
 
+
     $("#addTool").click(function(){
         $("#modal_add_tool").fadeIn(300);
         event.preventDefault();
     });
+
+
+
+    $("#sound").click(function(){
+        if (!volume) {
+            volume = 'on';
+        } else {
+            volume = null;
+        }
+        $(this).find('.fas').toggleClass('fa-volume-up').toggleClass('fa-volume-slash');
+    });
+
 
 
 
@@ -1323,6 +1340,7 @@ window.onload = function() {
             $(this).find('.button_form').mouseup();
         }
     });
+
 
 
     $('#alert_window').keypress(function(e){                               // обработчик нажатия ENTER alert_window
@@ -1339,7 +1357,6 @@ window.onload = function() {
         window.location.href = '/go_away';
         event.preventDefault();
     });
-
 
 
     $("#addUser").click(function(){
@@ -1755,10 +1772,12 @@ window.onload = function() {
          current_engines = result.engines;
          refreshSelectTool(result.critical_values);                      // обновляем значения в [selectTool]
          //counter++;                                                      // увеличиваем счетчик для [datapoints]
+         var alert;                                                      // флаг тревоги
 
-         var server_ts = Math.floor(result.server_time / 1000);
-         var server_time = getTimeFromTS(result.server_time);            // server_time as [00:00:00]
-         var tools    = Object.keys(result.critical_values);             // достаем tools
+         var server_ts    = Math.floor(result.server_time / 1000);
+         var server_time  = getTimeFromTS(result.server_time);            // server_time as [00:00:00]
+         var tools        = Object.keys(result.critical_values);             // достаем tools
+
 
          for (var i in result.engines){           // перебираем все engines
 
@@ -1808,7 +1827,13 @@ window.onload = function() {
 
                      led.children('.image_led').hide();   // скрываем все led и показываем только нужный
                      led.children(".image_led_" + color).show();
-          }
+                     if (color == 'red') alert = 'on';    // если мотор красный
+         }
+
+         if ((volume == 'on') && (alert == 'on')) {    // если хотя бы один мотор красный и звук вкл, то [alert]
+             snd.currentTime = 0;
+             snd.play();
+         }
 
 	}
 
@@ -1881,14 +1906,14 @@ window.onload = function() {
 	              data: {delta : delta, engine : active_motor, tool : tool},
 	              success: function(result){
 	                   var critical_value = result.critical_values[tool].value;   // забираем критическое значение
-                       var last_chart = charts.get(tool).last_chart;
-                       var last_dp    = charts.get(tool).last_dp;
+                       var last_chart     = charts.get(tool).last_chart;
+                       var last_dp        = charts.get(tool).last_dp;
                        clearLVChart(last_chart, last_dp);                         // очищаем график и шкалу
 
 
 	                   for (var i in result.last_values){
-	                        var ts = result.last_values[i].ts;
-	                        var time = getTimeFromTS(ts*1000);
+	                        var ts    = result.last_values[i].ts;
+	                        var time  = getTimeFromTS(ts*1000);
 	                        var value = result.last_values[i].value;
 
                            if (value > critical_value) {
