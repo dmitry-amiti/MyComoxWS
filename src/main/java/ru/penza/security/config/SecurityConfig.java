@@ -39,7 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/home", "/", "/images/**").permitAll()
+                .antMatchers("/home", "/", "/images/**", "/favicon.ico").permitAll()
                 .antMatchers("/**").authenticated()
 //                .antMatchers("/**").permitAll()
 

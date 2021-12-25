@@ -36,8 +36,8 @@ public class MyWebSocketService {
     public void publishMessage() {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("critical_values", toolService.getAllCriticalsMap());
-        jsonObject.put("engines", engineService.getAllEnginesNames());
         jsonObject.put("values", valueService.getAllValuesMap());
+        jsonObject.put("engines", engineService.getAllEnginesNames());
         jsonObject.put("server_time", System.currentTimeMillis());
         messagingTemplate.convertAndSend("/topic/public", jsonObject.toString());
 //        System.out.println("sent to topic");
