@@ -1629,11 +1629,11 @@ window.onload = function() {
 	          dataType: 'text',
 	          data: {name: active_motor},
 	          success: function(e){
-                  $("#"+active_motor).remove();                       // удаляем мотор с экрана
-                  $('.small_live_chart').hide();                      // скрываем все графики
-
                   position = current_engines.indexOf(active_motor);   // удаляем мотор из локального массива
                   if ( ~position ) current_engines.splice(position, 1);
+
+                  $("#"+active_motor).remove();                       // удаляем мотор с экрана
+                  $('.small_live_chart').hide();                      // скрываем все графики
 
                   active_motor = null;
                   $('#confirm_window').hide();
@@ -1660,8 +1660,8 @@ window.onload = function() {
 	           data: {name: $('#number').val()},
 	           success: function(e){
 	                    if (e != '0'){
+	                         current_engines.push(motor_number);  // если успех, добавляем в локальный массив
 	                         addNewEngine(motor_number);          // если успех, добавляем мотор на экран
-	                         current_engines.push(motor_number);  // добавляем в локальный массив
 	                         $(".modal").hide();
 	                         $('form').each(function() { this.reset() });
 	                         console.log(e);
@@ -1830,7 +1830,7 @@ window.onload = function() {
                      if (color == 'red') alert = 'on';    // если мотор красный
          }
 
-         if ((volume == 'on') && (alert == 'on')) {    // если хотя бы один мотор красный и звук вкл, то [alert]
+         if ((volume == 'on') && (alert == 'on')) {       // если хотя бы один мотор красный и звук вкл, то [alert]
              snd.currentTime = 0;
              snd.play();
          }
