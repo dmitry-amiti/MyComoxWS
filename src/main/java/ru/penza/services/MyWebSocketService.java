@@ -40,7 +40,8 @@ public class MyWebSocketService {
         jsonObject.put("engines", engineService.getAllEnginesNames());
         jsonObject.put("server_time", System.currentTimeMillis());
         messagingTemplate.convertAndSend("/topic/public", jsonObject.toString());
-//        System.out.println("sent to topic");
+        System.out.println("Sent to client: " + jsonObject.get("server_time"));
+        System.out.println();
     }
 
 

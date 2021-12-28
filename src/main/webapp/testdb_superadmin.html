@@ -8,9 +8,9 @@
     <title>MyComox | Main Page</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="icon" type="image/png" href="/images/icon.png">
-    <link rel="preload" href="https://i.ibb.co/WPT6q2f/motor.png" as="image">
-    <link rel="preload" href="https://i.ibb.co/xXpHmwp/tools.png" as="image">
-    <link rel="preload" href="https://i.ibb.co/FWbdBnt/user.png" as="image">
+    <link rel="preload" href="/images/motor.png" as="image">
+    <link rel="preload" href="/images/tools.png" as="image">
+    <link rel="preload" href="/images/user.png" as="image">
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
     <link href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -395,16 +395,19 @@ p {
 
 .up_image_motor {
     /*style="background-image: url(https://i.ibb.co/WPT6q2f/motor.png)"*/
-    background-image: url(https://i.ibb.co/WPT6q2f/motor.png);
+    /*background-image: url(https://i.ibb.co/WPT6q2f/motor.png);*/
+    background-image: url(/images/motor.png);
 }
 
 .up_image_tool {
     /*style="background-image: url(https://i.ibb.co/xXpHmwp/tools.png);"*/
-    background-image: url(https://i.ibb.co/xXpHmwp/tools.png);
+    /*background-image: url(https://i.ibb.co/xXpHmwp/tools.png);*/
+    background-image: url(/images/tools.png);
 }
 
 .up_image_user {
-    background-image: url(https://i.ibb.co/FWbdBnt/user.png);
+    /*background-image: url(https://i.ibb.co/FWbdBnt/user.png);*/
+    background-image: url(/images/user.png);
     background-position: bottom;
 }
 
@@ -1727,9 +1730,13 @@ window.onload = function() {
 
     function addNewEngine(motor_number){               // функция добавления мотора (принимает на вход номер мотора)
            var new_small_title    = $("<div class='small_title'>" + motor_number + "</div>");
-           var new_image_grey     = $("<img class='image_led image_led_grey'  src='https://i.ibb.co/2jHWKDj/grey.png'>");
-           var new_image_green    = $("<img class='image_led image_led_green' src='https://i.ibb.co/nPJHRbf/green.png'>");
-           var new_image_red      = $("<img class='image_led image_led_red'   src='https://i.ibb.co/HpqzmVm/red.png'>");
+           //var new_image_grey     = $("<img class='image_led image_led_grey'  src='https://i.ibb.co/2jHWKDj/grey.png'>");
+           //var new_image_green    = $("<img class='image_led image_led_green' src='https://i.ibb.co/nPJHRbf/green.png'>");
+           //var new_image_red      = $("<img class='image_led image_led_red'   src='https://i.ibb.co/HpqzmVm/red.png'>");
+           var new_image_grey     = $("<img class='image_led image_led_grey'  src='/images/grey.png'>");
+           var new_image_green    = $("<img class='image_led image_led_green' src='/images/green.png'>");
+           var new_image_red      = $("<img class='image_led image_led_red'   src='/images/red.png'>");
+
            var new_small_led      = $("<div class='small_led'/>")
                                                 .append(new_image_grey)
                                                 .append(new_image_green)

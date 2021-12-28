@@ -1723,9 +1723,13 @@ window.onload = function() {
 
     function addNewEngine(motor_number){               // функция добавления мотора (принимает на вход номер мотора)
            var new_small_title    = $("<div class='small_title'>" + motor_number + "</div>");
-           var new_image_grey     = $("<img class='image_led image_led_grey'  src='https://i.ibb.co/2jHWKDj/grey.png'>");
-           var new_image_green    = $("<img class='image_led image_led_green' src='https://i.ibb.co/nPJHRbf/green.png'>");
-           var new_image_red      = $("<img class='image_led image_led_red'   src='https://i.ibb.co/HpqzmVm/red.png'>");
+           //var new_image_grey     = $("<img class='image_led image_led_grey'  src='https://i.ibb.co/2jHWKDj/grey.png'>");
+           //var new_image_green    = $("<img class='image_led image_led_green' src='https://i.ibb.co/nPJHRbf/green.png'>");
+           //var new_image_red      = $("<img class='image_led image_led_red'   src='https://i.ibb.co/HpqzmVm/red.png'>");
+           var new_image_grey     = $("<img class='image_led image_led_grey'  src='/images/grey.png'>");
+           var new_image_green    = $("<img class='image_led image_led_green' src='/images/green.png'>");
+           var new_image_red      = $("<img class='image_led image_led_red'   src='/images/red.png'>");
+
            var new_small_led      = $("<div class='small_led'/>")
                                                 .append(new_image_grey)
                                                 .append(new_image_green)

@@ -54,7 +54,7 @@ public class ValueService {
                 }
             }
         }
-        System.out.println();
+//        System.out.println();
         return motors;
     }
 
