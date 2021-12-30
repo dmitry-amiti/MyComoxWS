@@ -65,7 +65,7 @@ public class ValueService {
 
 
     public List<Map> getLastVals(Long delta, String motor, String tool) {
-        long now = System.currentTimeMillis() / 1000;     // сначала делим, чтобы округлить
+        long now = System.currentTimeMillis() / 1000;     // сначала делим, чтобы округлить до секунд
         long then = now - delta;
 //        System.out.println("then: " + then + "    now: " + now);
 

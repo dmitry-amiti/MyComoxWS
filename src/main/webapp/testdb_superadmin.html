@@ -744,7 +744,6 @@ window.onload = function() {
     // $('#loading').fadeOut(1000);
 
 
-
     if ($('#item_motors:hover').length != 0) {
         $('#item_motors').children(".submenu").slideDown("fast");
     }
@@ -1122,6 +1121,7 @@ window.onload = function() {
      var snd = new Audio('/sounds/alert.mp3');
      //var snd = new Audio('/sounds/alert.wav');
      var volume = null;
+     var login = null;
 
      var dataLength = 20;
      //var counter = 0;                  // счетчик для [datapoints] графиков
@@ -1952,7 +1952,6 @@ window.onload = function() {
 <script>
     var stompClient = null;
     var socket = null;
-    var login = null;
 
 
     function connect() {
@@ -1981,7 +1980,6 @@ window.onload = function() {
             window.location.href = '/go_away';
         }
     }
-
 
 
     function onError(error) {

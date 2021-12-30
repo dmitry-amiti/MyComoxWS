@@ -1113,8 +1113,10 @@ window.onload = function() {
      var units = new Map();            // map хранит пары {"tool":"unit"}
      var updateInterval = 1000;
      var timer;
-     var snd = new Audio('/sounds/alert.wav');
+     var snd = new Audio('/sounds/alert.mp3');
+     //var snd = new Audio('/sounds/alert.wav');
      var volume = null;
+     var login = null;
 
      var dataLength = 20;
      //var counter = 0;                  // счетчик для [datapoints] графиков
@@ -1945,7 +1947,6 @@ window.onload = function() {
 <script>
     var stompClient = null;
     var socket = null;
-    var login = null;
 
 
     function connect() {
