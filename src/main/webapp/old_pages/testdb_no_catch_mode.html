@@ -1,16 +1,16 @@
 <html>
 
 
-<!-- MAIN DATABASE PAGE -->
+<!-- MAIN DATABASE PAGE  3.01.2022 -->
 
 
 <head>
     <title>MyComox | Main Page</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="icon" type="image/png" href="/images/icon.png">
-    <!--<link rel="preload" href="/images/motor.png" as="image">-->
-    <!--<link rel="preload" href="/images/tools.png" as="image">-->
-    <!--<link rel="preload" href="/images/user.png" as="image">-->
+    <link rel="preload" href="/images/motor.png" as="image">
+    <link rel="preload" href="/images/tools.png" as="image">
+    <link rel="preload" href="/images/user.png" as="image">
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
     <link href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -569,13 +569,10 @@ input:focus {
 }
 
 
+
 .item {
     float: left;
     position: relative;
-    color: #fff; /*white*/
-    padding: 15px 35px;
-    cursor: pointer;
-    user-select: none;
 }
 
 
@@ -586,8 +583,6 @@ input:focus {
 
 #sound, #catcher {
     background-color: #48cfad;
-    padding: 15px 13px;
-    float: right;
 }
 
 
@@ -601,25 +596,33 @@ input:focus {
 }
 
 
+.item > a {
+    display: block;
+    color: #fff;
+    padding: 15px 35px;
+    text-decoration: none;
+}
+
+
 .submenu {
     position: absolute;
     top: 99%;
-    left: 0px;
     display: none;
     width: 210px;
     background: #37bc9b;
 }
 
 
-.submenu div {
+.submenu a {
     color: #fff;
+    display: block;
     padding: 15px 35px;
+    text-decoration: none;
     background: #555;
     float: none;
 }
 
-
-.submenu div:hover {
+.submenu a:hover {
     background: #666;
 }
 
@@ -634,9 +637,12 @@ input:focus {
     float: right;
 }
 
-
 .home {
     background: #37bc9b;
+}
+
+
+.home a {
     padding: 15px 25px;
 }
 
@@ -813,35 +819,37 @@ window.onload = function() {
 
 
 <div class="menu">
-    <div class="item home" id="item_home"><i class='fa fa-home'></i>&nbsp; Home</div>
+    <div class="item home"><a href="javascript:void(0)"><i class='fa fa-home'></i>&nbsp; Home</a></div>
 
-    <div class="item" id="item_about">About</div>
+    <div class="item"><a href="javascript:void(0)" id="getAbout">About</a></div>
 
-    <!--<div class="item" id="item_motors">Motors &nbsp;<i class='fa fa-angle-down anim'></i>-->
-        <!--<div class="submenu engines">-->
-            <!--<div id="addMotor">Add Motor</div>-->
-            <!--<div id="deleteMotor">Delete Motor</div>-->
-        <!--</div>-->
-    <!--</div>-->
+    <div class="item" id="item_motors"><a href="#">Motors &nbsp;<i class='fa fa-angle-down anim'></i></a>
+        <div class="submenu engines">
+            <a href="#" id="addMotor">Add Motor</a>
+            <a href="#" id="deleteMotor">Delete Motor</a>
+        </div>
+    </div>
 
-    <!--<div class="item" id="item_tools">Tools &nbsp;<i class='fa fa-angle-down anim'></i>-->
-        <!--<div class="submenu">-->
-            <!--<div id="setCritical">Set Critical Values</div>-->
-        <!--</div>-->
-    <!--</div>-->
+    <div class="item" id="item_tools"><a href="#">Tools &nbsp;<i class='fa fa-angle-down anim'></i></a>
+        <div class="submenu">
+            <!--<a href="#" id="addTool">Add Tool</a>-->
+            <!--<a href="#">Delete Tool</a>-->
+            <a href="#" id="setCritical">Set Critical Values</a>
+        </div>
+    </div>
 
-    <!--<div class="item" id="item_users">Users &nbsp;<i class='fa fa-angle-down anim'></i>-->
-        <!--<div class="submenu users">-->
-            <!--<div id="addUser">Add User</div>-->
-            <!--<div id="deleteUser">Delete User</div>-->
-        <!--</div>-->
-    <!--</div>-->
+    <div class="item" id="item_users"><a href="#">Users &nbsp;<i class='fa fa-angle-down anim'></i></a>
+        <div class="submenu users">
+            <a href="#" id="addUser">Add User</a>
+            <a href="#" id="deleteUser">Delete User</a>
+        </div>
+    </div>
 
-    <div class="item logout" id="away"><i class="fa fa-user-circle-o"></i>&nbsp; Log Out</div>
+    <div class="item" id="sound"><a href="#">&nbsp;<i class="fas fa-volume-slash"></i>&nbsp;</a></div>
 
-    <div class="item" id="catcher">Catch Mode &nbsp;<i class="fad fa-toggle-off fa-lg"></i></div>
+    <div class="item" id="catcher"><a href="#">Catch Mode &nbsp;<i class="fad fa-toggle-off fa-lg"></i></a></div>
 
-    <div class="item" id="sound">&nbsp;<i class="fas fa-volume-slash"></i>&nbsp;</div>
+    <div class="item logout" id="away"><a href="#"><i class="fa fa-user-circle-o"></i>&nbsp; Log Out</a></div>
 </div>
 
 
