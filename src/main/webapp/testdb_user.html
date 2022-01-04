@@ -263,19 +263,31 @@ p {
 .small_play {
     position: absolute;
     display: none;
-    /*display: block;*/
-    /*overflow: hidden;*/
-    /*background:yellow;*/
-    width: 20%;
-    height: 20%;
-    top: 45px;
-    right: 10%;
+    //background:yellow;
+    width: 30%;
+    //height: 20%;
+    top: 38px;
+    right: 2%;
     font-size: 30px;
     color: grey;
+    border: 1px solid red;
+    border-radius: 5px;
+    padding: 3px 0 0;
 }
+
 
 .small_play:hover {
     color: black;
+}
+
+
+.play_time {
+    //background: red;
+    font-size: 10px;
+    font-weight: normal;
+    font-family: Poppins;
+    color: red;
+    width: 100%;
 }
 
 
@@ -1024,6 +1036,7 @@ window.onload = function() {
             <!--<div class="small_play">-->
                 <!--&lt;!&ndash;<img class="image_play" src="https://i.ibb.co/HBMc4Gh/play.png">&ndash;&gt;-->
                 <!--<i class="fa fa-play-circle"></i>-->
+                <!--<div class="play_time">00:00:00</div>-->
             <!--</div>-->
             <!--<div class="tool_info">-->
                 <!--<div class="tool_title temperature">Temperature:</div>-->
@@ -1750,8 +1763,9 @@ window.onload = function() {
                                                 .append(new_image_grey)
                                                 .append(new_image_green)
                                                 .append(new_image_red);
-           var new_small_play     = $("<div class='small_play'><i class='fa fa-play-circle'></i></div>");
-           var new_tool_info_temp = $("<div class='tool_info Temperature'><div class='tool_title'>Temperature:</div>"+
+           var new_small_play     = $("<div class='small_play'><i class='fa fa-play-circle'></i>" +
+                                      "<div class='play_time'>00:00:00</div></div>");
+           var new_tool_info_temp = $("<div class='tool_info Temperature'><div class='tool_title'>Temperature:</div>" +
                                       "<div class='tool_value'>--℃</div></div>");
            var new_tool_info_acc  = $("<div class='tool_info Accelerometer'><div class='tool_title'>Accelerometer:</div>" +
                                       "<div class='tool_value'>--g</div></div>");
@@ -1805,6 +1819,7 @@ window.onload = function() {
                      var color    = 'grey';
                      var led      = $("#"+e_number).children('.small_led');
                      var play     = $("#"+e_number).children('.small_play');
+                     var play_time = play.children('.play_time');
 
 
                      tools.forEach (function(tool){       // перебираем все tools
@@ -1856,7 +1871,10 @@ window.onload = function() {
                          led.children(".image_led_" + color).show();
                          if (color == 'red') {                       // если мотор красный
                             alert = 'on';
-                            if (catcher) play.show();
+                            if (catcher) {
+                                play_time.html(server_time);
+                                play.show();
+                            }
                          }
                      }
          }
