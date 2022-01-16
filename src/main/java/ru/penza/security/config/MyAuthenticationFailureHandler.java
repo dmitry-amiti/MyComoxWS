@@ -1,6 +1,7 @@
 package ru.penza.security.config;
 
 import org.json.JSONObject;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.stereotype.Component;
@@ -17,7 +18,13 @@ public class MyAuthenticationFailureHandler implements AuthenticationFailureHand
                                         HttpServletResponse response,
                                         AuthenticationException exception) throws IOException, ServletException {
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("status", "401");
+
+        if (exception.getClass().isAssignableFrom(BadCredentialsException.class)) {
+            jsonObject.put("status", "401");
+        } else {
+            jsonObject.put("status", "404");
+        }
+
         System.out.println(jsonObject.toString());
 
         response.getWriter().append(jsonObject.toString());

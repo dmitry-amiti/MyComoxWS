@@ -59,4 +59,18 @@ public class UserDetailsImpl implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+
+    @Override
+    public int hashCode() {
+        return user.getLogin() != null ? user.getLogin().hashCode() : 0;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof UserDetailsImpl) {
+            return user.getLogin().equals(((UserDetailsImpl) obj).getUsername());
+        }
+        return false;
+    }
 }

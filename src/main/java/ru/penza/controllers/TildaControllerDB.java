@@ -85,7 +85,7 @@ public class TildaControllerDB {
     }
 
 
-    @GetMapping("/me")                                    ///  CHECK USERNAME AND GET USER LOGIN ///
+    @GetMapping("/me")                                    /// CHECK USERNAME AND GET USER LOGIN ///
     @ResponseBody
     public String getMyLogin(Principal principal) {
         Optional<User> user = userService.getUser(principal.getName());

@@ -948,6 +948,8 @@ window.onload = function() {
                            window.location.href = e.redirect;
                       } else if (e.status == 401){
                            showAlert('Wrong login or password');
+                      } else {
+                           showAlert('Error');
                       }
 	             },
 	             error:  function(){
