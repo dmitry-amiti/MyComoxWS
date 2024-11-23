@@ -1,0 +1,2045 @@
+<html>
+
+
+<!-- MAIN DATABASE PAGE -->
+
+
+<head>
+    <title>MyComox | Main Page</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="icon" type="image/png" href="/images/icon.png">
+    <!--<link rel="preload" href="/images/motor.png" as="image">-->
+    <!--<link rel="preload" href="/images/tools.png" as="image">-->
+    <!--<link rel="preload" href="/images/user.png" as="image">-->
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <link href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
+
+
+
+<style>
+
+
+/*******************  SELECT TIME PERIOD  *****************/
+
+p {
+    margin: 30px 0 10px;
+}
+
+
+.select_time {
+    font-family: Georgia;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+#period {
+    text-align: center;
+    margin-left: 5px;
+    width: 110px;
+    height: 35px;
+    border-radius: 5px;
+}
+
+#btn_select_time {
+    height: 35px;
+    padding: 0 10px 0;
+    border: 1px solid;
+    border-radius: 5px;
+    background: #01A794;
+    color: white;
+}
+
+#btn_select_time:hover {
+    background: #039B8B;
+    color: white;
+}
+
+#btn_select_time:active {
+    background: #01A794;
+}
+
+/***************** END SELECT TIME PERIOD *****************/
+
+
+
+
+/**************** MODAL CONFIRM ******************/
+
+#confirm_content {
+    height: 20%;
+}
+
+#textConfirm {
+    top: 30%;
+}
+
+/**************** MODAL CONFIRM ******************/
+
+
+
+
+/**************** MODAL ALERT ******************/
+
+/* Фон за формой */
+.modal-alert {
+    display: none;
+    position: fixed;
+    z-index: 151;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.4);
+}
+
+
+.modal-content-alert {
+    position: relative;
+    overflow: hidden;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    user-select: none;
+    background-color: #fefefe;
+    border-radius: 7px;
+    width: 35%;
+    height: 15%;
+    box-shadow: 5px 10px 5px #666666;
+    font-family: Poppins;
+    font-size: 16px;
+}
+
+.text-alert {
+    position: relative;
+    text-align: center;
+    padding: 0 40px 0;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.close-alert {
+    position: absolute;
+    padding: 7px 12px;
+    top: 5px; right: 5px;
+    font-size: 20px;
+    color: #bfbfbf;
+    cursor: pointer;
+    transition: all .4s;
+    //background: yellow;
+}
+
+.close-alert:hover {
+    color: #404040;
+}
+
+/************** END MODAL ALERT ****************/
+
+
+/*****************  LIVE CHART  *****************/
+
+
+.small_live_chart {
+    display: none;
+    position: relative;
+
+    float: left;
+    margin: 20px 13px 10px;
+    width: 400px;
+    height: 150px;
+    padding: 5px;
+
+    border: 2px solid silver;
+    border-radius: 4px;
+    background-color: white;
+}
+
+.chart_container {
+    height: 100%;
+    width: 100%;
+}
+
+
+/***************  END LIVE CHART  ***************/
+
+
+
+
+/*****************  BIG ******************/
+
+
+.big {
+    display: inline-block;
+
+    margin: 10px 20px 10px;
+    padding: 10px;
+    min-height: 247px;
+    width: 94%;
+    user-select: none;
+
+    border: 1px solid silver;
+
+    text-align: center;
+    font-family: Georgia;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+
+
+.big_title {
+    position: relative;
+    width: 100%;
+    margin: 10px 0 10px 0;
+    /*background: yellow;*/
+}
+
+
+.small_motor {
+    position: relative;
+    cursor: pointer;
+
+    float:left;
+    margin: 20px 10px 10px;
+    width: 150px;
+    height: 150px;
+    padding: 5px;
+
+    border: 2px solid silver;
+    border-radius: 4px;
+    background-color: white;
+    transition: transform 0.2s;
+}
+
+.small_motor:hover {
+    transform: scale(1.1);
+    /*background-color: #E0E0E0;*/
+    /*border-color: #E0E0E0;*/
+}
+
+.small_motor_active {
+     background-color: #E0E0E0;
+     border-color: #E0E0E0;
+}
+
+.small_title {
+    position: relative;
+    width: 100%;
+    margin: 0 0 5px 0;
+    font-size: 20px;
+    /*background: yellow;*/
+}
+
+
+.small_led {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    /*top: 5px;*/
+    margin: auto;
+    width: 40%;
+    height: 40%;
+    pointer-events: none;
+    /*background: yellow;*/
+}
+
+.image_led_grey {
+    width:100%;
+}
+
+.image_led_green {
+    display:none;
+    width:100%;
+}
+
+.image_led_red {
+    display:none;
+    width:100%;
+}
+
+.small_play {
+    position: absolute;
+    display: none;
+    //background:yellow;
+    width: 30%;
+    //height: 20%;
+    top: 38px;
+    right: 2%;
+    font-size: 30px;
+    color: grey;
+    border: 1px solid red;
+    border-radius: 5px;
+    padding: 3px 0 0;
+}
+
+
+.small_play:hover {
+    color: black;
+}
+
+
+.play_time {
+    //background: red;
+    font-size: 10px;
+    font-weight: normal;
+    font-family: Poppins;
+    color: red;
+    width: 100%;
+}
+
+
+/*.image_play {*/
+/*    width:100%;*/
+/*}*/
+
+
+.tool_info {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    width: 100%;
+    /*background: yellow;*/
+    margin-bottom: 5px;
+    font-size: 11px;
+    font-weight: normal;
+    font-family: Poppins;
+}
+
+.tool_title {
+    margin: 0;
+    width: 62%;
+    /*background: green;*/
+    text-align: right;
+}
+
+.tool_value {
+    width: 25%;
+    /*background: green; */
+    text-align: left;
+}
+
+/****************** END BIG *****************/
+
+
+
+/************** MODAL ****************/
+
+/* Фон за формой */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 150;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+
+/* Содержание модального окна*/
+.modal-content {
+    overflow: hidden;
+    position: relative;
+    top: 50%; left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    user-select: none;
+    background-color: #fefefe;
+
+    border-radius: 14px;
+    width: 50%;
+    min-width: 700px;
+    height: 70%;
+    box-shadow: 5px 10px 5px #666;
+    font-family: Poppins;
+}
+
+.modal-content-user {
+    height: 77%;
+}
+
+
+
+.up {
+    position: relative;
+    height: 40%;
+    width: 100%;
+    overflow: hidden;
+}
+
+.up_add_user {
+    height: 35%;
+}
+
+
+
+.modal-content:hover .up_image {
+    transform: scale(1.2);
+}
+
+
+.up_text {
+    position: absolute;
+    top: 50%; left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    font-size: 30px;
+    font-weight: 900;
+    color: white;
+}
+
+
+.up_image {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    transition: 1s;
+}
+
+.up_image_motor {
+    /*style="background-image: url(https://i.ibb.co/WPT6q2f/motor.png)"*/
+    /*background-image: url(https://i.ibb.co/WPT6q2f/motor.png);*/
+    background-image: url(/images/motor.png);
+}
+
+.up_image_tool {
+    /*style="background-image: url(https://i.ibb.co/xXpHmwp/tools.png);"*/
+    /*background-image: url(https://i.ibb.co/xXpHmwp/tools.png);*/
+    background-image: url(/images/tools.png);
+}
+
+.up_image_user {
+    /*background-image: url(https://i.ibb.co/FWbdBnt/user.png);*/
+    background-image: url(/images/user.png);
+    background-position: bottom;
+}
+
+
+.close_form {
+    position: relative;
+    float: right;
+    margin: 20px 20px 0 0;
+    color: white; font-size: 30px;
+    cursor: pointer;
+}
+
+.close_form:hover .fa-times-circle {
+    transform: rotate(180deg);
+}
+
+.fa-times-circle {
+    transition: transform .4s;
+}
+
+
+
+
+.down {
+    margin: 20px 60px 40px 50px;
+    //background: green;
+}
+
+.down_add_user {
+    margin: 20px 70px 40px 40px;
+}
+
+.down_delete_user {
+    margin: 70px 70px 40px 40px;
+}
+
+.down label {
+    float: right;
+    margin: 15px 0 0 0;
+    text-align: right;
+    color: #808080;
+    width: 100%;
+    //background: yellow;
+}
+
+.down .label_critical {
+    margin: 5px 0 7px 0;
+    //background: red;
+}
+
+.down .label_add_user {
+    margin: 0;
+    //background: red;
+}
+
+
+#critical_value {
+    color: #01A794;
+    pointer-events: none;
+}
+
+
+.down input {
+    height: 45px;
+    width: 70%;
+    padding-left: 20px;
+    margin: 0 0 0 30px;
+	outline: none;
+	border: none;
+	border-bottom: 1px solid #808080;
+	font-family: Poppins;
+    font-size: 16px;
+    color: #505050;
+}
+
+
+input::-webkit-input-placeholder {
+    color: #999999;
+}
+
+input:focus::-webkit-input-placeholder {
+    color: transparent;
+}
+
+input:focus {
+    border-bottom: 1px solid #01A794;
+}
+
+
+.select_modal {
+	font-family: Poppins;
+    font-size: 16px;
+    color: #505050;
+    text-align: left;
+    width: 70%;
+    margin: 0 0 0 30px;
+    padding-left: 20px;
+    height: 45px;
+    border-radius: 5px;
+}
+
+.select_border_none {
+    border: none;
+    outline: none;
+    width: 20%;
+    margin-right: 50%;
+}
+
+
+.button_form {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 40px;
+
+    padding: 0 40px 0;
+    margin: auto;
+    height: 50px;
+    background-color: #01A794;
+    border-radius: 25px;
+    border: none;
+    font-family: Poppins;
+    font-size: 16px;
+    color: #fff;
+    transition: all 0.4s;
+}
+
+#button_set_critical {
+    top: 15px;
+}
+
+#button_add_user {
+    top: 15px;
+}
+
+
+
+.button_form:hover {
+    background-color: #333333;
+}
+
+/************** END MODAL ****************/
+
+
+
+/************** MENU ****************/
+
+.menu {
+    z-index: 100;
+    background-color: #48cfad;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    min-width: 800px;
+    font-family: Poppins;
+    font-size: 15px;
+    /*box-shadow: 0 2px 14px;*/
+}
+
+
+.item {
+    float: left;
+    position: relative;
+    color: #fff; /*white*/
+    padding: 15px 35px;
+    cursor: pointer;
+    user-select: none;
+}
+
+
+.item:hover {
+    background: #555; /*dark grey*/
+}
+
+
+#sound, #catcher {
+    background-color: #48cfad;
+    padding: 15px 13px;
+    float: right;
+}
+
+
+.item:hover .fa-angle-down {
+    transform: rotate(180deg);
+}
+
+
+.fa-angle-down {
+    transition: transform .3s;
+}
+
+
+.submenu {
+    position: absolute;
+    top: 99%;
+    left: 0px;
+    display: none;
+    width: 210px;
+    background: #37bc9b;
+}
+
+
+.submenu div {
+    color: #fff;
+    padding: 15px 35px;
+    background: #555;
+    float: none;
+}
+
+
+.submenu div:hover {
+    background: #666;
+}
+
+
+.users, .engines {
+    width: 170px;
+}
+
+
+.logout {
+    background: #37bc9b;
+    float: right;
+}
+
+
+.home {
+    background: #37bc9b;
+    padding: 15px 25px;
+}
+
+
+/************** END MENU ****************/
+
+
+
+/************** PRELOADER ****************/
+
+
+#main {
+    opacity: 0;
+    margin-top: 60px;
+    transition: all 2.5s;
+}
+
+
+#loading {
+    position: fixed;
+    z-index: 200;
+    top: 50%; left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    user-select: none;
+    text-align: center;
+    font-family: Georgia;
+    font-size: 34px;
+    font-weight: bold;
+}
+
+
+.hide_loading {
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.5s;
+}
+
+
+/************** END PRELOADER ****************/
+
+
+/************** SCROLLBAR ****************/
+
+/*полоса прокрутки*/
+::-webkit-scrollbar {
+    width: 18px;
+    background-color: #f9f9fd;
+}
+
+/*сам ползунок*/
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    border: 5px solid  #f9f9fd;
+    background: #606060;
+}
+
+::-webkit-scrollbar-thumb:hover{
+    background: #909090;
+}
+
+/************** END SCROLLBAR ****************/
+
+
+/****************** BODY ********************/
+
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+button {
+    cursor: pointer;
+}
+
+button:focus {
+    outline: none;
+    background-color: #333333;
+}
+
+/**************** END BODY ******************/
+
+</style>
+
+</head>
+
+
+
+
+<script>
+
+
+window.onload = function() {
+
+    document.getElementById("main").style="opacity: 1;";
+    $('#loading').addClass('hide_loading');
+    // $('#loading').fadeOut(1000);
+
+
+    if ($('#item_motors:hover').length != 0) {
+        $('#item_motors').children(".submenu").slideDown("fast");
+    }
+    if ($('#item_tools:hover').length != 0) {
+        $('#item_tools').children(".submenu").slideDown("fast");
+    }
+    if ($('#item_users:hover').length != 0) {
+        $('#item_users').children(".submenu").slideDown("fast");
+    }
+
+
+    $('#mac').mask("AA:AA:AA:AA:AA:AA", {placeholder: "__:__:__:__:__:__"});
+
+    $('#number').mask("SSSSSSSSSS", {'translation': {
+         S: {pattern: /[A-Za-z0-9_-]/}
+        },
+        placeholder: "Enter engine number (not more 10 symbols)"
+    });
+
+
+    $.ajax({
+	    url: '/me',
+	    method: 'get',
+	    dataType: 'json',
+	    success: function(result){
+	         if (result.logout == 0){
+	            login = result.me;
+	         } else {
+	            window.location.href = '/go_away';
+	         }
+	    },
+	    error: function(){}
+    });
+
+
+    $.ajax({
+	    url: '/motors',
+	    method: 'get',
+	    dataType: 'json',
+	    success: function(result){
+	            current_engines = result.engines;
+	    	    for (i = 0; i < result.engines.length; i++){
+	    	        addNewEngine(result.engines[i]);
+	    	    }
+	    	    connect();                                                                      // WEBSOCKET CONNECT
+	    },
+	    error: function(){
+	           showAlert('Please check the connection. Unable to get data from server.');
+	    }
+    });
+
+}
+
+
+</script>
+
+
+
+
+<body>
+
+<div id="loading">
+    <i class="fa fa-spinner fa-pulse fa-3x fa-fw" style="font-size: 150px;"></i>
+    <span style="margin-top: 20px;">Loading...</span>
+</div>
+
+
+
+
+<div class="menu">
+    <div class="item home" id="item_home"><i class='fa fa-home'></i>&nbsp; Home</div>
+
+    <div class="item" id="item_about">About</div>
+
+    <!--<div class="item" id="item_motors">Motors &nbsp;<i class='fa fa-angle-down anim'></i>-->
+        <!--<div class="submenu engines">-->
+            <!--<div id="addMotor">Add Motor</div>-->
+            <!--<div id="deleteMotor">Delete Motor</div>-->
+        <!--</div>-->
+    <!--</div>-->
+
+    <!--<div class="item" id="item_tools">Tools &nbsp;<i class='fa fa-angle-down anim'></i>-->
+        <!--<div class="submenu">-->
+            <!--<div id="setCritical">Set Critical Values</div>-->
+        <!--</div>-->
+    <!--</div>-->
+
+    <!--<div class="item" id="item_users">Users &nbsp;<i class='fa fa-angle-down anim'></i>-->
+        <!--<div class="submenu users">-->
+            <!--<div id="addUser">Add User</div>-->
+            <!--<div id="deleteUser">Delete User</div>-->
+        <!--</div>-->
+    <!--</div>-->
+
+    <div class="item logout" id="away"><i class="fa fa-user-circle-o"></i>&nbsp; Log Out</div>
+
+    <div class="item" id="catcher">Catch Mode &nbsp;<i class="fad fa-toggle-off fa-lg"></i></div>
+
+    <div class="item" id="sound">&nbsp;<i class="fas fa-volume-slash"></i>&nbsp;</div>
+</div>
+
+
+
+
+<div class="modal" id="modal_add_engine">
+    <div class="modal-content">
+        <div class="up">
+            <div class="up_image up_image_motor"></div>
+            <div class="up_text">ADD ENGINE</div>
+            <div class="close_form"><i class="fal fa-times-circle"></i></div>
+        </div>
+
+        <div class="down">
+            <form>
+                <label>Engine number
+                    <input type="text" id="number" name="number" placeholder="Enter engine number"
+                           autocomplete="off">
+                </label>
+                <label>MAC address
+                    <input type="text" id="mac" name="mac" placeholder="Enter MAC address"
+                           autocomplete="off">
+                </label>
+                <button class="button_form" id="button_add_engine" type="button">Add Engine</button>
+            </form>
+        </div>
+
+        <!--<div style="height: 100%; width: 100%; -->
+        <!--            background-image: url(https://i.ibb.co/YpJK6vg/sen3.png);-->
+        <!--            background-size: cover;   background-position: center;">-->
+        <!--        <div style="height: 100%; width: 100%; position: relative; background-color: rgba(54,84,99,0.7);">-->
+
+        <!--        </div>-->
+        <!--</div>-->
+
+    </div>
+</div>
+
+
+
+<div class="modal" id="modal_add_tool">
+    <div class="modal-content">
+        <div class="up">
+            <div class="up_image up_image_tool"></div>
+            <div class="up_text">ADD TOOL</div>
+            <div class="close_form"><i class="fal fa-times-circle"></i></div>
+        </div>
+
+        <div class="down">
+            <form>
+                <label>Tool name
+                    <input type="text" id="tool_name" name="tool_name" placeholder="Enter tool name" autocomplete="off">
+                </label>
+                <label>Critical value
+                    <input type="text" id="value" name="value" placeholder="Enter critical value" autocomplete="off">
+                </label>
+                <button class="button_form" id="button_add_tool" type="button">Add Tool</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal" id="modal_set_critical">
+    <div class="modal-content">
+        <div class="up">
+            <div class="up_image up_image_tool"></div>
+            <div class="up_text">SET CRITICAL VALUE</div>
+            <div class="close_form"><i class="fal fa-times-circle"></i></div>
+        </div>
+
+        <div class="down">
+            <form>
+               <label class="label_critical">Select tool
+                   <select class="select_modal" id="selectTool"></select>
+               </label>
+               <label class="label_critical">Critical value
+                   <input type="text" id="critical_value" disabled>
+               </label>
+               <label class="label_critical">New value
+                   <input type="text" id="new_value" placeholder="Enter new critical value" autocomplete="off">
+               </label>
+               <button class="button_form" id="button_set_critical" type="button">Set critical value</button>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="modal" id="modal_add_user">
+    <div class="modal-content  modal-content-user">
+        <div class="up up_add_user">
+            <div class="up_image up_image_user"></div>
+            <div class="up_text">ADD USER</div>
+            <div class="close_form"><i class="fal fa-times-circle"></i></div>
+        </div>
+
+        <div class="down  down_add_user">
+            <form>
+                <label class="label_add_user">Name
+                    <input type="text" id="user_name"     autocomplete="off">
+                </label>
+                <label class="label_add_user">Last Name
+                    <input type="text" id="user_lastname" autocomplete="off">
+                </label>
+                <label class="label_add_user">Login
+                    <input type="text" id="user_login"    autocomplete="off" placeholder="minimum 4 symbols">
+                </label>
+                <label class="label_add_user">Password
+                    <input type="text" id="user_password" autocomplete="off" placeholder="minimum 4 symbols">
+                </label>
+                <label class="label_add_user">Select role
+                    <select class="select_modal  select_border_none"  id="selectRole" tabindex="-1">
+                        <option value="USER" selected>User</option>
+                        <option value="ADMIN">Admin</option>
+                    </select>
+                </label>
+            </form>
+        </div>
+        <button class="button_form" id="button_add_user" type="button">Add User</button>
+
+    </div>
+</div>
+
+
+<div class="modal" id="modal_delete_user">
+    <div class="modal-content">
+        <div class="up">
+            <div class="up_image up_image_user"></div>
+            <div class="up_text">DELETE USER</div>
+            <div class="close_form"><i class="fal fa-times-circle"></i></div>
+        </div>
+
+        <div class="down  down_delete_user">
+            <form>
+                <label>Select user
+                    <select class="select_modal"  id="selectUser"></select>
+                </label>
+
+                <button class="button_form" id="button_delete_user" type="button">Delete User</button>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="modal-alert" id="alert_window" tabindex="1">
+    <div class="modal-content-alert">
+        <div class="text-alert" id="textAlert"></div>
+        <div class="close-alert"><i class="far fa-times"></i></div>
+    </div>
+</div>
+
+
+<div class="modal-alert" id="confirm_window">
+    <div class="modal-content-alert" id="confirm_content">
+        <div class="text-alert" id="textConfirm"></div>
+        <div class="close-alert"><i class="far fa-times"></i></div>
+        <button class="button_form" id="button_confirm" type="button">OK</button>
+    </div>
+</div>
+
+
+
+
+<div id="main">
+
+    <div class="big" id="big_motors">
+        <div class="big_title">Current Engines</div>
+
+        <!--<div class="small_motor" id="Engine_1">-->
+            <!--<div class="small_title">Engine 1</div>-->
+            <!--<div class="small_led">-->
+                <!--<img class="image_led_grey" src="https://i.ibb.co/2jHWKDj/grey.png">-->
+                <!--<img class="image_led_green" src="https://i.ibb.co/nPJHRbf/green.png">-->
+                <!--<img class="image_led_red" src="https://i.ibb.co/HpqzmVm/red.png">-->
+            <!--</div>-->
+            <!--<div class="small_play">-->
+                <!--&lt;!&ndash;<img class="image_play" src="https://i.ibb.co/HBMc4Gh/play.png">&ndash;&gt;-->
+                <!--<i class="fa fa-play-circle"></i>-->
+                <!--<div class="play_time">00:00:00</div>-->
+            <!--</div>-->
+            <!--<div class="tool_info">-->
+                <!--<div class="tool_title temperature">Temperature:</div>-->
+                <!--<div class="tool_value">&#45;&#45;℃ </div>-->
+            <!--</div>-->
+            <!--<div class="tool_info">-->
+                <!--<div class="tool_title acc">Accelerometer:</div>-->
+                <!--<div class="tool_value">&#45;&#45;g</div>-->
+            <!--</div>-->
+            <!--<div class="tool_info">-->
+                <!--<div class="tool_title magn">Magnetometer:</div>-->
+                <!--<div class="tool_value">&#45;&#45;uT</div>-->
+            <!--</div>-->
+        <!--</div>-->
+
+
+
+
+        <!--<div class="small_motor" id="Engine_2">Engine 2-->
+        <!--</div>-->
+
+        <!--<div class="small_motor" id="Engine_3">Engine 3-->
+        <!--</div>-->
+
+        <!--<div class="small_motor" id="Engine_4">Engine 4-->
+        <!--</div>-->
+
+        <!--<div class="small_motor" id="Engine_5">Engine 5-->
+        <!--</div>-->
+
+        <!--<div class="small_motor" id="Engine_777">Engine 6-->
+        <!--</div>-->
+
+    </div>
+
+
+    <div class="big" id="big_live_charts">
+        <div class="big_title">Live Data Charts</div>
+
+        <div class="small_live_chart">
+            <div class="chart_container" id="tempLiveContainer"></div>
+        </div>
+        <div class="small_live_chart">
+            <div class="chart_container" id="accLiveContainer"></div>
+        </div>
+        <div class="small_live_chart">
+            <div class="chart_container" id="magnLiveContainer"></div>
+        </div>
+    </div>
+
+
+
+    <div class="big" id="last_values_charts">
+        <div class="big_title">Last Values</div>
+
+        <p>
+            <span class="select_time">Select time period:</span>
+            <select class="select_time" name="period" id="period">
+                <option value="20" selected>20 seconds</option>
+                <option value="60">1 minute</option>
+                <option value="300">5 minutes</option>
+            </select>
+            <button class="select_time" id="btn_select_time" type="button">Show values</button>
+        </p>
+
+        <div class="small_live_chart">
+            <div class="chart_container" id="tempLVContainer"></div>
+        </div>
+        <div class="small_live_chart">
+            <div class="chart_container" id="accLVContainer"></div>
+        </div>
+        <div class="small_live_chart">
+            <div class="chart_container" id="magnLVContainer"></div>
+        </div>
+    </div>
+
+
+
+</div>
+
+
+</body>
+
+
+
+<script>
+
+     var active_motor = null;
+     var current_engines = [];
+     var units = new Map();            // map хранит пары {"tool":"unit"}
+     var updateInterval = 1000;
+     var timer;
+     var snd = new Audio('/sounds/alert.mp3');
+     //var snd = new Audio('/sounds/alert.wav');
+     var volume = null;
+     var catcher = null;
+     var login = null;
+
+     var dataLength = 20;
+     //var counter = 0;                  // счетчик для [datapoints] графиков
+
+     var charts = new Map();           // map, которая хранит данные о графиках (имена и названия dp)
+
+     var tempLiveDataPoints = [];
+     var accLiveDataPoints  = [];
+     var magnLiveDataPoints = [];
+
+     var tempLVDataPoints = [];
+     var accLVDataPoints  = [];
+     var magnLVDataPoints = [];
+
+
+
+////////////  live charts  /////////////
+
+     var tempLiveChart = new CanvasJS.Chart("tempLiveContainer", {
+ 	   theme: "light2",
+ 	   title: {
+ 	       text: "Temperature (°C)"
+ 	   },
+ 	   axisX: {
+           crosshair:{
+               enabled: true,
+               snapToDataPoint: true,
+               lineDashType: "dash",
+               label: ""
+           },
+       	   title: "Timestamp (in seconds)",
+       	   labelAngle: -40
+       	   //interval: 1,
+       	   //suffix: " s"
+       },
+ 	   data: [{
+ 	   	   type: "spline",
+ 	   	   dataPoints: tempLiveDataPoints
+ 	   }]
+     });
+
+
+     var accLiveChart = new CanvasJS.Chart("accLiveContainer", {
+ 	   theme: "light2",
+ 	   title: {
+ 	       text: "Accelerometer (g)"
+ 	   },
+ 	   axisX: {
+           crosshair:{
+               enabled: true,
+               snapToDataPoint: true,
+               lineDashType: "dash",
+               label: ""
+           },
+       	   title: "Timestamp (in seconds)",
+       	   labelAngle: -40
+       },
+ 	   data: [{
+ 	   	   type: "spline",
+ 	   	   dataPoints: accLiveDataPoints
+ 	   }]
+     });
+
+
+     var magnLiveChart = new CanvasJS.Chart("magnLiveContainer", {
+ 	   theme: "light2",
+ 	   title: {
+ 	       text: "Magnetometer (uT)"
+ 	   },
+ 	   axisX: {
+           crosshair:{
+               enabled: true,
+               snapToDataPoint: true,
+               lineDashType: "dash",
+               label: ""
+           },
+       	   title: "Timestamp (in seconds)",
+       	   labelAngle: -40
+       },
+ 	   data: [{
+ 	   	   type: "spline",
+ 	   	   dataPoints: magnLiveDataPoints
+ 	   }]
+     });
+
+
+
+////////////  last_values charts  ////////////
+
+     var tempLVChart = new CanvasJS.Chart("tempLVContainer", {
+ 	   theme: "light2",
+ 	   title: {
+ 	       text: "Temperature (°C)"
+ 	   },
+ 	   zoomEnabled:true,
+ 	   axisX: {
+           crosshair:{
+               enabled: true,
+               snapToDataPoint: true,
+               lineDashType: "dash",
+               label: ""
+           },
+       	   title: "Timestamp (in seconds)",
+       	   labelAngle: -40
+       },
+ 	   data: [{
+ 	   	   type: "spline",
+ 	   	   color: "#01A794",
+ 	   	   dataPoints: tempLVDataPoints
+ 	   }]
+     });
+
+
+     var accLVChart = new CanvasJS.Chart("accLVContainer", {
+ 	   theme: "light2",
+ 	   title: {
+ 	       text: "Accelerometer (g)"
+ 	   },
+ 	   zoomEnabled:true,
+ 	   axisX: {
+           crosshair:{
+               enabled: true,
+               snapToDataPoint: true,
+               lineDashType: "dash",
+               label: ""
+           },
+       	   title: "Timestamp (in seconds)",
+       	   labelAngle: -40
+       },
+ 	   data: [{
+ 	   	   type: "spline",
+ 	   	   color: "#01A794",
+ 	   	   dataPoints: accLVDataPoints
+ 	   }]
+     });
+
+
+     var magnLVChart = new CanvasJS.Chart("magnLVContainer", {
+ 	   theme: "light2",
+ 	   title: {
+ 	       text: "Magnetometer (uT)"
+ 	   },
+ 	   zoomEnabled:true,
+ 	   axisX: {
+           crosshair:{
+               enabled: true,
+               snapToDataPoint: true,
+               lineDashType: "dash",
+               label: ""
+           },
+       	   title: "Timestamp (in seconds)",
+       	   labelAngle: -40
+       },
+ 	   data: [{
+ 	   	   type: "spline",
+ 	   	   color: "#01A794",
+ 	   	   dataPoints: magnLVDataPoints
+ 	   }]
+     });
+
+
+///////////////////////////////////////////////////
+
+
+     var temp_chart = {
+        chart: tempLiveChart,
+        dp: tempLiveDataPoints,
+        last_chart: tempLVChart,
+        last_dp: tempLVDataPoints
+     }
+
+     var acc_chart = {
+        chart: accLiveChart,
+        dp: accLiveDataPoints,
+        last_chart: accLVChart,
+        last_dp: accLVDataPoints
+     }
+
+     var magn_chart = {
+        chart: magnLiveChart,
+        dp: magnLiveDataPoints,
+        last_chart: magnLVChart,
+        last_dp: magnLVDataPoints
+     }
+
+     charts.set("Temperature", temp_chart)    // заполняем map [charts] переменными графиков и datapoints
+        .set("Accelerometer", acc_chart)
+        .set("Magnetometer", magn_chart);
+
+
+
+
+
+    $("#addMotor").click(function(){
+        $("#modal_add_engine").fadeIn(300);
+        event.preventDefault();   /*отменяет прокрутку страницы в самое начало*/
+    });
+
+
+
+    $("#addTool").click(function(){
+        $("#modal_add_tool").fadeIn(300);
+        event.preventDefault();
+    });
+
+
+
+    $("#sound").click(function(){
+        if (!volume) {
+            volume = 'on';
+        } else {
+            volume = null;
+        }
+        $(this).find('.fas').toggleClass('fa-volume-up').toggleClass('fa-volume-slash');
+    });
+
+
+    $("#catcher").click(function(){
+        if (!catcher) {
+            catcher = 'on';
+        } else {
+            catcher = null;
+        }
+        $(this).find('.fad').toggleClass('fa-toggle-on').toggleClass('fa-toggle-off');
+    });
+
+
+
+
+    $('.modal-content').keypress(function(e){                          // обработчик нажатия ENTER на модальном окне
+        var key = e.which;
+        if (key == 13) {
+            $(this).find('.button_form').mouseup();
+        }
+    });
+
+
+
+    $('#alert_window').keypress(function(e){                               // обработчик нажатия ENTER alert_window
+        var key = e.which;
+        if (key == 13) {
+            $(this).find('.close-alert').mouseup();
+        }
+    });
+
+
+
+    $("#away").click(function(){
+        disconnect();
+        window.location.href = '/go_away';
+        event.preventDefault();
+    });
+
+
+    $("#addUser").click(function(){
+        $("#modal_add_user").fadeIn(300);
+        event.preventDefault();
+    });
+
+
+
+    $("#deleteUser").click(function(){                                                    // вызов формы DELETE_USER
+        $("#modal_delete_user").fadeIn(300);
+        $('#selectUser').find('option').remove()   // очищаем перед заполнением
+        $('#selectUser').prop('disabled', true);   // блокируем сначала
+        var option;
+	    var selectedVal;
+        event.preventDefault();
+
+        $.ajax({
+	           url: '/users',
+	           method: 'get',
+	           dataType: 'json',
+	           success: function(result){
+                    var users = result.users;     // достаем users
+                    if (users.length > 0){
+                        $('#selectUser').prop('disabled', false);
+                    }
+
+                    for (var i in users){
+                        if (i == 0) {
+                              selectedVal = 'selected';
+                        } else {
+                              selectedVal = '';
+                        }
+                        option = $("<option value='" + users[i] + "' " + selectedVal + ">" + users[i] + "</option>");
+                        $('#selectUser').append(option);
+                    }
+	           }
+        });
+    });
+
+
+    $("#button_delete_user").click(function(){                                             // обработчик DELETE_USER
+          var userLogin  = $('#selectUser option:selected').val();
+
+          if (userLogin != null){
+                $.ajax({
+	                url: '/delete_user',
+	                method: 'post',
+	                dataType: 'text',
+	                data: {login: userLogin},
+	                success: function(e){
+	                    $("#selectUser option:selected").remove();      // удаляем выделенный элемент из option
+                        if ($('#selectUser option').size() == 0) {      // если select пустой
+                              $('#selectUser').prop('disabled', true);  // блокируем
+                        }
+                        showAlert('User was removed from DB');          // даже если пользователя уже нет в БД
+	                },
+	                error:  function(){
+                        showAlert('Something went wrong... Check the connection.');
+                    }
+                });
+          }
+    });
+
+
+
+	$("#button_add_user").mouseup(function(){                                          // обработчик кнопки ADD_USER
+	    if ($('#user_name').val().length     != 0 &&
+	        $('#user_lastname').val().length != 0 &&
+	        $('#user_login').val().length    >= 4 &&
+	        $('#user_password').val().length >= 4) {
+
+	       var userName      = $('#user_name').val();
+           var userLastName  = $('#user_lastname').val();
+           var userLogin     = $('#user_login').val();
+           var userPass      = $('#user_password').val();
+           var userRole      = $('#selectRole option:selected').val();
+
+	       $.ajax({
+	           url: '/add_user',
+	           method: 'post',
+	           dataType: 'text',
+	           data: {name: userName, lastname: userLastName, login: userLogin, password: userPass, role: userRole},
+	           success: function(e){
+	                if (e != '0'){
+	                    showAlert(e);
+	                    $('form').each(function() { this.reset() });
+	                } else {
+	                    showAlert('This login already exists');
+	                }
+                    console.log(e);
+	           },
+	           error:  function(){
+                  showAlert('Something went wrong... Check the connection.');
+               }
+           });
+
+	    } else {
+	        showAlert('Values are incorrect. Please, check the values.');
+	    }
+    });
+
+
+
+
+    $("#setCritical").click(function(){                                                  // вызов формы SET_CRITICAL
+        $("#modal_set_critical").fadeIn(300);
+        $('#selectTool').find('option').remove()   // очищаем перед заполнением
+        $('#selectTool').prop('disabled', true);   // блокируем сначала
+	    units.clear();                             // очищаем массив с единицами измерения
+	    var option;
+	    var selectedVal;
+
+        $.ajax({
+	           url: '/tools',
+	           method: 'get',
+	           dataType: 'json',
+	           success: function(result){
+	                $('#selectTool').prop('disabled', false);
+                    var tools    = Object.keys(result.critical_values);     // достаем tools
+                    var val_unit = Object.values(result.critical_values);   // достаем пары value-unit(мапы)
+
+                    for (var i in tools){
+                        if (i == 0) {
+                              selectedVal = 'selected';
+                              $('#critical_value').val(val_unit[i].value + val_unit[i].unit);
+                        } else {
+                              selectedVal = '';
+                        }
+                        var total_value = val_unit[i].value + val_unit[i].unit;
+                        option = $("<option value='" + total_value + "' " + selectedVal + ">" + tools[i] + "</option>");
+                        $('#selectTool').append(option);
+
+                        units.set(tools[i], val_unit[i].unit);       // добавляем в массив пару {"tool":"unit"}
+                    }
+	           }
+        });
+        event.preventDefault();
+    });
+
+
+
+    $('#selectTool').on('change', function() {                                     // смена OPTION у SELECT
+        $('#critical_value').val(this.value);
+        //console.log(units);
+    });
+
+
+
+    $("#button_set_critical").mouseup(function(){                                  // обработчик кнопки SET_CRITICAL
+	     var value = $('#new_value').val();
+	     var tool  = $('#selectTool option:selected').html();
+
+	     if ($.isNumeric(value) && value > 0) {
+               $.ajax({
+	                 url: '/change_tool',
+	                 method: 'post',
+	                 dataType: 'text',
+	                 data: {name: tool, value: value},
+	                 success: function(e){
+                          $('#selectTool option:selected').val(value + units.get(tool));
+                          $('#critical_value').val(value + units.get(tool));
+                          $('#new_value').val('');
+                          console.log(e);
+	                 },
+	                 error:  function(){
+                          showAlert('Something went wrong... Check the connection.');
+                     }
+               });
+	     };
+	});
+
+
+
+     function refreshSelectTool(result) {                                                     // REFRESH SELECT_TOOL
+          if(!$('#selectTool').is(":hidden")) {
+
+              var tools    = Object.keys(result);     // достаем tools
+              var val_unit = Object.values(result);   // достаем пары value-unit(мапы)
+              var total_value = null;
+
+              for (var i in tools){
+                    total_value = val_unit[i].value + val_unit[i].unit;               // создаем string [value_unit]
+                    $("#selectTool option:contains("+tools[i]+")").val(total_value);  // меняем значение option
+
+                    if($("#selectTool option:selected").text() === tools[i]){
+                        $('#critical_value').val(total_value);                        // обновляем [critical_value]
+                    }
+              }
+          }
+     }
+
+
+
+
+    $('#big_motors').on('click','.small_play', function(e) {                                  // hide element [play]
+       $(this).hide();
+       e.stopPropagation();
+    });
+
+
+
+	$(".item")
+        .mouseenter(function() {
+            $(this).children(".submenu").stop().slideDown("fast");
+        })
+        .mouseleave(function(){
+            $(this).children(".submenu").stop().slideUp("fast");
+        });
+
+
+
+    $('.modal').mouseup(function(e){                   // событие клика по веб-документу
+		var div = $(".modal-content");                 // тут указываем ID элемента
+
+		if (!div.is(e.target)                          // если клик был не по нашему блоку
+		    && div.has(e.target).length === 0) {       // и не по его дочерним элементам
+			$(".modal").hide();
+			$('form').each(function() { this.reset() });
+		}
+	});
+
+
+
+    $('.modal-alert').mouseup(function(e){             // событие клика по веб-документу
+		var alertDiv = $(".modal-content-alert");
+
+		if (!alertDiv.is(e.target)                     // если клик был не по нашему блоку
+		    && alertDiv.has(e.target).length === 0){   // и не по его дочерним элементам
+			$(".modal-alert").hide();
+		}
+	});
+
+
+
+	$(".close_form").mouseup(function (e){             // закрытие форм
+	   $(this).parents(".modal").hide();
+	   $('form').each(function() { this.reset() });
+	});
+
+
+	$(".close-alert").mouseup(function (e){            // закрытие ALERT и CONFIRM
+	   $(this).parents(".modal-alert").hide();
+	});
+
+
+
+    function showAlert (text) {                                                                  // вызов окна ALERT
+        $('#textAlert').html(text);
+        $('#alert_window').fadeIn(300);
+        $('#alert_window').focus();
+    }
+
+
+    $("#deleteMotor").click(function(){                                                // вызов CONFIRM DELETE_MOTOR
+         if (active_motor != null){
+              $('#textConfirm').html('Are you sure you want to delete this engine?');
+              $("#confirm_window").fadeIn(300);
+         } else {
+              showAlert('Please, select engine');
+         }
+         event.preventDefault();
+    });
+
+
+    $("#button_confirm").click(function(){                                        // обработчик CONFIRM DELETE_MOTOR
+          $.ajax({
+	          url: '/delete_motor',
+	          method: 'post',
+	          dataType: 'text',
+	          data: {name: active_motor},
+	          success: function(e){
+                  position = current_engines.indexOf(active_motor);   // удаляем мотор из локального массива
+                  if ( ~position ) current_engines.splice(position, 1);
+
+                  $("#"+active_motor).remove();                       // удаляем мотор с экрана
+                  $('.small_live_chart').hide();                      // скрываем все графики
+
+                  active_motor = null;
+                  $('#confirm_window').hide();
+                  console.log(e);
+	          },
+	          error:  function(){
+                  showAlert('Something went wrong... Check the connection.');
+              }
+          });
+    });
+
+
+
+
+	$("#button_add_engine").mouseup(function(){                                       // обработчик кнопки ADD_MOTOR
+	    if ($('#mac').val().length == 17 && $('#number').val().length != 0){
+
+	       var motor_number = $('#number').val();
+
+	       $.ajax({
+	           url: '/add_motor',
+	           method: 'post',
+	           dataType: 'text',
+	           data: {name: $('#number').val()},
+	           success: function(e){
+	                    if (e != '0'){
+	                         current_engines.push(motor_number);  // если успех, добавляем в локальный массив
+	                         addNewEngine(motor_number);          // если успех, добавляем мотор на экран
+	                         $(".modal").hide();
+	                         $('form').each(function() { this.reset() });
+	                         console.log(e);
+	                    } else {
+	                         showAlert('This number already exists in the DB');
+	                    }
+	           },
+	           error:  function(){
+                  showAlert('Something went wrong... Check the connection.');
+               }
+           });
+
+
+	    } else {
+	        showAlert('Values are incorrect. Please, check the values.');
+	    }
+    });
+
+
+
+
+    $('#big_motors').on('click','.small_motor', function(e) {                 // функция нажатия на конкретный мотор
+
+            for (let tool of charts.keys()) {          // перебираем ключи charts и очищаем все графики
+                clearLiveChart(charts.get(tool).chart,   charts.get(tool).dp);
+                clearLVChart(charts.get(tool).last_chart, charts.get(tool).last_dp);
+                //counter = 0;
+            }
+
+
+            if (active_motor == null){                  // если не нажат ни один элемент
+                 $(this).addClass('small_motor_active');
+                 $('.small_live_chart').show();
+                 $('.chart_container').show();
+                 active_motor = $(this).attr('id');
+            } else if (this.id != active_motor) {       // если нажат другой элемент
+                 $("#"+active_motor).removeClass('small_motor_active');
+                 $(this).addClass('small_motor_active');
+                 active_motor = this.id;
+            } else if (this.id == active_motor) {       // если уже нажат этот же элемент
+                 $(this).removeClass('small_motor_active');
+                 $('.small_live_chart').hide();
+                 active_motor = null;
+            }
+
+
+            for (let tool of charts.keys()) {          // рендерим все графики (после появления блоков на странице)
+                charts.get(tool).chart.render();
+                charts.get(tool).last_chart.render();
+            }
+
+            e.stopPropagation();
+            console.log(active_motor);
+    });
+
+
+
+
+
+    function addNewEngine(motor_number){               // функция добавления мотора (принимает на вход номер мотора)
+           var new_small_title    = $("<div class='small_title'>" + motor_number + "</div>");
+           //var new_image_grey     = $("<img class='image_led image_led_grey'  src='https://i.ibb.co/2jHWKDj/grey.png'>");
+           //var new_image_green    = $("<img class='image_led image_led_green' src='https://i.ibb.co/nPJHRbf/green.png'>");
+           //var new_image_red      = $("<img class='image_led image_led_red'   src='https://i.ibb.co/HpqzmVm/red.png'>");
+           var new_image_grey     = $("<img class='image_led image_led_grey'  src='/images/grey.png'>");
+           var new_image_green    = $("<img class='image_led image_led_green' src='/images/green.png'>");
+           var new_image_red      = $("<img class='image_led image_led_red'   src='/images/red.png'>");
+
+           var new_small_led      = $("<div class='small_led'/>")
+                                                .append(new_image_grey)
+                                                .append(new_image_green)
+                                                .append(new_image_red);
+           var new_small_play     = $("<div class='small_play'><i class='fa fa-play-circle'></i>" +
+                                      "<div class='play_time'>00:00:00</div></div>");
+           var new_tool_info_temp = $("<div class='tool_info Temperature'><div class='tool_title'>Temperature:</div>" +
+                                      "<div class='tool_value'>--℃</div></div>");
+           var new_tool_info_acc  = $("<div class='tool_info Accelerometer'><div class='tool_title'>Accelerometer:</div>" +
+                                      "<div class='tool_value'>--g</div></div>");
+           var new_tool_info_magn = $("<div class='tool_info Magnetometer'><div class='tool_title'>Magnetometer:</div>" +
+                                      "<div class='tool_value'>--uT</div></div>");
+
+           var new_motor = $("<div class='small_motor' id='" + motor_number + "' />")
+                        .append(new_small_title)
+                        .append(new_small_led)
+                        .append(new_small_play)
+                        .append(new_tool_info_temp)
+                        .append(new_tool_info_acc)
+                        .append(new_tool_info_magn);
+
+          $('#big_motors').append(new_motor);  // добавляем мотор на экран
+    }
+
+
+
+
+	function processingWSData(result){                                              //  ОБРАБОТКА ДАННЫХ С WEBSOCKET
+
+         result.engines.forEach(function(e_number){
+	         if(current_engines.indexOf(e_number) < 0) {    // если элемента 'e_number' нет в [current_engines]
+	             addNewEngine(e_number);
+	         }
+	     });
+	     current_engines.forEach(function(e_number){
+	         if (result.engines.indexOf(e_number) < 0) {    // если элемента 'e_number' нет в [result.engines]
+	              $("#"+e_number).remove();
+	              if (active_motor == e_number) {
+	                  $('.small_live_chart').hide();        // скрываем все графики
+	                  active_motor = null;
+	              }
+	         }
+	     });
+
+         current_engines = result.engines;
+         refreshSelectTool(result.critical_values);                      // обновляем значения в [selectTool]
+         //counter++;                                                      // увеличиваем счетчик для [datapoints]
+         var alert;                                                      // флаг тревоги
+
+         var server_ts    = Math.floor(result.server_time / 1000);
+         var server_time  = getTimeFromTS(result.server_time);            // server_time as [00:00:00]
+         var tools        = Object.keys(result.critical_values);             // достаем tools
+
+
+         for (var i in result.engines){           // перебираем все engines
+
+                     var e_number = result.engines[i];
+                     var color    = 'grey';
+                     var led      = $("#"+e_number).children('.small_led');
+                     var play     = $("#"+e_number).children('.small_play');
+                     var play_time = play.children('.play_time');
+
+
+                     tools.forEach (function(tool){       // перебираем все tools
+                          var temp_value = 0;
+
+                          if (e_number in result.values && tool in result.values[e_number]) {
+                             temp_value = (result.values[e_number])[tool].value;
+                          }
+
+                          var y     = temp_value;
+                          var chart = charts.get(tool).chart;
+                          var dp    = charts.get(tool).dp;
+                          var text_value = $("#"+e_number).children("."+tool).children('.tool_value');
+                          var crit_value = result.critical_values[tool].value;
+                          var crit_unit  = result.critical_values[tool].unit;
+
+                          if (y > crit_value) {
+                                if (play.is(":hidden")){
+                                   text_value.html(y + crit_unit);
+                                   text_value.css('color', 'red');
+                                   color = 'red';
+                                }
+                                if (active_motor == e_number) {                              // отрисовываем график
+                                    renderLiveChart(chart, dp, 'red',   y, server_ts, server_time);
+                                }
+                          } else if (y <= crit_value && y > 0){
+                                if (play.is(":hidden")){
+                                   text_value.html(y + crit_unit);
+                                   text_value.css('color', 'black');
+                                   if (color != 'red') color = 'green';
+                                }
+                                if (active_motor == e_number) {                              // отрисовываем график
+                                    renderLiveChart(chart, dp, 'green', y, server_ts, server_time);
+                                }
+                          } else if (y == 0) {
+                                if (play.is(":hidden")){
+                                    text_value.html("--" + crit_unit);
+                                    text_value.css('color', 'black');
+                                    if (color != 'red' && color != 'green') color = 'grey';
+                                }
+                                if (active_motor == e_number) {                              // отрисовываем график
+                                    renderLiveChart(chart, dp, 'grey',  y, server_ts, server_time);
+                                }
+                          }
+                     });
+
+                     if (play.is(":hidden")){
+                         led.children('.image_led').hide();          // скрываем все led и показываем только нужный
+                         led.children(".image_led_" + color).show();
+                         if (color == 'red') {                       // если мотор красный
+                            alert = 'on';
+                            if (catcher) {
+                                play_time.html(server_time);
+                                play.show();
+                            }
+                         }
+                     }
+         }
+
+         if ((volume == 'on') && (alert == 'on')) {       // если хотя бы один мотор красный и звук вкл, то [alert]
+             snd.currentTime = 0;
+             snd.play();
+         }
+
+	}
+
+
+
+   function renderLiveChart(chart, dataPoints, color, yValue, ts, tsNowLocale) {   // пушит в массив и отрисовывает
+        if (color=="red"){
+            dataPoints.push({x: ts, y: yValue, label: tsNowLocale, color: "Red", markerSize: 15});
+        } else if (color=="grey"){
+            dataPoints.push({x: ts, y: 0,      label: tsNowLocale, color: "Grey"});
+        } else {
+            dataPoints.push({x: ts, y: yValue, label: tsNowLocale});
+        }
+
+        // шаг у 'X' должен быть равен 1, иначе будут сбои с разлиновкой
+
+        if (dataPoints.length > dataLength) {
+         	dataPoints.shift();
+        }
+        chart.render();
+   }
+
+
+
+   function clearLiveChart (chart, dataPoints){                               // очищаем переданный в функцию график
+        dataPoints.length = 0;
+        chart.render();
+   }
+
+
+    function clearLVChart (chart, dataPoints){                                // очищаем переданный в функцию график
+        chart.options.axisX.viewportMinimum = null;
+        chart.options.axisX.viewportMaximum = null;
+        dataPoints.length = 0;
+        chart.render();
+   }
+
+
+   function getTimeFromTS (ts){                                       // converts server timestamp to time [00:00:00]
+        var date = new Date(ts);
+        var hours = date.getHours();
+        var minutes = "0" + date.getMinutes();
+        var seconds = "0" + date.getSeconds();
+        // will display time in [00:00:00] format
+        var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+        return formattedTime;
+   }
+
+
+
+
+    $("#btn_select_time").click(function(){                                    // нажатие на кнопку SHOW LAST VALUES
+        if (active_motor != null) {
+            getLastValues();
+        } else {
+            showAlert('Please, select engine')
+        }
+    });
+
+
+
+    function getLastValues () {                                                                   // GET LAST VALUES
+          var delta = $('#period').val();
+
+          for (let tool of charts.keys()) {                // перебираем tools из charts
+               $.ajax({
+	              url: '/last_values',
+	              method: 'post',
+	              dataType: 'json',
+	              data: {delta : delta, engine : active_motor, tool : tool},
+	              success: function(result){
+	                   var critical_value = result.critical_values[tool].value;   // забираем критическое значение
+                       var last_chart     = charts.get(tool).last_chart;
+                       var last_dp        = charts.get(tool).last_dp;
+                       clearLVChart(last_chart, last_dp);                         // очищаем график и шкалу
+
+
+	                   for (var i in result.last_values){
+	                        var ts    = result.last_values[i].ts;
+	                        var time  = getTimeFromTS(ts*1000);
+	                        var value = result.last_values[i].value;
+
+                           if (value > critical_value) {
+                                last_dp.push({x: ts, y: value, label: time, color: "Red", markerSize: 15});
+                           } else if (value <= critical_value && value > 0) {
+                                last_dp.push({x: ts, y: value, label: time});
+                           } else if (value == 0) {
+                                last_dp.push({x: ts, y: 0, label: time, color: "Grey"});
+                           }
+	                   }
+
+	                   last_chart.render();         // отрисовываем график
+	              },
+	              error:  function(){
+                     showAlert('Something went wrong... Check the connection.');
+                  }
+               });
+          };
+
+    }
+
+
+</script>
+
+<script>
+    var stompClient = null;
+    var socket = null;
+
+
+    function connect() {
+        socket = new SockJS('/ws');
+        stompClient = Stomp.over(socket);
+        stompClient.connect({}, onConnected, onError);
+    }
+
+
+    function onConnected() {
+        stompClient.subscribe('/topic/public', onMessageReceived);           // Subscribe to the Public Topic
+        stompClient.subscribe('/topic/logout/'+login, onGetLogoutMessage);   // Subscribe to the Login Topic
+        stompClient.debug = null;                                            // Disable console messages
+    }
+
+
+    function onMessageReceived(payload) {
+        var result = JSON.parse(payload.body);
+        processingWSData(result);                                            // call processing data function
+    }
+
+
+    function onGetLogoutMessage(payload) {
+        if (payload.body == 'out') {
+            disconnect();
+            window.location.href = '/go_away';
+        }
+    }
+
+
+    function onError(error) {
+        stompClient.disconnect();
+        stompClient = null;
+        socket = null;
+        location.reload();
+        //showAlert('Could not connect to WebSocket server.<br>Please refresh this page to try again!');
+    }
+
+
+    function disconnect() {
+        stompClient.disconnect();
+        stompClient = null;
+        socket = null;
+    }
+
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+
+
+</html>

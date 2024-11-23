@@ -1,0 +1,1153 @@
+<html>
+
+
+<!--HOME PAGE-->
+
+
+<head>
+    <title>MyComox | Home Page</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="icon" type="image/png" href="/images/icon.png">
+    <link rel="preload" href="/images/sec.png" as="image">
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <link href="https://fonts.cdnfonts.com/css/resotelavender" rel="stylesheet">
+    <link href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
+
+
+
+<style>
+
+/**************** GREETINGS ******************/
+
+.greetings {
+    position: fixed;
+    padding: 50px 0;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    background-color: rgba(255,255,255,1);
+    color: #01A794;
+
+    //background-color: rgba(0,0,0,0.7);
+    //color: white;
+    text-align: center;
+    //font-weight: bold;
+    font-family: ResotELavender;
+    font-size: 75px;
+    user-select: none;
+    //border-radius: 20px;
+}
+
+
+.button_enter {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    padding: 0 100px 0;
+    margin: auto;
+    height: 70px;
+    background-color: #01A794;
+    border-radius: 200px;
+    border: none;
+    font-family: Poppins;
+    //font-weight: bold;
+    font-size: 25px;
+    color: #fff;
+    //transition: all 0.4s;
+    box-shadow:  0 10px 10px rgba(0,0,0,0.5);
+}
+
+.button_enter:hover {
+    background-color: rgba(0,0,0,0.8);
+}
+
+
+/**************** END GREETINGS ******************/
+
+
+
+/**************** MODAL CONFIRM ******************/
+
+#confirm_content {
+    height: 20%;
+}
+
+#textConfirm {
+    top: 30%;
+}
+
+/**************** MODAL CONFIRM ******************/
+
+
+
+
+/**************** MODAL ALERT ******************/
+
+/* Фон за формой */
+.modal-alert {
+    display: none;
+    position: fixed;
+    z-index: 151;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.4);
+}
+
+
+.modal-content-alert {
+    position: relative;
+    overflow: hidden;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    user-select: none;
+    background-color: #fefefe;
+    border-radius: 7px;
+    width: 35%;
+    height: 15%;
+    box-shadow: 5px 10px 5px #666666;
+    font-family: Poppins;
+    font-size: 16px;
+    outline: none;
+}
+
+
+.text-alert {
+    position: relative;
+    text-align: center;
+    padding: 0 40px 0;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.close-alert {
+    position: absolute;
+    padding: 7px 12px;
+    top: 5px; right: 5px;
+    font-size: 20px;
+    color: #bfbfbf;
+    cursor: pointer;
+    transition: all .4s;
+    //background: yellow;
+}
+
+.close-alert:hover {
+    color: #404040;
+}
+
+/************** END MODAL ALERT ****************/
+
+
+
+/************** MODAL ****************/
+
+/* Фон за формой */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 150;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.8);
+}
+
+
+/* Содержание модального окна*/
+.modal-content {
+    overflow: hidden;
+    position: relative;
+    top: 50%; left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    user-select: none;
+    background-color: #fefefe;
+
+    border-radius: 14px;
+    width: 50%;
+    min-width: 700px;
+    height: 70%;
+    //box-shadow: 5px 10px 5px #666;
+    font-family: Poppins;
+}
+
+
+
+.up {
+    position: relative;
+    height: 40%;
+    width: 100%;
+    overflow: hidden;
+}
+
+
+.modal-content:hover .up_image {
+    transform: scale(1.2);
+}
+
+
+.up_text {
+    position: absolute;
+    top: 50%; left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    font-size: 30px;
+    font-weight: 900;
+    color: white;
+}
+
+
+.up_image {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    transition: 1s;
+}
+
+.up_image_motor {
+    /*style="background-image: url(https://i.ibb.co/WPT6q2f/motor.png)"*/
+    background-image: url(https://i.ibb.co/WPT6q2f/motor.png);
+}
+
+.up_image_tool {
+    /*style="background-image: url(https://i.ibb.co/xXpHmwp/tools.png);"*/
+    background-image: url(https://i.ibb.co/xXpHmwp/tools.png);
+}
+
+.up_image_user {
+    background-image: url(https://i.ibb.co/FWbdBnt/user.png);
+    background-position: bottom;
+}
+
+.up_image_login {
+    background-image: url(/images/sec.png);
+    /*background-image: url(https://i.ibb.co/k1WDzXV/sec.png);*/
+    /*background-image: url(https://i.ibb.co/1d48mh7/sec1.png);*/
+    /*background-image: url(https://i.ibb.co/f087Vs4/secure.png);*/
+}
+
+
+.close_form {
+    position: relative;
+    float: right;
+    margin: 20px 20px 0 0;
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.close_form:hover .fa-times-circle {
+    transform: rotate(180deg);
+}
+
+.fa-times-circle {
+    transition: transform .4s;
+}
+
+
+
+
+.down {
+    margin: 20px 60px 40px 50px;
+    //background: green;
+}
+
+.down label {
+    float: right;
+    margin: 15px 0 0 0;
+    text-align: right;
+    color: #808080;
+    width: 100%;
+    //background: yellow;
+}
+
+.down .label_critical {
+    margin: 5px 0 7px 0;
+    //background: red;
+}
+
+
+#critical_value {
+    color: #01A794;
+    pointer-events: none;
+}
+
+.down input {
+    height: 45px;
+    width: 70%;
+    padding-left: 20px;
+    margin: 0 0 0 30px;
+	outline: none;
+	border: none;
+	border-bottom: 1px solid #808080;
+	font-family: Poppins;
+    font-size: 16px;
+    color: #505050;
+}
+
+
+input::-webkit-input-placeholder {
+    color: #999999;
+}
+
+input:focus::-webkit-input-placeholder {
+    color: transparent;
+}
+
+input:focus {
+    border-bottom: 1px solid #01A794;
+}
+
+
+.select_tool {
+	font-family: Poppins;
+    font-size: 16px;
+    color: #505050;
+    text-align: left;
+    width: 70%;
+    margin: 0 0 0 30px;
+    padding-left: 20px;
+    height: 45px;
+    border-radius: 5px;
+}
+
+
+.button_form {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 40px;
+
+    padding: 0 40px 0;
+    margin: auto;
+    height: 50px;
+    background-color: #01A794;
+    border-radius: 25px;
+    border: none;
+    font-family: Poppins;
+    font-size: 16px;
+    color: #fff;
+    transition: all 0.4s;
+}
+
+#button_set_critical {
+    top: 15px;
+}
+
+.button_form:hover {
+    background-color: #333333;
+}
+
+/************** END MODAL ****************/
+
+
+
+/************** MENU ****************/
+
+.menu {
+    z-index: 100;
+    background-color: #48cfad;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    min-width: 800px;
+    font-family: Poppins;
+    font-size: 15px;
+    /*box-shadow: 0 2px 14px;*/
+}
+
+
+
+.item {
+    float: left;
+    position: relative;
+}
+
+
+.item:hover {
+    background: #555; /*dark grey*/
+}
+
+
+.item:hover .fa-angle-down {
+    transform: rotate(180deg);
+}
+
+
+.fa-angle-down {
+    transition: transform .3s;
+}
+
+
+.item > a {
+    display: block;
+    color: #fff;
+    padding: 15px 35px;
+    text-decoration: none;
+}
+
+
+.submenu {
+    position: absolute;
+    top: 99%;
+    display: none;
+    width: 210px;
+    background: #37bc9b;
+}
+
+
+.submenu a {
+    color: #fff;
+    display: block;
+    padding: 15px 35px;
+    text-decoration: none;
+    background: #555;
+    float: none;
+}
+
+.submenu a:hover {
+    background: #666;
+}
+
+
+.users, .engines {
+    width: 170px;
+}
+
+
+.login {
+    background: #37bc9b;
+    float: right;
+}
+
+.home {
+    background: #37bc9b;
+}
+
+
+.home a {
+    padding: 15px 25px;
+}
+
+
+/************** END MENU ****************/
+
+
+/************** PRELOADER ****************/
+
+
+#main {
+    opacity: 0;
+    //margin-top: 50px;
+    transition: all 2.5s;
+}
+
+
+#loading {
+    position: fixed;
+    z-index: 200;
+    top: 50%; left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    user-select: none;
+    text-align: center;
+    font-family: Georgia;
+    font-size: 34px;
+    font-weight: bold;
+}
+
+
+.hide_loading {
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.5s;
+}
+
+
+/************** END PRELOADER ****************/
+
+
+/************** SCROLLBAR ****************/
+
+/*полоса прокрутки*/
+::-webkit-scrollbar {
+    width: 18px;
+    background-color: #f9f9fd;
+}
+
+/*сам ползунок*/
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    border: 5px solid  #f9f9fd;
+    background: #606060;
+}
+
+::-webkit-scrollbar-thumb:hover{
+    background: #909090;
+}
+
+/************** END SCROLLBAR ****************/
+
+
+/****************** BODY ********************/
+
+body {
+    margin:  0;
+    padding: 0;
+    width:   100%;
+    height:  100%;
+}
+
+button {
+    cursor: pointer;
+}
+
+
+button:focus {
+    outline: none;
+    background-color: #333333;
+}
+
+
+.back {
+    width: 60%;
+    height: 80%;
+    position: fixed;
+    margin-top: 20px;
+    min-width: 700px;
+
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 1s;
+
+    //background: url(https://i.ibb.co/mD2gVBD/back.jpg);
+    background: url(/images/back.png);
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    //background-color: yellow;
+}
+
+.back:hover {
+    transform: translate(-50%, -50%) scale(1.1);
+}
+
+/**************** END BODY ******************/
+
+
+
+/**************** BACKGROUND ******************/
+
+.back_big {
+    overflow: hidden;
+    position: fixed;
+    width: 120%;
+    height: 100%;
+    min-width: 1400px;
+    min-height: 700px;
+    user-select: none;
+}
+
+
+.back_small {
+    float: left;
+    overflow: hidden;
+    width: 24.3%;
+    height: 100%;
+    transform: skewX(-20deg) translate(-35%, 0);
+    margin-right: 0.7%;
+
+}
+
+
+.back_img {
+    transition: all 1s, filter 0s;
+    transform: skewX(20deg) translate(-15%, 0);
+    height: 100%;
+    width: auto;
+    pointer-events: none;
+    opacity: 0.5;
+    filter: grayscale(100%);
+}
+
+
+//.back_small:hover .back_img {
+//    transform: skewX(20deg) translate(-15%, 0) scale(1.2);
+//    opacity: 1;
+//    filter: grayscale(0%);
+//}
+
+
+#bs1:hover #img1 {
+    transform: skewX(20deg) translate(-15%, 0) scale(1.2);
+    opacity: 1;
+    filter: grayscale(0%);
+}
+
+#bs2:hover #img2 {
+    transform: skewX(20deg) translate(-13%, 0) scale(1.2);
+    opacity: 1;
+    filter: grayscale(0%);
+}
+
+#bs3:hover #img3 {
+    transform: skewX(20deg) translate(-15%, 0) scale(1.2);
+    opacity: 1;
+    filter: grayscale(0%);
+}
+
+#bs4:hover #img4 {
+    transform: skewX(20deg) translate(-14%, 0) scale(1.2);
+    opacity: 1;
+    filter: grayscale(0%);
+}
+
+
+/**************** END BACKGROUND ******************/
+
+</style>
+
+</head>
+
+
+
+
+<script>
+
+
+window.onload = function() {
+
+    document.getElementById("main").style="opacity: 1;";
+    $('#loading').addClass('hide_loading');
+    // $('#loading').fadeOut(1000);
+
+
+
+    if ($('#item_motors:hover').length != 0) {
+        $('#item_motors').children(".submenu").slideDown("fast");
+    }
+    if ($('#item_tools:hover').length != 0) {
+        $('#item_tools').children(".submenu").slideDown("fast");
+    }
+    if ($('#item_users:hover').length != 0) {
+        $('#item_users').children(".submenu").slideDown("fast");
+    }
+
+}
+
+
+</script>
+
+
+
+
+<body>
+
+<div id="loading">
+    <i class="fa fa-spinner fa-pulse fa-3x fa-fw" style="font-size: 150px;"></i>
+    <span style="margin-top: 20px;">Loading...</span>
+</div>
+
+
+
+
+<!--<div class="menu">-->
+    <!--<div class="item home"><a href="javascript:void(0)"><i class='fa fa-home'></i>&nbsp; Home</a></div>-->
+    <!--<div class="item"><a href="#">About</a></div>-->
+    <!--<div class="item" id="item_motors"><a href="#">Motors &nbsp;<i class='fa fa-angle-down anim'></i></a>-->
+        <!--<div class="submenu engines">-->
+            <!--<a href="#" id="addMotor">Add Motor</a>-->
+            <!--<a href="#" id="deleteMotor">Delete Motor</a>-->
+        <!--</div>-->
+    <!--</div>-->
+
+    <!--<div class="item" id="item_tools"><a href="#">Tools &nbsp;<i class='fa fa-angle-down anim'></i></a>-->
+        <!--<div class="submenu">-->
+            <!--<a href="#" id="addTool">Add Tool</a>-->
+            <!--<a href="#">Delete Tool</a>-->
+            <!--<a href="#" id="setCritical">Set Critical Values</a>-->
+        <!--</div>-->
+    <!--</div>-->
+
+    <!--<div class="item" id="item_users"><a href="#">Users &nbsp;<i class='fa fa-angle-down anim'></i></a>-->
+        <!--<div class="submenu users">-->
+            <!--<a href="#">Add User</a>-->
+            <!--<a href="#">Delete User</a>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<div class="item login" id="callLoginForm"><a href="#"><i class="fa fa-user-circle-o"></i>&nbsp; Log In</a></div>-->
+<!--</div>-->
+
+
+
+
+
+<div class="modal" id="modal_add_engine">
+    <div class="modal-content">
+        <div class="up">
+            <div class="up_image up_image_motor"></div>
+            <div class="up_text">ADD ENGINE</div>
+            <div class="close_form"><i class="fal fa-times-circle"></i></div>
+        </div>
+
+        <div class="down">
+            <form>
+                <label>Engine number
+                    <input type="text" id="number" name="number" placeholder="Enter engine number"
+                           autocomplete="off">
+                </label>
+                <label>MAC address
+                    <input type="text" id="mac" name="mac" placeholder="Enter MAC address"
+                           autocomplete="off">
+                </label>
+                <button class="button_form" id="button_add_engine" type="button">Add Engine</button>
+            </form>
+        </div>
+
+        <!--<div style="height: 100%; width: 100%;-->
+                    <!--background-image: url(https://i.ibb.co/YpJK6vg/sen3.png);-->
+                    <!--background-size: cover;   background-position: center;">-->
+                <!--<div style="height: 100%; width: 100%; position: relative; background-color: rgba(54,84,99,0.7);">-->
+
+                <!--</div>-->
+        <!--</div>-->
+
+    </div>
+</div>
+
+
+
+<div class="modal" id="modal_add_tool">
+    <div class="modal-content">
+        <div class="up">
+            <div class="up_image up_image_tool"></div>
+            <div class="up_text">ADD TOOL</div>
+            <div class="close_form"><i class="fal fa-times-circle"></i></div>
+        </div>
+
+        <div class="down">
+            <form>
+                <label>Tool name
+                    <input type="text" id="tool_name" name="tool_name" placeholder="Enter tool name" autocomplete="off">
+                </label>
+                <label>Critical value
+                    <input type="text" id="value" name="value" placeholder="Enter critical value" autocomplete="off">
+                </label>
+                <button class="button_form" id="button_add_tool" type="button">Add Tool</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal" id="modal_set_critical">
+    <div class="modal-content">
+        <div class="up">
+            <div class="up_image up_image_tool"></div>
+            <div class="up_text">SET CRITICAL VALUE</div>
+            <div class="close_form"><i class="fal fa-times-circle"></i></div>
+        </div>
+
+        <div class="down">
+            <form>
+               <label class="label_critical">Select tool
+                   <select class="select_tool" name="selectTool" id="selectTool"></select>
+               </label>
+               <label class="label_critical">Critical value
+                   <input type="text" id="critical_value" disabled>
+               </label>
+               <label class="label_critical">New value
+                   <input type="text" id="new_value" placeholder="Enter new critical value" autocomplete="off">
+               </label>
+               <button class="button_form" id="button_set_critical" type="button">Set critical value</button>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="modal" id="modal_login">
+    <div class="modal-content">
+        <div class="up">
+            <div class="up_image up_image_login"></div>
+            <div class="up_text">LOG IN</div>
+            <div class="close_form"><i class="fal fa-times-circle"></i></div>
+        </div>
+
+        <div class="down">
+            <form method="post" action="/perform_login" id="form_login">
+                <label>Login
+                    <input type="text" id="log_in" name="username" placeholder="Enter login" autocomplete="off">
+                </label>
+                <label>Password
+                    <input type="password" id="pass" name="password" placeholder="Enter password" autocomplete="off">
+                </label>
+                <button class="button_form" id="button_login" type="button">Log In</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal-alert" id="alert_window" tabindex="1">
+    <div class="modal-content-alert">
+        <div class="text-alert" id="textAlert"></div>
+        <div class="close-alert"><i class="far fa-times"></i></div>
+    </div>
+</div>
+
+
+<div class="modal-alert" id="confirm_window">
+    <div class="modal-content-alert" id="confirm_content">
+        <div class="text-alert" id="textConfirm"></div>
+        <div class="close-alert"><i class="far fa-times"></i></div>
+        <button class="button_form" id="button_confirm" type="button">OK</button>
+    </div>
+</div>
+
+
+<div id="main">
+    <div class="back_big">
+        <div class="back_small" id="bs1"><img class="back_img" id="img1" src="/images/motor.jpg"></div>
+        <div class="back_small" id="bs2"><img class="back_img" id="img2" src="/images/sensors.jpg"></div>
+        <div class="back_small" id="bs3"><img class="back_img" id="img3" src="/images/laptop3.jpg"></div>
+        <div class="back_small" id="bs4"><img class="back_img" id="img4" src="/images/sec1.jpg"></div>
+
+      <!--<div class="back_small" id="bs1"><img class="back_img" id="img1" src="https://i.ibb.co/2jQ5XY2/motor.jpg"></div>-->
+      <!--<div class="back_small" id="bs2"><img class="back_img" id="img2" src="https://i.ibb.co/gWV8jJ6/sensors.jpg"></div>-->
+      <!--<div class="back_small" id="bs3"><img class="back_img" id="img3" src="https://i.ibb.co/NykyGMz/laptop3.jpg"></div>-->
+      <!--<div class="back_small" id="bs4"><img class="back_img" id="img4" src="https://i.ibb.co/34V7vKH/sec1.jpg"></div>-->
+
+       <div class="greetings">WELCOME TO MYCOMOX</div>
+       <button class="button_enter" id="call_login_form" type="button">Enter</button>
+    </div>
+</div>
+
+
+</body>
+
+
+
+<script>
+
+    $("#addMotor").click(function(){
+        $("#modal_add_engine").fadeIn(300);
+        event.preventDefault();   /*отменяет прокрутку страницы в самое начало*/
+    });
+
+
+    $("#addTool").click(function(){
+        $("#modal_add_tool").fadeIn(300);
+        event.preventDefault();
+    });
+
+
+
+    $('.modal-content').keypress(function(e){                          // обработчик нажатия ENTER на модальном окне
+        var key = e.which;
+        if (key == 13) {
+            $(this).find('.button_form').mouseup();
+        }
+    });
+
+
+    $('#alert_window').keypress(function(e){                               // обработчик нажатия ENTER alert_window
+        var key = e.which;
+        if (key == 13) {
+            $(this).find('.close-alert').mouseup();
+        }
+    });
+
+
+
+    $('.modal').mouseup(function(e){                   // событие клика по веб-документу
+		var div = $(".modal-content");                 // тут указываем ID элемента
+
+		if (!div.is(e.target)                          // если клик был не по нашему блоку
+		    && div.has(e.target).length === 0) {       // и не по его дочерним элементам
+			$(".modal").hide();
+			$('form').each(function() { this.reset() });
+		}
+	});
+
+
+    $('.modal-alert').mouseup(function(e){             // событие клика по веб-документу
+		var alertDiv = $(".modal-content-alert");
+
+		if (!alertDiv.is(e.target)                     // если клик был не по нашему блоку
+		    && alertDiv.has(e.target).length === 0){   // и не по его дочерним элементам
+			$(".modal-alert").hide();
+		}
+	});
+
+
+
+	$(".close_form").mouseup(function (e){
+	   $(this).parents(".modal").hide();
+	   $('form').each(function() { this.reset() });
+	});
+
+
+	$(".close-alert").mouseup(function (e){
+	   $(this).parents(".modal-alert").hide();
+	});
+
+
+
+
+    $("#call_login_form").click(function(){                                                     // вызов формы LOGIN
+        $("#modal_login").fadeIn(300);
+        $('#log_in').focus();
+        event.preventDefault();
+    });
+
+
+
+
+
+    $("#button_login").mouseup(function(){                                               // обработчик кнопки LOG_IN
+        if ($('#log_in').val().length != 0 && $('#pass').val().length != 0){
+
+           var userLogin = $('#log_in').val();
+           var userPass  = $('#pass').val();
+
+           //$('#form_login').submit();
+
+           $.ajax({
+	             url: '/perform_login',
+	             method: 'post',
+	             dataType: 'json',
+	 	         data: {username: userLogin, password: userPass},
+	             success: function(e){
+                      //console.log(e.status);
+                      if (e.status == 200){
+                           window.location.href = e.redirect;
+                      } else if (e.status == 401){
+                           showAlert('Wrong login or password');
+                      } else {
+                           showAlert('Error');
+                      }
+	             },
+	             error:  function(){
+                      showAlert('Something went wrong... Check the connection.');
+                 }
+           });
+
+
+        } else {
+            showAlert('Values are incorrect. Please, check the values.');
+        }
+    });
+
+
+
+    function showAlert (text) {                                                                  // вызов окна ALERT
+        $('#textAlert').html(text);
+        $('#alert_window').fadeIn(300);
+        $('#alert_window').focus();
+    }
+
+
+
+    $("#setCritical").click(function(){                                            // вызов формы SET_CRITICAL_VALUES
+        $("#modal_set_critical").fadeIn(300);
+        $('#selectTool').find('option').remove()   // очищаем перед заполнением
+        $('#selectTool').prop('disabled', true);   // блокируем сначала
+	    units.clear();
+	    var option;
+	    var selectedVal;
+
+        $.ajax({
+	           url: '/tools',
+	           method: 'get',
+	           dataType: 'json',
+	           success: function(result){
+	                $('#selectTool').prop('disabled', false);
+                    var tools    = Object.keys(result.critical_values);     // достаем tools
+                    var val_unit = Object.values(result.critical_values);   // достаем пары value-unit
+
+                    for (var i in tools){
+                      if (i == 0) {
+                            selectedVal = 'selected';
+                            $('#critical_value').val(val_unit[i].value + val_unit[i].unit);
+                      } else {
+                            selectedVal = '';
+                      }
+                      var total_value = val_unit[i].value + val_unit[i].unit;
+                      option = $("<option value='" + total_value + "' " + selectedVal + ">" + tools[i] + "</option>");
+                      $('#selectTool').append(option);
+
+                      units.set(tools[i], val_unit[i].unit);       // добавляем в массив пару {"tool":"unit"}
+                    }
+	           }
+        });
+        event.preventDefault();
+    });
+
+
+
+    $('#selectTool').on('change', function() {                                      // смена OPTION у SELECT
+        $('#critical_value').val(this.value);
+        console.log(units);
+    });
+
+
+
+    $("#button_set_critical").mouseup(function(){                                   // обработчик кнопки SET_CRITICAL
+	     var value = $('#new_value').val();
+	     var tool  = $('#selectTool option:selected').html();
+
+	     if ($.isNumeric(value) && value > 0) {
+               $.ajax({
+	                 url: '/change_tool',
+	                 method: 'post',
+	                 dataType: 'text',
+	                 data: {name: tool, value: value},
+	                 success: function(e){
+                          $('#selectTool option:selected').val(value + units.get(tool));
+                          $('#critical_value').val(value + units.get(tool));
+                          $('#new_value').val('');
+                          console.log(e);
+	                 },
+	                 error:  function(){
+                        showAlert('Something went wrong... Check the connection.');
+                     }
+               });
+	     };
+	});
+
+
+
+    //$("#number, #mac").on("input", function(e) {
+    //    console.log($(this).val().length);
+    //});
+
+
+    $(".play").click(function(e){
+       $(this).css({"visibility":"hidden"});
+       console.log(this.id);
+       e.stopPropagation();
+    });
+
+
+    $('#big_motors').on('click','.small_play', function(e) {
+       $(this).hide();
+       e.stopPropagation();
+    });
+
+
+
+	$(".item")
+        .mouseenter(function() {
+            $(this).children(".submenu").stop().slideDown("fast");
+        })
+        .mouseleave(function(){
+            $(this).children(".submenu").stop().slideUp("fast");
+        });
+
+
+
+
+	$("#button_add_engine").mouseup(function(){                                        // обработчик кнопки ADD_MOTOR
+	    if ($('#mac').val().length == 17 && $('#number').val().length != 0){
+
+	       var motor_number = $('#number').val();
+
+	       $.ajax({
+	           url: '/add_motor',
+	           method: 'post',
+	           dataType: 'text',
+	           data: {name: $('#number').val()},
+	           success: function(e){
+	                    if (e != '0'){
+	                         addNewEngine(motor_number);          // если успех, добавляем мотор на экран
+	                         current_engines.push(motor_number);  // добавляем в локальный массив
+	                         $(".modal").hide();
+	                         $('form').each(function() { this.reset() });
+	                         console.log(e);
+	                    } else {
+	                        showAlert('This number already exists in the DB');
+	                    }
+	           },
+	           error:  function(){
+                  showAlert('Something went wrong... Check the connection.');
+               }
+           });
+
+
+	    } else {
+	        showAlert('Values are incorrect. Please, check the values.');
+	    }
+    });
+
+
+
+    $("#deleteMotor").mouseup(function(){                                               // вызов CONFIRM DELETE MOTOR
+         var active_motor = null;
+         if (active_motor != null){
+              $("#textConfirm").html('Are you sure you want to delete this engine?');
+              $("#confirm_window").fadeIn(300);
+         } else {
+              showAlert('Please, select engine');
+         }
+    });
+
+
+
+    $("#button_confirm").click(function(){                                         // обработчик CONFIRM DELETE_MOTOR
+          $.ajax({
+	          url: '/delete_motor',
+	          method: 'post',
+	          dataType: 'text',
+	          data: {name: active_motor},
+	          success: function(e){
+                  $("#"+active_motor).remove();                         // удаляем мотор с экрана
+                  clearLiveChart(tempLiveChart, tempLiveDataPoints);    // очищаем график
+                  $('.small_live_chart').hide();                        // скрываем все графики
+
+                  position = current_engines.indexOf(active_motor);     // удаляем мотор из локального массива
+                  if ( ~position ) current_engines.splice(position, 1);
+
+                  active_motor = null;
+                  console.log(e);
+	          },
+	          error:  function(){
+                  showAlert('Something went wrong... Check the connection.');
+              }
+          });
+    });
+
+
+
+
+
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
+
+
+</html>
