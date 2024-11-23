@@ -1,0 +1,619 @@
+<html>
+
+<!--TEST PAGE DATABASE-->
+
+
+<head>
+    <title>Publisher MyComox | Main Page</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <link href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+
+
+<style>
+
+
+
+/*****************  BIGGGGGGGGGGGGG  *****************/
+
+
+.big {
+    display: inline-block;
+
+    margin: 10px 20px 10px;
+    padding: 10px;
+    min-height: 247px;
+    width: 94%;
+    user-select: none;
+
+    border: 1px solid silver;
+
+    text-align: center;
+    font-family: Georgia;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+
+.big_title {
+    position:relative;
+    width: 100%;
+    margin: 10px 0 10px 0;
+    /*background: yellow;*/
+}
+
+
+.small_motor {
+    position: relative;
+    cursor: pointer;
+
+    float:left;
+    margin: 20px 10px 10px;
+    width: 150px;
+    height: 150px;
+    padding: 5px;
+
+    border: 2px solid silver;
+    border-radius: 4px;
+    background-color: white;
+}
+
+
+.with_hover{
+     transition: 0.2s transform;
+}
+
+.with_hover:hover{
+     transform: scale(1.1);
+}
+
+
+.small_motor_active {
+     background-color: #E0E0E0;
+     border-color: #E0E0E0;
+}
+
+.small_title {
+    position: relative;
+    width: 100%;
+    margin: 0 0 5px 0;
+    font-size: 20px;
+    /*background: yellow;*/
+}
+
+
+.small_led {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    top: 2%;
+    margin: auto;
+    width: 70%;
+    height: 70%;
+    /*background: yellow;*/
+    pointer-events: none;
+}
+
+.image_red_play {
+    width:100%;
+}
+
+.image_green_pause {
+    display:none;
+    width:100%;
+}
+
+
+/****************** END BIGGGGGGGGG *****************/
+
+/**************** MODAL ALERT ******************/
+
+/* Фон за формой */
+.modal-alert {
+    display: none;
+    position: fixed;
+    z-index: 151;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.4);
+}
+
+
+.modal-content-alert {
+    position: relative;
+    overflow: hidden;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    user-select: none;
+    background-color: #fefefe;
+    border-radius: 7px;
+    width: 35%;
+    height: 15%;
+    box-shadow: 5px 10px 5px #666666;
+    font-family: Poppins;
+    font-size: 16px;
+}
+
+
+.text-alert {
+    position: relative;
+    text-align: center;
+    padding: 0 40px 0;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.close-alert {
+    position: absolute;
+    padding: 7px 12px;
+    top: 5px; right: 5px;
+    font-size: 20px;
+    color: #bfbfbf;
+    cursor: pointer;
+    transition: all .4s;
+    //background: yellow;
+}
+
+.close-alert:hover {
+    color: #404040;
+}
+
+/************** END MODAL ALERT ****************/
+
+
+/************** MENU ****************/
+
+.menu {
+    z-index: 100;
+    background-color: #48cfad;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    font-family: Poppins;
+    font-size: 15px;
+    /*box-shadow: 0 2px 14px;*/
+}
+
+
+
+.item {
+    float: left;
+    position: relative;
+}
+
+
+.item:hover {
+    background: #555; /*dark grey*/
+}
+
+
+.item:hover .fa-angle-down {
+    transform: rotate(180deg);
+}
+
+
+.fa-angle-down {
+    transition: transform .3s;
+}
+
+
+.item > a {
+    display: block;
+    color: #fff;
+    padding: 15px 35px;
+    text-decoration: none;
+}
+
+
+.submenu {
+    position: absolute;
+    top: 99%;
+    display: none;
+    width: 210px;
+    background: #37bc9b;
+}
+
+
+.submenu a {
+    color: #fff;
+    display: block;
+    padding: 15px 35px;
+    text-decoration: none;
+    background: #555;
+    float: none;
+}
+
+.submenu a:hover {
+    background: #666;
+}
+
+
+.users, .engines {
+    width: 170px;
+}
+
+
+.login {
+    background: #37bc9b;
+    float: right;
+}
+
+.home {
+    background: #37bc9b;
+}
+
+
+.home a {
+    padding: 18px 20px;
+}
+
+
+/************** END MENU ****************/
+
+
+
+/************** PRELOADER ****************/
+
+
+#main {
+    opacity: 0;
+    margin-top: 60px;
+    transition: all 2.5s;
+}
+
+
+#loading {
+    position: fixed;
+    z-index: 200;
+    top: 50%; left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    user-select: none;
+    text-align: center;
+    font-family: Georgia;
+    font-size: 34px;
+    font-weight: bold;
+}
+
+
+.hide_loading {
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.5s;
+}
+
+
+/************** END PRELOADER ****************/
+
+
+/************** SCROLLBAR ****************/
+
+/*полоса прокрутки*/
+::-webkit-scrollbar {
+    width: 18px;
+    background-color: #f9f9fd;
+}
+
+/*сам ползунок*/
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    border: 5px solid  #f9f9fd;
+    background: #606060;
+}
+
+::-webkit-scrollbar-thumb:hover{
+    background: #909090;
+}
+
+/************** END SCROLLBAR ****************/
+
+
+/****************** BODY ********************/
+
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+button {
+    cursor: pointer;
+}
+
+/**************** END BODY ******************/
+
+</style>
+
+</head>
+
+
+
+
+<script>
+
+
+window.onload = function() {
+
+    document.getElementById("main").style="opacity: 1;";
+    $('#loading').addClass('hide_loading');
+
+
+    if ($('#item_motors:hover').length != 0) {
+        $('#item_motors').children(".submenu").slideDown("fast");
+    }
+    if ($('#item_tools:hover').length != 0) {
+        $('#item_tools').children(".submenu").slideDown("fast");
+    }
+    if ($('#item_users:hover').length != 0) {
+        $('#item_users').children(".submenu").slideDown("fast");
+    }
+
+
+
+    $.ajax({                                           // говорим серверу, какие моторы активны на странице
+	   //url: 'http://localhost:8080/change_array',
+	   url: '/change_array',
+	   method: 'post',
+	   dataType: 'text',
+	   contentType: "application/json",
+	   data: JSON.stringify({ arr : active_engines }),
+	   success: function(e){
+	          console.log(e);
+	   },
+	   error:  function(){
+          alert('Something went wrong... Check the connection.');
+       }
+    });
+
+
+    $.ajax({
+	    //url: 'http://localhost:8080/motors',
+	    url: '/motors',
+	    method: 'get',
+	    dataType: 'json',
+	    success: function(result){
+	            //console.log(result.engines.length);
+	    	    for (i = 0; i < result.engines.length; i++){
+	    	        addNewEngine(result.engines[i]);
+	    	    }
+
+	    	    current_engines = result.engines;
+	    	    timer = window.setInterval(getTimerData, updateInterval);
+
+	    },
+	    error: function(){
+	           alert('Please check the connection. Unable to get data from server.');
+	    }
+    });
+
+}
+
+
+</script>
+
+
+
+
+<body>
+
+<div id="loading">
+    <i class="fa fa-spinner fa-pulse fa-3x fa-fw" style="font-size: 150px;"></i>
+    <span style="margin-top: 20px;">Loading...</span>
+</div>
+
+
+<div class="modal-alert" id="alert_window">
+    <div class="modal-content-alert">
+        <div class="text-alert" id="textAlert"></div>
+        <div class="close-alert"><i class="far fa-times"></i></div>
+    </div>
+</div>
+
+
+<div class="menu">
+    <div class="item home"><a href="javascript:void(0)"><i class='fa fa-home'></i></a></div>
+    <div class="item"><a href="#">About</a></div>
+    <div class="item" id="item_motors"><a href="#">Motors &nbsp;<i class='fa fa-angle-down anim'></i></a>
+        <div class="submenu engines">
+            <a href="#" id="addMotor">Add Motor</a>
+            <a href="#" id="deleteMotor">Delete Motor</a>
+        </div>
+    </div>
+
+    <div class="item" id="item_tools"><a href="#">Tools &nbsp;<i class='fa fa-angle-down anim'></i></a>
+        <div class="submenu">
+            <a href="#" id="addTool">Add Tool</a>
+            <a href="#">Delete Tool</a>
+            <a href="#" id="setCritical">Set Critical Values</a>
+        </div>
+    </div>
+
+    <div class="item" id="item_users"><a href="#">Users &nbsp;<i class='fa fa-angle-down anim'></i></a>
+        <div class="submenu users">
+            <a href="#">Add User</a>
+            <a href="#">Delete User</a>
+        </div>
+    </div>
+    <div class="item login"><a href="#"><i class="fa fa-user-circle-o"></i>&nbsp; Log In</a></div>
+</div>
+
+
+
+<div id="main">
+    <div class="big" id="big_motors">
+        <div class="big_title">Current Engines</div>
+
+        <!--<div class="small_motor" id="Engine_1">-->
+            <!--<div class="small_title">Engine 1</div>-->
+            <!--<div class="small_led">-->
+                <!--&lt;!&ndash;<i class="fas fa-play-circle"></i>&ndash;&gt;-->
+                <!--&lt;!&ndash;<i class="fas fa-pause-circle"></i>&ndash;&gt;-->
+                <!--<img class="image_red_play" src="https://i.ibb.co/tPD9WcM/play-red.png">-->
+                <!--<img class="image_green_pause" src="https://i.ibb.co/HXyf1Xg/pause-green.png">-->
+            <!--</div>-->
+        <!--</div>-->
+
+        <!--<div class="small_motor" id="Engine_2">-->
+            <!--<div class="small_title">Engine 2</div>-->
+            <!--<div class="small_led">-->
+                <!--&lt;!&ndash;<i class="fas fa-play-circle"></i>&ndash;&gt;-->
+                <!--&lt;!&ndash;<i class="fas fa-pause-circle"></i>&ndash;&gt;-->
+                <!--<img class="image_red_play" src="https://i.ibb.co/tPD9WcM/play-red.png">-->
+                <!--<img class="image_green_pause" src="https://i.ibb.co/HXyf1Xg/pause-green.png">-->
+            <!--</div>-->
+        <!--</div>-->
+
+    </div>
+</div>
+
+
+</body>
+
+
+
+<script>
+     var current_engines = [];
+     var active_engines  = [];
+     var updateInterval  = 1000;
+     var timer;                     // таймер обновления моторов на текущей странице
+
+
+
+	$(".item")
+        .mouseenter(function() {
+            $(this).children(".submenu").stop().slideDown("fast");
+        })
+        .mouseleave(function(){
+            $(this).children(".submenu").stop().slideUp("fast");
+        });
+
+
+
+	$(".close-alert").mouseup(function (e){
+	   $(this).parents(".modal-alert").hide();
+	});
+
+
+	function showAlert (text) {                                                                  // вызов окна ALERT
+        $('#textAlert').html(text);
+        $('#alert_window').fadeIn(300);
+    }
+
+
+
+    $('#big_motors').on('click','.small_motor', function(e) {                  // функция нажатия на конкретный мотор
+            e.stopPropagation();
+
+            var e_number = $(this).attr('id');
+            var index = active_engines.indexOf(e_number);
+
+
+            if (index < 0) {                // если элемента нет в массиве [active_engines]
+                active_engines.push(e_number);
+                $(this).children('.small_led').children(".image_red_play").hide();
+                $(this).children('.small_led').children(".image_green_pause").show();
+            } else {
+                active_engines.splice(index, 1);
+                $(this).children('.small_led').children(".image_red_play").show();
+                $(this).children('.small_led').children(".image_green_pause").hide();
+            }
+
+
+            $.ajax({                       // говорим серверу, какие моторы активны на странице
+	           //url: 'http://localhost:8080/change_array',
+	           url: '/change_array',
+	           method: 'post',
+	           dataType: 'text',
+	           contentType: "application/json",
+	           data: JSON.stringify({ arr : active_engines }),
+	           success: function(e){
+	                  console.log(e);
+	           },
+	           error:  function(){
+                  alert('Something went wrong... Check the connection.');
+               }
+            });
+
+    });
+
+
+
+
+    function addNewEngine(motor_number){                 // добавление мотора на экран (принимает на вход номер мотора)
+           var new_small_title  = $("<div class='small_title'>" + motor_number + "</div>");
+           //var new_image_play   = $("<img class='image_red_play'    src='https://i.ibb.co/tPD9WcM/play-red.png'>");
+           //var new_image_pause  = $("<img class='image_green_pause' src='https://i.ibb.co/HXyf1Xg/pause-green.png'>");
+           var new_image_play   = $("<img class='image_red_play'    src='/images/play-red.png'>");
+           var new_image_pause  = $("<img class='image_green_pause' src='/images/pause-green.png'>");
+
+           var new_small_led      = $("<div class='small_led'/>")
+                                                .append(new_image_play)
+                                                .append(new_image_pause);
+
+           var new_motor = $("<div class='small_motor with_hover' id='" + motor_number + "' />")
+                        .append(new_small_title)
+                        .append(new_small_led);
+
+          $('#big_motors').append(new_motor);  // добавляем мотор на экран
+    }
+
+
+
+
+    function getTimerData(){                                                   //  ПОЛУЧАЕМ ТЕКУЩИЕ МОТОРЫ ПО ТАЙМЕРУ
+
+         $.ajax({
+	        //url: 'http://localhost:8080/motors',
+	        url: '/motors',
+	        method: 'get',
+	        dataType: 'json',
+	        success: function(result){
+
+	             result.engines.forEach(function(e_number){
+	                 if (current_engines.indexOf(e_number) < 0) {       // если элемента 'e_number' нет в [current]
+	                     addNewEngine(e_number);
+	                 }
+	             });
+	             current_engines.forEach(function(e_number){
+	                 if (result.engines.indexOf(e_number) < 0) {        // если элемента 'e_number' нет в [result]
+	                    $("#"+e_number).remove();
+                        var index = active_engines.indexOf(e_number);
+	                    if (index > -1) {
+	                        active_engines.splice(index, 1);            // remove from [active_engines]
+	                    }
+	                 }
+	             });
+
+                 current_engines = result.engines;
+	        },
+	        error: function(){
+	                clearInterval(timer);
+	                active_engines  = [];
+	                $('.big').children().prop("disabled", true);
+	                $('.big').children().removeClass('with_hover');
+	                $(".image_green_pause").hide();
+	                $(".image_red_play").show();
+	                //alert('Connection lost.<br>You cannot get fresh data from server.\nRefresh page to restart timer.');
+	                showAlert('Connection lost.<br>You cannot get fresh data from server.<br>Refresh page to restart timer.');
+	        }
+         });
+    }
+
+
+
+</script>
+
+
+
+</html>
